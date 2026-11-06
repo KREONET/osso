@@ -33,6 +33,7 @@
 ## D {#cmd-d}
 
 - `date` — [G.3](G-packages.qmd#g-3-homebrew)
+- `dd` — [§1.5](01-image.qmd#1-5-p2v-online)
 - `df` — [§1.2](01-image.qmd#1-2-disk-resize) · [§7.2](07-ai-governance.qmd#7-2-what) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [실습⑬](labs/lab-13.qmd#lab-13)
 - `diff` — [§2.2](02-firewall.qmd#2-2-verify)
 - `dig` — [§5.2](05-trust.qmd#5-2-verify)
@@ -40,6 +41,7 @@
 - `dnf` — [G.2](G-packages.qmd#g-2-os) · [J.1](J-workstation.qmd#j-1-shell) · [J.6](J-workstation.qmd#j-6-system) · [K.6](K-delivery.qmd#k-6-software)
 - `docker` — [§2.2](02-firewall.qmd#2-2-docker-bypass) · [§4.0](04-container.qmd#4-0-history) · [§4.1](04-container.qmd#4-1-container-vs-vm) · [§4.2](04-container.qmd#4-2-compose) · [§4.3](04-container.qmd#4-3-exec) · [§4.4](04-container.qmd#4-4-network-membership) · [§4.5](04-container.qmd#4-5-non-root) · [§7.3](07-ai-governance.qmd#7-3-flow) · [실습⑨](labs/lab-09.qmd#lab-09) · [실습⑨′](labs/lab-09p.qmd#lab-09p) · [실습⑭](labs/lab-14.qmd#lab-14) · [부록 D](D-cheatsheet.qmd#d-3-docker)
 - `du` — [§1.2](01-image.qmd#1-2-raw)
+- `dump` — [§1.5](01-image.qmd#1-5-p2v-dump)
 
 ## E {#cmd-e}
 
@@ -49,7 +51,7 @@
 
 ## F {#cmd-f}
 
-- `find` — [§4.0](04-container.qmd#4-0-network-stack)
+- `find` — [§1.5](01-image.qmd#1-5-p2v-dump) · [§4.0](04-container.qmd#4-0-network-stack)
 - `firewall-cmd` — [§2.1](02-firewall.qmd#2-1-nftables) · [§2.4](02-firewall.qmd#2-4-template) · [실습④](labs/lab-04.qmd#lab-04) · [부록 D](D-cheatsheet.qmd#d-5-firewall) · [K.7](K-delivery.qmd#k-7-ssh)
 - `fstrim` — [실습②](labs/lab-02.qmd#lab-02)
 
@@ -133,6 +135,7 @@
 
 - `republock` — [§2.5](02-firewall.qmd#2-5-geo-block) · [실습⑤](labs/lab-05.qmd#lab-05)
 - `resize2fs` — [§1.2](01-image.qmd#1-2-disk-resize)
+- `restore` — [§1.5](01-image.qmd#1-5-p2v-dump)
 - `restorecon` — [§1.4](01-image.qmd#1-4-selinux)
 - `rm` — [§7.1](07-ai-governance.qmd#7-1-ai-access) · [H.7](H-pve.qmd#h-7-4-cluster-reset)
 - `rpm` — [§5.1](05-trust.qmd#5-1-root-programs)
@@ -153,14 +156,14 @@
 - `snap` — [J.5](J-workstation.qmd#j-5-ssh-clients)
 - `sqlite3` — [H.7](H-pve.qmd#h-7-4-cluster-reset)
 - `ss` — [§4.0](04-container.qmd#4-0-unix-socket) · [§7.2](07-ai-governance.qmd#7-2-what) · [실습⑬](labs/lab-13.qmd#lab-13)
-- `ssh` — [§1.3](01-image.qmd#1-3-dotfiles) · [§1.7](01-image.qmd#1-7-asset-tags) · [§3.5](03-network.qmd#3-5-bastion) · [§6.1](06-access.qmd#6-1-key-files) · [§6.3](06-access.qmd#6-3-verify) · [실습⑦](labs/lab-07.qmd#lab-07) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [부록 D](D-cheatsheet.qmd#d-4-ssh) · [I.5](I-access-control.qmd#i-5-1-ssh) · [I.6](I-access-control.qmd#i-6-1-jump-host) · [J.5](J-workstation.qmd#j-5-config-keys) · [K.7](K-delivery.qmd#k-7-ssh)
+- `ssh` — [§1.3](01-image.qmd#1-3-dotfiles) · [§1.5](01-image.qmd#1-5-p2v-online) · [§1.7](01-image.qmd#1-7-asset-tags) · [§3.5](03-network.qmd#3-5-bastion) · [§6.1](06-access.qmd#6-1-key-files) · [§6.3](06-access.qmd#6-3-verify) · [실습⑦](labs/lab-07.qmd#lab-07) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [부록 D](D-cheatsheet.qmd#d-4-ssh) · [I.5](I-access-control.qmd#i-5-1-ssh) · [I.6](I-access-control.qmd#i-6-1-jump-host) · [J.5](J-workstation.qmd#j-5-config-keys)
 - `ssh-add` — [J.4](J-workstation.qmd#j-4-ssh-keys)
 - `ssh-copy-id` — [§6.1](06-access.qmd#6-1-key-files) · [I.5](I-access-control.qmd#i-5-1-ssh)
 - `ssh-import-id` — [§6.2](06-access.qmd#6-2-server) · [실습⑧](labs/lab-08.qmd#lab-08-prep) · [부록 D](D-cheatsheet.qmd#d-4-ssh)
 - `ssh-keygen` — [§6.1](06-access.qmd#6-1-verify) · [§6.2](06-access.qmd#6-2-verify) · [§7.2](07-ai-governance.qmd#7-2-identity) · [실습⑧](labs/lab-08.qmd#lab-08-prep) · [부록 D](D-cheatsheet.qmd#d-4-ssh) · [I.5](I-access-control.qmd#i-5-1-ssh) · [J.4](J-workstation.qmd#j-4-ssh-keys) · [J.5](J-workstation.qmd#j-5-config-keys) · [J.7](J-workstation.qmd#j-7-summary)
 - `sshd` — [§6.3](06-access.qmd#6-3-match) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [부록 D](D-cheatsheet.qmd#d-7-systemd) · [I.5](I-access-control.qmd#i-5-1-ssh) · [K.7](K-delivery.qmd#k-7-ssh)
 - `Start-Service` — [J.4](J-workstation.qmd#j-4-ssh-keys)
-- `sync` — [실습②](labs/lab-02.qmd#lab-02)
+- `sync` — [§1.5](01-image.qmd#1-5-p2v-online) · [실습②](labs/lab-02.qmd#lab-02)
 - `sysctl` — [§3.2](03-network.qmd#3-2-rp-filter)
 - `systemctl` — [§1.2](01-image.qmd#1-2-discard) · [§1.3](01-image.qmd#1-3-drop-in) · [§3.2](03-network.qmd#3-2-which-tool) · [§4.5](04-container.qmd#4-5-address-pools) · [§6.3](06-access.qmd#6-3-verify) · [§6.5](06-access.qmd#6-5-verify) · [§7.2](07-ai-governance.qmd#7-2-inventory) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [실습⑥](labs/lab-06.qmd#lab-06) · [부록 D](D-cheatsheet.qmd#d-7-systemd) · [H.7](H-pve.qmd#h-7-1-vf-service)
 - `systemd-cgls` — [§4.0](04-container.qmd#4-0-history)
@@ -215,3 +218,5 @@
 ## X {#cmd-x}
 
 - `xfs_growfs` — [§1.2](01-image.qmd#1-2-disk-resize)
+- `xfsdump` — [§1.5](01-image.qmd#1-5-p2v-dump)
+- `xfsrestore` — [§1.5](01-image.qmd#1-5-p2v-dump)

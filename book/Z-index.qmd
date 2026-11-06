@@ -75,6 +75,7 @@
 - **자격증명 (credential)** — [§5.6](05-trust.qmd#5-6-why)
 - **자산 태그** — [§1.7](01-image.qmd#1-7-asset-tags) · [부록 A](A-assets.qmd#a-public) · [J.6](J-workstation.qmd#j-6-system) · [K.3](K-delivery.qmd#k-3-tags) · [K.8](K-delivery.qmd#k-8-checklist)
 - **재현성 (reproducibility)** — [들어가며](index.qmd#big-picture) · [Part 1](01-image.qmd#part-1) · [§1.3](01-image.qmd#1-3-offline-edit) · [§1.8](01-image.qmd#1-8-reproducible) · [§4.1](04-container.qmd#4-1-container-vs-vm) · [§4.2](04-container.qmd#4-2-compose) · [§7.5](07-ai-governance.qmd#7-5-principles)
+- **저널링 파일시스템 (journaling file system)** — [§1.5](01-image.qmd#1-5-p2v-online)
 - **접근 제어 (access control)** — [§1.4](01-image.qmd#1-4-identity-reset) · [§1.7](01-image.qmd#1-7-hardware-identity) · [§3.4](03-network.qmd#3-4-vpn) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [부록 A](A-assets.qmd#a-docs) · [부록 I](I-access-control.qmd#appendix-i) · [I.2](I-access-control.qmd#i-2-what) · [I.5](I-access-control.qmd#i-5-application)
 - **제로 트러스트** — [§5.6](05-trust.qmd#5-6-zero-trust) · [실습⑪](labs/lab-11.qmd#lab-11)
 - **증적 (evidence)** — [§7.5](07-ai-governance.qmd#7-5-sadp)
@@ -97,6 +98,7 @@
 
 ## ㅍ
 
+- **파일시스템 덤프 (filesystem dump)** — [§1.5](01-image.qmd#1-5-p2v-dump)
 - **패스프레이즈 (passphrase)** — [§1.6](01-image.qmd#1-6-root-recovery) · [§6.1](06-access.qmd#6-1-verify) · [실습②](labs/lab-02.qmd#lab-02) · [J.4](J-workstation.qmd#j-4-ssh-keys)
 - **패키지 관리자** — [§1.8](01-image.qmd#1-8-reproducible) · [부록 A](A-assets.qmd#a-docs) · [부록 G](G-packages.qmd#appendix-g) · [G.1](G-packages.qmd#g-1-what) · [G.2](G-packages.qmd#g-2-os) · [G.4](G-packages.qmd#g-4-winget) · [G.6](G-packages.qmd#g-6-safety) · [J.5](J-workstation.qmd#j-5-ssh-clients)
 - **평판 (reputation)** — [§2.5](02-firewall.qmd#2-5-reputation) · [실습③](labs/lab-03.qmd#lab-03) · [실습④](labs/lab-04.qmd#lab-04) · [실습⑤](labs/lab-05.qmd#lab-05) · [부록 A](A-assets.qmd#a-public) · [I.1](I-access-control.qmd#i-1-terms) · [I.2](I-access-control.qmd#i-2-limits)
@@ -176,6 +178,7 @@
 ## I
 
 - **IdP (Identity Provider)** — [§6.4](06-access.qmd#6-4-why) · [Part 6](06-access.qmd#6-summary) · [실습⑫](labs/lab-12.qmd#lab-12)
+- **inode** — [§1.5](01-image.qmd#1-5-p2v-dump)
 - **INPUT / FORWARD** — [§2.2](02-firewall.qmd#2-2-docker-bypass) · [§2.3](02-firewall.qmd#2-3-ufw-docker) · [§2.4](02-firewall.qmd#2-4-firewalld-docker) · [§2.5](02-firewall.qmd#2-5-reputation) · [§2.7](02-firewall.qmd#2-7-host) · [§4.4](04-container.qmd#4-4-network-membership) · [실습③](labs/lab-03.qmd#lab-03) · [I.6](I-access-control.qmd#i-6-3-docker-ufw)
 - **internal network** — [§2.7](02-firewall.qmd#2-7-common)
 - **IPMI** — [§1.6](01-image.qmd#1-6-root-recovery) · [§1.7](01-image.qmd#1-7-hardware-identity) · [§3.2](03-network.qmd#3-2-rp-filter) · [실습②](labs/lab-02.qmd#lab-02) · [K.1](K-delivery.qmd#k-1-overview) · [K.2](K-delivery.qmd#k-2-inxi) · [K.5](K-delivery.qmd#k-5-ipmi) · [K.8](K-delivery.qmd#k-8-checklist)
@@ -191,7 +194,7 @@
 
 ## M
 
-- **machine-id** — [§1.3](01-image.qmd#1-3-offline-edit) · [§1.4](01-image.qmd#1-4-identity-reset) · [§1.5](01-image.qmd#1-5-p2v) · [§7.2](07-ai-governance.qmd#7-2-inventory) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [실습⑨](labs/lab-09.qmd#lab-09-more) · [H.6](H-pve.qmd#h-6-1-customize)
+- **machine-id** — [§1.3](01-image.qmd#1-3-offline-edit) · [§1.4](01-image.qmd#1-4-identity-reset) · [§1.5](01-image.qmd#1-5-p2v-first-boot) · [§7.2](07-ai-governance.qmd#7-2-inventory) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [실습⑨](labs/lab-09.qmd#lab-09-more) · [H.6](H-pve.qmd#h-6-1-customize)
 - **MADR** — [§7.6](07-ai-governance.qmd#7-6-adr) · [부록 A](A-assets.qmd#a-public) · [부록 C](C-adr.qmd#appendix-c)
 - **mTLS** — [Part 5](05-trust.qmd#part-5) · [§5.1](05-trust.qmd#5-1-korean-certs) · [§5.6](05-trust.qmd#5-6-mtls) · [실습⑩](labs/lab-10.qmd#lab-10) · [실습⑪](labs/lab-11.qmd#lab-11) · [I.5](I-access-control.qmd#i-5-2-web) · [부록 I](I-access-control.qmd#i-summary)
 - **MTU** — [§3.2](03-network.qmd#3-2-netplan-mtu) · [§3.6](03-network.qmd#3-6-mtu)

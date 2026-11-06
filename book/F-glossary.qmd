@@ -44,6 +44,7 @@
 | 일반화 (generalization) | 이미지를 여러 기계에 복제해도 겹치지 않도록 machine-id·SSH 호스트 키·로그 같은 기계 고유 정보를 지우는 일. Windows는 `sysprep`, 리눅스 이미지는 `virt-sysprep`으로 한다. → [Part 1 §1.4](01-image.qmd#1-4-identity-reset) |
 | 자격증명 (credential) | 비밀번호·토큰·키처럼 신원을 증명하는 정보. |
 | 재현성 (reproducibility) | 같은 입력과 절차로 같은 결과를 다시 만들 수 있는 성질. → [Part 1 §1.8](01-image.qmd#1-8-reproducible) |
+| 저널링 파일시스템 (journaling file system) | 바꿀 내용을 저널에 먼저 적어 두어, 비정상 종료 뒤에도 파일시스템의 일관성을 되찾는 파일시스템. XFS·ext4가 여기에 속한다. → [Part 1 §1.5](01-image.qmd#1-5-p2v-online) |
 | 접근 제어 (access control) | 누가 무엇에 접근할 수 있는지 정하고 강제하는 일. |
 | 제로 트러스트 | "내부망이니 믿는다"를 버리고 연결마다 주체를 확인해 필요한 만큼만 허락하는 보안 방식(NIST SP 800-207). mTLS가 대표적 구현 수단. → [Part 5 §5.6](05-trust.qmd) |
 | 증적 (evidence) | 통제가 지켜졌음을 보여 주는 기록. |
@@ -55,6 +56,7 @@
 | 토폴로지 | 망의 연결 구조. 어떤 장비가 어느 망에 붙어 있는지의 배치. |
 | 투명 브리지 (transparent bridge) | IP 주소 없이 두 망 사이에 끼워 패킷을 걸러 내는 장치. → [Part 2 §2.5](02-firewall.qmd#2-5-case) |
 | 특수화 이미지 (specialized image) | 특정 기계의 고유 정보가 남아 있는 이미지. 일반화하기 전의 상태. → [Part 1 §1.4](01-image.qmd#1-4-identity-reset) |
+| 파일시스템 덤프 (filesystem dump) | 블록이 아니라 파일 단위로 파일시스템 전체를 떠 두는 백업. XFS는 `xfsdump`·`xfsrestore`, ext4는 `dump`·`restore`. 쓰인 양에 비례해 시간이 든다. → [Part 1 §1.5](01-image.qmd#1-5-p2v-dump) |
 | 패스프레이즈 (passphrase) | 개인키 파일을 암호화하는 긴 암호. |
 | 패키지 관리자 | 정해진 저장소에서 프로그램을 받아 서명 검증·의존성 설치·업데이트·제거를 해 주는 도구(apt, dnf, Homebrew, WinGet). 설치 목록을 파일로 내보내 다시 설치할 수 있다. → [부록 G](G-packages.qmd) |
 | 평판 (reputation) | 과거 악성 행위 기록에 근거한 IP 주소·대역의 신뢰도. → [Part 2 §2.5](02-firewall.qmd#2-5-reputation) |
@@ -99,6 +101,7 @@
 | HTTP-01 | ACME 검증 방식. 80포트의 지정 경로로 소유를 증명한다. |
 | IdP (Identity Provider) | 사용자 인증(로그인)을 맡는 계정 서버. OIDC 로그인의 상대편이다. → [Part 6 §6.4](06-access.qmd#6-4-idp) |
 | INPUT / FORWARD | iptables/nftables 체인. INPUT은 호스트 자신에게 오는 것, FORWARD는 호스트를 거쳐 가는 것(컨테이너 트래픽). |
+| inode | 아이노드. 파일 하나의 속성(소유자·권한·시각)과 데이터 블록 위치를 담은 구조. 파일 이름은 디렉터리가 inode를 가리키는 항목이다. → [Part 1 §1.5](01-image.qmd#1-5-p2v-dump) |
 | internal network | 외부로 나가는 경로가 없는 Docker 네트워크(`internal: true`). |
 | IPMI | 서버 보드(BMC)의 원격 관리 인터페이스. 전원·콘솔 제어. 외부에 노출하지 말 것. |
 | IPSet (Proxmox) | 이름을 붙여 방화벽 규칙에서 참조하는 주소 목록. `management`는 관리 접속을 허용하는 특별한 IPSet이다. → [부록 H.4](H-pve.qmd#h-4-ipset) |
