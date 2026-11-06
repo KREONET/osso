@@ -74,7 +74,7 @@
 ## ㅍ
 
 - **패스프레이즈 (passphrase)** — [§1.6](01-image.qmd#1-6-root-recovery) · [§6.1](06-access.qmd#6-1-verify) · [실습②](labs/lab-02.qmd#lab-02) · [J.4](J-workstation.qmd#j-4-ssh-keys)
-- **패키지 관리자** — [§1.8](01-image.qmd#1-8-reproducible) · [부록 A](A-assets.qmd#a-docs) · [부록 G](G-packages.qmd#appendix-g) · [G.1](G-packages.qmd#g-1-what) · [G.2](G-packages.qmd#g-2-os) · [G.3](G-packages.qmd#g-3-homebrew) · [G.4](G-packages.qmd#g-4-winget) · [G.6](G-packages.qmd#g-6-safety)
+- **패키지 관리자** — [§1.8](01-image.qmd#1-8-reproducible) · [부록 A](A-assets.qmd#a-docs) · [부록 G](G-packages.qmd#appendix-g) · [G.1](G-packages.qmd#g-1-what) · [G.2](G-packages.qmd#g-2-os) · [G.4](G-packages.qmd#g-4-winget) · [G.6](G-packages.qmd#g-6-safety) · [J.5](J-workstation.qmd#j-5-ssh-clients)
 - **폭발 반경 (blast radius)** — [§1.4](01-image.qmd#1-4-selinux)
 - **프로비저닝 (provisioning)** — [§1.2](01-image.qmd#1-2-image-formats) · [실습 들어가기](labs/00-lab-intro.qmd#how-to-read) · [실습①](labs/lab-01.qmd#lab-01) · [H.5](H-pve.qmd#h-5-preallocation)
 - **프록시 (proxy)** — [§2.4](02-firewall.qmd#2-4-keep-native) · [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§2.7](02-firewall.qmd#2-7-four-levels) · [§6.4](06-access.qmd#6-4-oidc) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑫](labs/lab-12.qmd#lab-12) · [I.5](I-access-control.qmd#i-5-2-web)
@@ -91,11 +91,11 @@
 
 - **ACME** — [§5.2](05-trust.qmd#5-2-acme) · [§5.3](05-trust.qmd#5-3-how-to) · [실습⑩](labs/lab-10.qmd#lab-10) · [부록 A](A-assets.qmd#a-public)
 - **ADR** — [§4.1](04-container.qmd#4-1-container-vs-vm) · [Part 7](07-ai-governance.qmd#part-7) · [§7.1](07-ai-governance.qmd#7-1-three-layers) · [§7.2](07-ai-governance.qmd#7-2-prompt) · [§7.5](07-ai-governance.qmd#7-5-control-points) · [§7.6](07-ai-governance.qmd#7-6-adr-license) · [실습⑨](labs/lab-09.qmd#lab-09) · [부록 C](C-adr.qmd#appendix-c)
-- **authorized_keys** — [§6.1](06-access.qmd#6-1-key-files) · [§6.2](06-access.qmd#6-2-server) · [§7.1](07-ai-governance.qmd#7-1-three-layers) · [H.7](H-pve.qmd#h-7-3-root-ssh)
+- **authorized_keys** — [§6.1](06-access.qmd#6-1-key-files) · [§6.2](06-access.qmd#6-2-server) · [§7.1](07-ai-governance.qmd#7-1-three-layers) · [H.7](H-pve.qmd#h-7-3-root-ssh) · [J.5](J-workstation.qmd#j-5-config-keys)
 
 ## B
 
-- **bastion** — [들어가며](index.qmd#addresses) · [§1.3](01-image.qmd#1-3-dotfiles) · [§3.5](03-network.qmd#3-5-bastion) · [§6.3](06-access.qmd#6-3-match) · [§7.1](07-ai-governance.qmd#7-1-three-layers) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [실습⑬](labs/lab-13.qmd#lab-13) · [I.6](I-access-control.qmd#i-6-1-jump-host)
+- **bastion** — [들어가며](index.qmd#addresses) · [§3.5](03-network.qmd#3-5-bastion) · [§6.3](06-access.qmd#6-3-match) · [§7.1](07-ai-governance.qmd#7-1-three-layers) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [실습⑬](labs/lab-13.qmd#lab-13) · [I.6](I-access-control.qmd#i-6-1-jump-host) · [J.5](J-workstation.qmd#j-5-config-keys)
 - **BMC (Baseboard Management Controller)** — [§1.6](01-image.qmd#1-6-root-recovery) · [§1.7](01-image.qmd#1-7-hardware-identity) · [K.1](K-delivery.qmd#k-1-overview) · [K.2](K-delivery.qmd#k-2-inxi)
 
 ## C
@@ -120,7 +120,7 @@
 - **DNS-01** — [§5.2](05-trust.qmd#5-2-acme) · [실습⑩](labs/lab-10.qmd#lab-10)
 - **docker compose** — [§2.4](02-firewall.qmd#2-4-host-port) · [§4.0](04-container.qmd#4-0-container-env) · [§4.2](04-container.qmd#4-2-compose) · [§4.5](04-container.qmd#4-5-address-pools) · [§7.3](07-ai-governance.qmd#7-3-flow) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [실습⑨](labs/lab-09.qmd#lab-09) · [실습⑨′](labs/lab-09p.qmd#lab-09p)
 - **DOCKER-USER** — [§2.2](02-firewall.qmd#2-2-trace) · [§2.3](02-firewall.qmd#2-3-ufw-docker) · [§2.4](02-firewall.qmd#2-4-host-port) · [§4.4](04-container.qmd#4-4-network-membership) · [실습③](labs/lab-03.qmd#lab-03) · [실습⑨′](labs/lab-09p.qmd#lab-09p) · [I.6](I-access-control.qmd#i-6-3-docker-ufw)
-- **dotfile (점 파일)** — [들어가며](index.qmd#audience) · [§1.3](01-image.qmd#1-3-dotfiles) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [G.1](G-packages.qmd#g-1-what) · [G.5](G-packages.qmd#g-5-dotfiles) · [G.6](G-packages.qmd#g-6-safety) · [J.6](J-workstation.qmd#j-6-system)
+- **dotfile (점 파일)** — [들어가며](index.qmd#audience) · [§1.3](01-image.qmd#1-3-dotfiles) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [G.1](G-packages.qmd#g-1-what) · [G.5](G-packages.qmd#g-5-dotfiles) · [G.6](G-packages.qmd#g-6-safety) · [J.5](J-workstation.qmd#j-5-config-keys) · [J.6](J-workstation.qmd#j-6-system)
 - **DPI (Deep Packet Inspection)** — [§5.5](05-trust.qmd#5-5-dpi) · [§5.6](05-trust.qmd#5-6-mental-model) · [실습⑪](labs/lab-11.qmd#lab-11)
 
 ## E
@@ -190,6 +190,7 @@
 - **PATH** — [§1.3](01-image.qmd#1-3-dotfiles) · [§4.0](04-container.qmd#4-0-path) · [실습⑨](labs/lab-09.qmd#lab-09)
 - **PCI pass-through** — [H.3](H-pve.qmd#h-3-3-sriov)
 - **policy (firewalld)** — [§2.1](02-firewall.qmd#2-1-ufw-firewalld) · [§2.2](02-firewall.qmd#2-2-trace) · [§2.4](02-firewall.qmd#2-4-firewalld-docker) · [§5.1](05-trust.qmd#5-1-root-programs) · [실습④](labs/lab-04.qmd#lab-04)
+- **PPK** — [J.5](J-workstation.qmd#j-5-config-keys)
 - **Proxmox VE** — [§1.2](01-image.qmd#1-2-image-formats) · [실습②](labs/lab-02.qmd#lab-02) · [부록 H](H-pve.qmd#appendix-h) · [H.2](H-pve.qmd#h-2-1-pve) · [H.3](H-pve.qmd#h-3-1-separate) · [H.4](H-pve.qmd#h-4-firewall) · [H.6](H-pve.qmd#h-6-1-cloud-image) · [I.3](I-access-control.qmd#i-3-builtin)
 - **ProxyJump** — [§3.5](03-network.qmd#3-5-bastion) · [§6.3](06-access.qmd#6-3-match) · [§7.1](07-ai-governance.qmd#7-1-example) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [I.6](I-access-control.qmd#i-6-1-jump-host) · [J.5](J-workstation.qmd#j-5-ssh-clients)
 - **publish (Docker)** — [§2.2](02-firewall.qmd#2-2-hooks) · [§2.4](02-firewall.qmd#2-4-firewalld-docker) · [§2.5](02-firewall.qmd#2-5-reputation) · [§2.7](02-firewall.qmd#2-7-container) · [실습③](labs/lab-03.qmd#lab-03) · [실습④](labs/lab-04.qmd#lab-04) · [I.4](I-access-control.qmd#i-4-distro) · [I.6](I-access-control.qmd#i-6-3-docker-ufw)
@@ -216,6 +217,7 @@
 
 ## T
 
+- **Tabby** — [J.2](J-workstation.qmd#j-2-terminal) · [J.5](J-workstation.qmd#j-5-ssh-clients)
 - **TLS 핸드셰이크** — [§3.6](03-network.qmd#3-6-mtu) · [§5.6](05-trust.qmd#5-6-mental-model)
 
 ## U

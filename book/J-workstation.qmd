@@ -123,12 +123,13 @@ chmod 600 ~/.ssh/id_ed25519
 | OpenSSH Client | BSD | O | O | O | | 터미널의 `ssh` 명령 |
 | iTerm2 | GPL v2 | O | | | | 맥 터미널 에뮬레이터 |
 | Termius | 상용(무료 등급 있음) | O | O | O | O | GitHub Student Developer Pack에 포함(작성 시점) |
-| PortX | 상용(무료 등급 있음) | O | O | O | O | |
+| PortX | 상용(무료 등급 있음) | O | O | O | O | 상업 이용 조건은 받을 때 함께 오는 사용권 계약에서 확인 |
+| Tabby | MIT | O | O | O | | 옛 이름 Terminus. `~/.ssh/config`를 자동으로 읽음 |
 | PuTTY | MIT | O | O | O | | |
-| MobaXterm | 상용(Home Edition 무료) | | O | | | |
+| MobaXterm | 상용(Home Edition 무료) | | O | | | Home Edition은 본인이 직접 내려받아 설치하고 혼자 쓸 때만 기관에서도 무료. 일괄 배포·공용 설치는 Professional([라이선스 5.1](https://mobaxterm.mobatek.net/license.html)) |
 | mRemoteNG | GPL v2 | | O | | | SSH, 윈도우 RDP, VNC, Telnet, PowerShell을 한 창에서 |
 | SecureCRT | 상용(유료) | O | O | O | | |
-| Xshell | 개인 무료·기업 유료 | | O | | | |
+| Xshell | 가정·학교 무료, 업무용 유료 | | O | | | 무료 라이선스는 비상업 용도만([NetSarang 무료 라이선스](https://www.netsarang.com/en/free-for-home-school/)) |
 
 라이선스 칸이 왜 중요한지는 [부록 B](B-licenses.qmd)와 [§1.8](01-image.qmd)의 Anaconda 이야기와 같습니다. "개인 무료"인 도구를 기관 PC에 설치하면 그 자체로 라이선스 위반이 될 수 있습니다.
 
@@ -157,6 +158,59 @@ winget install -e --id mRemoteNG.mRemoteNG
 스마트폰용 Termius·PortX는 구글 플레이·앱스토어에서 받습니다.
 
 ⚠️ **GUI 클라이언트에 키와 비밀번호를 "저장"하는 기능**은 편하지만, 그 앱(과 동기화 기능이 있다면 그 회사의 클라우드)이 내 열쇠를 보관하게 됩니다. 저장 위치와 암호화 방식을 확인하고, 비밀번호 저장은 끄고 키 인증만 쓰는 쪽을 권합니다([Part 6](06-access.qmd)).
+
+### 클라이언트마다 다른 접속 설정과 키 {#j-5-config-keys}
+
+같은 서버에 접속하더라도 프로그램마다 접속 목록(호스트 이름, 사용자, 포트, 점프 호스트)과 키를 보관하는 곳이 다릅니다. 프로그램을 바꾸거나 여러 개를 함께 쓰면 설정이 여러 벌로 갈라지고, 서버 주소 하나를 바꿀 때 고칠 곳이 늘어납니다.
+
+| 클라이언트 | `~/.ssh/config`를 읽나 | 접속 목록을 두는 곳 | 키 형식 | 점프 호스트 |
+| --- | --- | --- | --- | --- |
+| OpenSSH `ssh` (맥 터미널·iTerm2, 윈도우 PowerShell·Windows Terminal, WSL, VS Code Remote-SSH) | 읽음(이것이 원본) | `~/.ssh/config`. 윈도우는 `C:\Users\⟨사용자⟩\.ssh\config`, WSL은 리눅스 쪽 `~/.ssh/config`로 서로 다른 파일 | OpenSSH(`id_ed25519`) | `ProxyJump` |
+| Tabby | 자동으로 읽음(`Include` 포함). "Imported from .ssh/config" 묶음으로 보여 줌 | `~/.ssh/config`와 자체 프로필 | OpenSSH | `ProxyJump`를 읽어 씀 |
+| Termius | 가져오기(Import)로 한 번 복사. 이후는 따로 관리 | 앱의 보관함(vault). 계정으로 기기 간 동기화 | OpenSSH 키를 가져옴(웹사이트에서 받은 앱만 `IdentityFile`을 가져옴) | 점프 설정은 Host chain으로 바뀌고, `ProxyCommand`는 무시됨([Termius 문서](https://docs.termius.com/getting-started/import-existing-hosts/)) |
+| MobaXterm | 세션 관리자는 읽지 않음 | `MobaXterm.ini`(설치형은 사용자 폴더, 포터블은 실행 파일 옆) | OpenSSH 키와 `.ppk` 모두 | 세션 설정의 SSH gateway |
+| PuTTY | 읽지 않음 | 윈도우 레지스트리 `HKCU\Software\SimonTatham\PuTTY\Sessions` | `.ppk`(PuTTYgen으로 변환). 에이전트는 Pageant | 0.77부터 Proxy 설정에서 SSH 종류로 지정 |
+| mRemoteNG | 읽지 않음 | `confCons.xml`. SSH 접속은 내장 PuTTY가 하므로 키는 PuTTY 저장 세션이나 Pageant로 지정 | `.ppk` | PuTTY 세션 설정을 따름 |
+
+PortX, Xshell, SecureCRT도 각자 자체 세션 목록을 둡니다.
+
+**원본은 하나로 둡니다.** 접속 정보의 원본은 `~/.ssh/config`(와 `conf.d/` 조각, [§1.3](01-image.qmd#1-3-dotfiles))로 정하고, 프로그램은 다음 순서로 고르면 설정이 갈라지지 않습니다.
+
+1. OpenSSH를 그대로 쓰는 도구(터미널, VS Code Remote-SSH)
+2. `~/.ssh/config`를 자동으로 읽는 도구(Tabby)
+3. 가져오기만 되는 도구(Termius). 가져온 뒤에는 두 벌이 되므로, 바뀔 때마다 다시 가져와야 합니다.
+4. 자체 목록만 쓰는 도구(PuTTY, mRemoteNG, MobaXterm 세션). 서버가 몇 대뿐이거나 기관 표준 도구일 때만 씁니다.
+
+**키 형식 바꾸기.** PuTTY 계열은 `.ppk` 형식을 씁니다. 키를 새로 만들지 말고, 가진 OpenSSH 키를 변환합니다. 윈도우에서는 PuTTYgen 화면의 *Conversions* 메뉴(*Import key*로 OpenSSH 키 불러오기, *Export OpenSSH key*로 내보내기)를 쓰고, 리눅스·맥에서는 `putty-tools`의 `puttygen` 명령을 씁니다.
+
+```bash
+# OpenSSH 개인키 → PuTTY 형식(.ppk)
+puttygen ~/.ssh/id_ed25519 -o ~/.ssh/id_ed25519.ppk
+# .ppk → OpenSSH 형식
+puttygen ~/.ssh/id_ed25519.ppk -O private-openssh-new -o ~/.ssh/id_ed25519
+```
+
+```text
+PuTTY-User-Key-File-3: ssh-ed25519
+Encryption: none
+```
+
+(Ubuntu 24.04 컨테이너의 puttygen 0.81, 2026-11 기준. 변환한 `.ppk`의 첫 줄이 위와 같고, 다시 OpenSSH로 바꾼 키에서 `ssh-keygen -y`로 뽑은 공개키가 원래 공개키와 같았습니다.) 형식만 바뀔 뿐 같은 키이므로 서버의 `authorized_keys`는 그대로 둡니다. 변환한 파일도 개인키이니 원본과 같이 지킵니다.
+
+**직접 만들 수도 있습니다.** 라이선스 때문에 쓸 수 있는 GUI 도구가 마땅치 않다면, OpenSSH가 세 OS에 모두 들어 있으므로 "목록에서 골라 접속하는" 부분만 작게 만들어 쓰면 됩니다. 아래 셸 함수는 설정 파일의 `Host` 이름을 모아 [fzf](https://github.com/junegunn/fzf)(목록에서 골라 주는 도구, 패키지 관리자로 설치)로 고르게 합니다.
+
+```bash
+# ~/.zshrc 또는 ~/.bashrc — 설정 파일의 Host 목록에서 골라 접속한다
+sshp() {
+  local h
+  h=$(grep -hiE '^\s*Host\s' ~/.ssh/config ~/.ssh/conf.d/*.conf 2>/dev/null \
+    | awk '{for (i = 2; i <= NF; i++) print $i}' \
+    | grep -v '[*?!]' | sort -u | fzf) || return
+  ssh "$h"
+}
+```
+
+AI 코딩 도구로 이보다 큰 도구(예: `~/.ssh/config`에서 Windows Terminal 프로필을 만들어 주는 스크립트)를 만들 때도 원칙은 같습니다. 접속 정보는 `~/.ssh/config`에서 읽기만 하고, 키와 비밀번호를 도구가 따로 저장하지 않게 합니다.
 
 ## J.6 셸 환경 설정 — oh-my-zsh {#j-6-oh-my-zsh}
 

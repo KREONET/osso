@@ -42,3 +42,5 @@ Proxmox VE | Proxmox VE, PVE
 제로 트러스트 | 제로 트러스트, Zero Trust
 DPI | DPI
 MTU | MTU, 점보 프레임
+PPK | .ppk, PuTTYgen, puttygen, Pageant
+Tabby | Tabby, Terminus
