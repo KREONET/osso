@@ -347,7 +347,9 @@ AVC(Access Vector Cache, SELinux가 접근 판정을 내리고 거부를 기록�
 
 ## 1.5 배포의 세 가지 방법과 복구 — PVE Clone, V2P, Clonezilla {#1-5-deploy}
 
-**멘탈모델:** 되돌리는 세 가지 방법은 *무엇을 복제하고, 어디서 실행하는가*가 다르다.
+이 책은 서버를 되도록 가상 머신으로 운영하는 쪽을 권합니다. VM은 부팅이 빠르고, 문제가 생긴 서버를 이미지에서 새로 만들어 갈아 끼우는 비용이 작습니다. 이미지를 고쳐 다시 찍어 내는 이 장의 방식이 그대로 통하는 곳이 VM입니다. 그 대가는 가상화 오버헤드(overhead, 하이퍼바이저를 거치느라 더 드는 처리 비용)입니다. 이 비용은 CPU가 가상화를 하드웨어로 지원하고(Intel VT-x, AMD-V), 디스크와 네트워크에 반가상화 장치(virtio, 게스트가 가상 환경임을 알고 쓰는 전용 드라이버)를 쓰면서 크게 줄었습니다. 일반적인 서버 업무에서는 체감하기 어려운 수준입니다. 그래도 물리 장비가 필요한 경우(GPU 같은 장치를 직접 다루거나 하드웨어에 묶인 라이선스가 있을 때)가 남는데, 같은 이미지를 물리 디스크에 기록하는 V2P가 그때의 퇴로가 됩니다. 반대 방향으로, 이미 물리 장비에서 돌고 있는 서버를 VM으로 옮기는 일은 P2V라고 합니다([P2V](#1-5-p2v)).
+
+이 절에서 다루는 되돌리는 방법 세 가지는 무엇을 복제하고 어디서 실행하는지가 다릅니다.
 
 | 길 | 무엇을 | 어디서 | 쓰임 |
 | --- | --- | --- | --- |
@@ -370,7 +372,20 @@ lsblk -o NAME,SIZE,MODEL,MOUNTPOINT
 
 복구 관점에서 요약하면, 깨끗한 재설치는 V2P, 이 서버 그대로 복원은 Clonezilla, VM이면 Clone입니다. 셋을 모두 갖춘 곳이 "디스크를 잃어도 분 단위로 되살리는" 곳입니다.
 
-더 깊이: [Clonezilla 문서](https://clonezilla.org/), [Proxmox VE: Clone](https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines), [qemu-img convert](https://www.qemu.org/docs/master/tools/qemu-img.html).
+### 물리 서버를 VM으로 옮기기 — P2V {#1-5-p2v}
+
+P2V(physical-to-virtual)는 물리 서버의 디스크를 VM의 디스크로 옮겨, 같은 서버를 하이퍼바이저 위에서 계속 돌리는 일입니다. 오래된 장비를 정리하면서 그 위의 서비스를 살려 두고 싶을 때, 그리고 침해가 의심되는 서버를 다시 설치하기 전에 증거로 보존해 두고 싶을 때 씁니다. 보존한 사본은 VM에서 네트워크를 끊은 채 부팅해 살펴볼 수 있습니다.
+
+방법은 두 가지입니다. 첫째는 이 절에서 익힌 Clonezilla를 그대로 쓰는 것입니다. 물리 서버의 디스크를 Clonezilla 이미지로 떠 두고, 같은 크기 이상의 빈 디스크를 단 VM을 Clonezilla로 부팅해 그 이미지를 복원합니다. 둘째는 libguestfs 프로젝트의 [virt-p2v](https://libguestfs.org/virt-p2v.1.html)입니다. 물리 서버를 virt-p2v가 든 ISO나 PXE로 부팅하면, virt-p2v가 SSH로 변환 서버(virt-v2v가 설치된 서버)에 접속해 디스크를 보내고, 변환 서버는 이를 KVM에서 돌 수 있는 VM으로 바꿉니다. 디스크를 라이브 매체에서 읽는 것은 두 방법이 같습니다. 원본 디스크가 복사 도중에 바뀌지 않아야 하기 때문입니다.
+
+옮긴 VM이 처음 부팅할 때 걸리는 곳은 대개 하드웨어 차이입니다.
+
+- **네트워크 인터페이스 이름이 바뀐다.** 물리 NIC의 `eno1`이 VM에서는 `ens18` 같은 이름이 되므로, 네트워크 설정(netplan, `/etc/network/interfaces`)을 새 이름에 맞춘다. MAC 주소도 바뀐다.
+- **디스크 컨트롤러 드라이버.** 리눅스 배포판 커널은 virtio 드라이버를 대개 포함하지만, initramfs(부팅 초기에 루트 디스크를 찾으려고 읽는 작은 파일시스템)에 빠져 있으면 루트를 찾지 못한다. Windows는 virtio 드라이버를 따로 넣어야 한다. virt-p2v는 이 작업을 대신해 준다.
+- **원본과 동시에 켜지 않는다.** P2V는 일반화를 거치지 않으므로 호스트 이름, IP, SSH 호스트 키, `machine-id`가 원본과 같다. 원본을 끄기 전에 사본을 같은 네트워크에 연결하면 주소가 충돌한다.
+- **하드웨어 전용 도구를 정리한다.** RAID 관리 도구나 서버 제조사의 관리 에이전트는 VM에서 쓸 곳이 없으므로 지운다.
+
+더 깊이: [Clonezilla 문서](https://clonezilla.org/), [Proxmox VE: Clone](https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines), [qemu-img convert](https://www.qemu.org/docs/master/tools/qemu-img.html), [virt-p2v](https://libguestfs.org/virt-p2v.1.html), [KVM](https://linux-kvm.org/page/Main_Page).
 
 ## 1.6 루트 비밀번호를 잃었을 때 — 복구 방법과 보안상 의미 {#1-6-root-recovery}
 

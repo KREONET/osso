@@ -36,6 +36,7 @@
 | 신뢰 사슬 (chain of trust) | 루트 CA에서 서버 인증서까지 서명으로 이어지는 믿음의 연결. → [Part 5](05-trust.qmd) |
 | 암묵지 | 문서로 정리되지 않고 사람에게만 남아 있는 노하우. → [Part 1 §1.3](01-image.qmd#1-3-dotfiles) |
 | 연합 (federation) | 다른 기관의 계정으로 로그인하도록 신원 확인을 연동하는 방식. |
+| 오버헤드 (overhead) | 본래 작업 외에 더 드는 처리 비용. 가상화에서는 하이퍼바이저를 거치느라 생기는 비용을 말하며, CPU의 하드웨어 가상화 지원과 virtio로 크게 줄었다. → [Part 1 §1.5](01-image.qmd#1-5-deploy) |
 | 오케스트레이터 | 쿠버네티스처럼 여러 컨테이너를 여러 서버에 배치·관리하는 시스템. |
 | 오탐 (false positive) | 정상 대상을 악성으로 잘못 판정하는 것(false positive). |
 | 위임 사다리 | AI에게 맡기는 정도를 조언→조사→승인 후 실행→위임의 네 칸으로 나눈 것. 칸마다 계정·권한·사람의 확인 방법이 다르다. → [Part 7 §7.1](07-ai-governance.qmd) |
@@ -116,6 +117,7 @@
 | OIDC | OpenID Connect. OAuth 2.0 위의 로그인(인증) 표준. |
 | OVS (Open vSwitch) | 소프트웨어 가상 스위치. → [부록 H.3](H-pve.qmd#h-3-layout) |
 | PATH | 명령 이름을 찾을 디렉터리 목록인 환경변수. 왼쪽부터 찾으며 리눅스는 현재 디렉터리를 뒤지지 않는다. → [Part 4 §4.0](04-container.qmd) |
+| P2V | Physical to Virtual. 물리 서버의 디스크를 VM으로 옮겨 그대로 계속 운영하는 것. 일반화를 거치지 않으므로 원본과 동시에 켜지 않는다. → [Part 1 §1.5](01-image.qmd#1-5-p2v) |
 | PCI pass-through | 호스트의 PCI 장치를 VM에 직접 넘겨주는 방식. |
 | policy (firewalld) | 한 zone에서 다른 zone으로 가는 트래픽에 적용하는 규칙 묶음. → [Part 2 §2.4](02-firewall.qmd#2-4-firewalld-docker) |
 | PPK | PuTTY 계열이 쓰는 개인키 파일 형식(`.ppk`). PuTTYgen으로 OpenSSH 키와 서로 바꿀 수 있다. 에이전트는 Pageant. → [부록 J.5](J-workstation.qmd#j-5-config-keys) |
@@ -135,6 +137,7 @@
 | TLS 핸드셰이크 | 암호화 통신을 시작하기 전에 양쪽이 인증서와 키 정보를 주고받는 절차. |
 | unix socket (유닉스 도메인 소켓) | `IP:포트` 대신 파일 경로(`/var/run/docker.sock` 등)로 여는 소켓. 같은 컴퓨터 안 프로그램끼리의 대화(IPC·RPC)는 대부분 이것이며, 파일 권한이 곧 접근 통제다. → [Part 4 §4.0](04-container.qmd) |
 | V2P | Virtual to Physical. 가상 이미지를 물리 서버로 복원·이식하는 것. |
+| virtio | 게스트가 가상 환경임을 알고 쓰는 반가상화 장치·드라이버(디스크·네트워크). 가상화 오버헤드를 줄인다. → [Part 1 §1.5](01-image.qmd#1-5-deploy) |
 | veth | 양 끝이 이어진 가상 이더넷 쌍. 컨테이너의 네트워크 네임스페이스를 호스트 브리지에 잇는다. |
 | X.509 | 인증서의 국제 표준 형식. HTTPS 서버 인증서, mTLS 클라이언트 인증서, 공동(옛 공인)인증서가 모두 이 형식이다. → [Part 5 §5.1](05-trust.qmd) |
 | zone (firewalld) | 네트워크를 신뢰 수준별로 나눈 구역. 출발지나 인터페이스로 트래픽을 구역에 배정한다. → [Part 2 §2.1](02-firewall.qmd#2-1-ufw-firewalld) |
