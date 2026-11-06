@@ -1,6 +1,6 @@
 # 부록 D. 명령어 치트시트 (Runbook) {#appendix-d}
 
-실습에서 쓴 주요 명령어 모음입니다. `⟨…⟩` 는 본인 값으로 바꾸세요.
+실습에서 쓴 주요 명령어 모음(runbook, 런북: 반복 작업을 명령 단위로 정리한 절차서)입니다. `⟨…⟩` 는 본인 값으로 바꾸세요.
 
 ## 1. 이미지 (libguestfs / qemu) {#d-1-image}
 
@@ -30,7 +30,7 @@ virt-customize -a ⟨image.img⟩ \
   --root-password file:⟨pw.txt⟩ \
   --install ⟨qemu-guest-agent⟩ \
   --firstboot-command '⟨systemctl enable --now ssh⟩'
-# 정체성 리셋(machine-id·hostkey·로그)
+# 일반화(machine-id·hostkey·로그 지우기)
 virt-sysprep -a ⟨image.img⟩
 # 포맷 변환 (raw/vmdk/qcow2)
 qemu-img convert -O qcow2 ⟨in.img⟩ ⟨out.qcow2⟩
@@ -53,7 +53,7 @@ Clonezilla: savedisk    ⟨이미지명⟩ ⟨sda⟩
 Clonezilla: restoredisk ⟨이미지명⟩ ⟨sda⟩
 ```
 
-루트 비밀번호 분실 복구: GRUB 메뉴에서 `e` 로 편집, `linux` 줄 끝에 추가 후 `Ctrl+X`.
+루트 비밀번호 분실 복구: GRUB(리눅스 부트로더) 메뉴에서 `e` 로 편집, `linux` 줄 끝에 추가 후 `Ctrl+X`.
 
 ```text
 init=/bin/bash
@@ -172,7 +172,7 @@ ping -M do -s 8972 ⟨target⟩
 
 ## 7. 서비스 (systemd) {#d-7-systemd}
 
-옛 문서에는 `service`·`/etc/init.d/` 명령이 많습니다. 현재 배포판은 systemd를 쓰며, 옛 명령은 대개 systemd로 넘겨 주는 호환용입니다.
+옛 문서에는 `service`·`/etc/init.d/` 명령이 많습니다. 현재 배포판은 systemd(부팅과 서비스를 관리하는 리눅스의 첫 프로세스)를 쓰며, 옛 명령은 대개 systemd로 넘겨 주는 호환용입니다.
 
 | | 옛 방식 (init.d) | 지금 (systemd) |
 | --- | --- | --- |
@@ -191,6 +191,6 @@ journalctl -u sshd -n 50
 systemctl is-enabled sshd
 ```
 
-데비안·우분투에서는 서비스 이름이 `ssh`입니다(`systemctl restart ssh`). 프로세스 트리 관점에서 systemd가 무엇을 바꿨는지는 [Part 4](04-container.qmd)에 있습니다.
+데비안·우분투에서는 서비스 이름이 `ssh`입니다(`systemctl restart ssh`). 프로세스 트리(process tree, 부모·자식 관계로 이어진 프로세스 구조) 관점에서 systemd가 무엇을 바꿨는지는 [Part 4](04-container.qmd)에 있습니다.
 
 관련: [부록 F 용어집](F-glossary.qmd) · [Part 2](02-firewall.qmd)

@@ -44,3 +44,8 @@ DPI | DPI
 MTU | MTU, 점보 프레임
 PPK | .ppk, PuTTYgen, puttygen, Pageant
 Tabby | Tabby, Terminus
+재현성 (reproducibility) | 재현성, 재현 가능, reproducible
+최소 권한 원칙 (least privilege) | 최소 권한, 최소권한, least privilege
+접근 제어 (access control) | 접근 제어, 접근제어, access control
+일반화 (generalization) | 일반화, generalization
+허용 목록 (allowlist) | 허용 목록, allowlist

@@ -6,9 +6,15 @@
 |---|---|
 | 2FA | 2단계 인증. 비밀번호에 휴대전화·보안키 같은 두 번째 수단을 더한다. |
 | 802.1X | 포트 단위 인증 표준. 인증된 단말만 네트워크에 붙게 한다(NAC의 구현 수단). |
+| 감사 (audit) | 누가 언제 무엇을 했는지, 규칙을 지켰는지를 기록과 증거로 점검하는 일. |
+| 감사 가능성 (auditability) | 누가 언제 무엇을 바꿨는지 나중에 확인할 수 있는 성질. 설정과 절차가 파일과 기록으로 남아 있어야 생긴다. → [Part 1 §1.1](01-image.qmd#1-1-golden-image) |
+| 거버넌스 (governance) | 조직이 통제와 책임을 정하고 그것이 지켜지게 하는 체계. → [Part 7](07-ai-governance.qmd) |
+| 격리 (isolation) | 시스템·망·프로세스를 서로 닿지 않게 떼어 두어 한쪽의 문제가 번지지 않게 하는 일. |
 | 골든 이미지 (golden image) | 표준으로 삼아 복제해 쓰는 기준 디스크 이미지. → [Part 1 §1.1](01-image.qmd#1-1-golden-image) |
 | 공격면 (attack surface) | 외부에서 공격받을 수 있는 지점의 총합. 열린 포트·노출된 서비스가 넓힐수록 커진다. |
 | 굽다 (bake) | 설정이나 파일을 넣어 이미지를 새로 빌드하는 것. 반대는 실행할 때 마운트하는 것이다. → [Part 4 §4.3](04-container.qmd#4-3-config-mount) |
+| 다층 방어 (defense in depth) | 여러 겹의 통제를 두어 한 겹이 뚫려도 다음 겹이 막게 하는 설계. |
+| 단일 장애 지점 (single point of failure) | 그곳 하나가 멈추면 전체가 멈추는 지점. |
 | 드롭인 (drop-in) | 본 설정 파일을 고치지 않고 `*.d/` 디렉터리에 조각 파일을 넣어 설정을 덧붙이는 방식. 패키지 업데이트에도 설정이 유지된다. → [Part 1 §1.3](01-image.qmd#1-3-drop-in) |
 | 루트 프로그램 | OS·브라우저 회사가 어떤 루트 CA를 기본으로 믿을지 정하고 관리하는 제도(Mozilla·Microsoft·Apple·Chrome). 목록은 설치 미디어와 OS 업데이트로 배포된다. → [Part 5 §5.1](05-trust.qmd) |
 | 리버스 프록시 (reverse proxy) | 외부 요청을 대신 받아 뒤쪽 서버에 전달하는 서버. HTTPS·로그인을 앞단에서 처리할 때 쓴다(예: Caddy). |
@@ -17,30 +23,47 @@
 | 멀티홈드 (multi-homed) | 두 개 이상의 망에 동시에 연결된 호스트. default route는 하나만 둔다. → [Part 3 §3.2](03-network.qmd#3-2-multi-homed) |
 | 멘탈모델 (mental model) | 대상이 어떻게 동작하는지 단순하게 잡아 둔 이해의 틀. 이 책은 각 절 첫머리에 한두 문장으로 적는다. → [들어가며](index.qmd#how-to-use) |
 | 멱등 (idempotent) | 몇 번을 실행해도 결과가 같은 성질. 설정 스크립트가 갖춰야 할 성질이다. |
+| 명령형 (imperative) | 할 절차를 순서대로 적는 방식. 반대는 선언형. |
+| 무결성 (integrity) | 내용이 손상되거나 변조되지 않은 상태. |
 | 미러 (mirror) | 원본 저장소를 복제해 제공하는 서버. |
 | 방탄 호스팅 (bulletproof hosting) | 신고·차단 요청에 응하지 않는 호스팅. 평판 목록이 대역째로 막는 대상이다. |
+| 비대칭 경로 (asymmetric routing) | 요청과 응답이 서로 다른 길로 오가는 경로. 상태를 추적하는 방화벽에서 응답이 버려지는 원인이 된다. |
+| 사전 할당 (preallocation) | 디스크 공간을 만들 때 미리 확보해 두는 설정. thick 디스크가 이렇게 만들어진다. |
 | 섀도우 IT | 조직의 승인·관리 밖에서 현업이 스스로 마련해 운영하는 시스템과 서비스. → [Part 7 §7.5](07-ai-governance.qmd#7-5-governance) |
 | 선언형 운영 | 원하는 최종 상태를 파일로 적어 두고 도구가 그 상태를 맞추게 하는 운영 방식. → [Part 4 §4.2](04-container.qmd#4-2-compose) |
 | 스테이징 (staging) | 운영에 반영하기 전에 같은 구성으로 시험하는 환경. |
 | 스푸핑 (spoofing) | 출발지 주소 등을 위조하는 공격. |
+| 신뢰 사슬 (chain of trust) | 루트 CA에서 서버 인증서까지 서명으로 이어지는 믿음의 연결. → [Part 5](05-trust.qmd) |
 | 암묵지 | 문서로 정리되지 않고 사람에게만 남아 있는 노하우. → [Part 1 §1.3](01-image.qmd#1-3-dotfiles) |
+| 연합 (federation) | 다른 기관의 계정으로 로그인하도록 신원 확인을 연동하는 방식. |
 | 오케스트레이터 | 쿠버네티스처럼 여러 컨테이너를 여러 서버에 배치·관리하는 시스템. |
-| 오탐 | 정상 대상을 악성으로 잘못 판정하는 것(false positive). |
+| 오탐 (false positive) | 정상 대상을 악성으로 잘못 판정하는 것(false positive). |
 | 위임 사다리 | AI에게 맡기는 정도를 조언→조사→승인 후 실행→위임의 네 칸으로 나눈 것. 칸마다 계정·권한·사람의 확인 방법이 다르다. → [Part 7 §7.1](07-ai-governance.qmd) |
 | 인벤토리 | 서버·소프트웨어·계정 같은 자산과 그 식별 정보를 모은 목록. → [Part 7 §7.2](07-ai-governance.qmd#7-2-inventory) |
+| 일반화 (generalization) | 이미지를 여러 기계에 복제해도 겹치지 않도록 machine-id·SSH 호스트 키·로그 같은 기계 고유 정보를 지우는 일. Windows는 `sysprep`, 리눅스 이미지는 `virt-sysprep`으로 한다. → [Part 1 §1.4](01-image.qmd#1-4-identity-reset) |
+| 자격증명 (credential) | 비밀번호·토큰·키처럼 신원을 증명하는 정보. |
+| 재현성 (reproducibility) | 같은 입력과 절차로 같은 결과를 다시 만들 수 있는 성질. → [Part 1 §1.8](01-image.qmd#1-8-reproducible) |
+| 접근 제어 (access control) | 누가 무엇에 접근할 수 있는지 정하고 강제하는 일. |
 | 제로 트러스트 | "내부망이니 믿는다"를 버리고 연결마다 주체를 확인해 필요한 만큼만 허락하는 보안 방식(NIST SP 800-207). mTLS가 대표적 구현 수단. → [Part 5 §5.6](05-trust.qmd) |
+| 증적 (evidence) | 통제가 지켜졌음을 보여 주는 기록. |
 | 초과 약정 (over-provisioning) | 실제 저장 용량보다 많은 용량을 VM들에 약속해 두는 것. thin 디스크에서 생기며, 실제로 다 쓰면 저장소가 가득 찬다. → [Part 1 §1.2](01-image.qmd#1-2-image-formats) |
+| 최소 권한 원칙 (least privilege) | 일에 꼭 필요한 만큼만 권한을 주는 원칙. |
+| 출처 (provenance) | 이미지·패키지가 누가 어디서 어떻게 만들었는지에 대한 근거. |
 | 커널 스레드 | 커널 안에서 커널이 직접 만든 작업자. `ps`에서 `[kworker/…]`처럼 대괄호로 보이고 부모는 `kthreadd`(PID 2). → [Part 4 §4.0](04-container.qmd) |
 | 키스토어 (keystore) · 키체인 | 기기가 신뢰하는 인증서와 개인키를 보관하는 OS의 저장소. → [Part 5 §5.4](05-trust.qmd#5-4-keystore) |
 | 토폴로지 | 망의 연결 구조. 어떤 장비가 어느 망에 붙어 있는지의 배치. |
 | 투명 브리지 (transparent bridge) | IP 주소 없이 두 망 사이에 끼워 패킷을 걸러 내는 장치. → [Part 2 §2.5](02-firewall.qmd#2-5-case) |
+| 특수화 이미지 (specialized image) | 특정 기계의 고유 정보가 남아 있는 이미지. 일반화하기 전의 상태. → [Part 1 §1.4](01-image.qmd#1-4-identity-reset) |
 | 패스프레이즈 (passphrase) | 개인키 파일을 암호화하는 긴 암호. |
 | 패키지 관리자 | 정해진 저장소에서 프로그램을 받아 서명 검증·의존성 설치·업데이트·제거를 해 주는 도구(apt, dnf, Homebrew, WinGet). 설치 목록을 파일로 내보내 다시 설치할 수 있다. → [부록 G](G-packages.qmd) |
+| 평판 (reputation) | 과거 악성 행위 기록에 근거한 IP 주소·대역의 신뢰도. → [Part 2 §2.5](02-firewall.qmd#2-5-reputation) |
+| 폐기 (revocation) | 만료 전에 인증서를 무효로 선언하는 일. CRL과 OCSP로 알린다. |
 | 폭발 반경 (blast radius) | 사고 하나가 영향을 미치는 범위. 격리의 목적은 이것을 줄이는 것이다. |
 | 프로비저닝 (provisioning) | 서버를 쓸 수 있는 상태로 설치·설정을 미리 마쳐 두는 작업. |
 | 프록시 (proxy) | 클라이언트 대신 외부에 접속해 요청을 중계하는 서버. 나가는 연결을 한곳으로 모을 때 쓴다. → [Part 2 §2.6](02-firewall.qmd#2-6-egress-allowlist) |
+| 허용 목록 (allowlist) | 허용할 대상만 적어 두고 나머지는 모두 막는 목록. → 화이트리스팅 |
 | 호스트명 규칙 | VM 구분용 이름 짓기 예: `⟨IP 끝자리 3자리⟩-⟨OS약어⟩-⟨용도⟩` (예: `042-u24-web`). |
-| 화이트리스팅 (allowlist) | 허용 목록에 있는 대상만 통과시키고 나머지는 막는 방식. → [Part 2 §2.6](02-firewall.qmd#2-6-egress-allowlist) |
+| 화이트리스팅 (allowlisting) | 허용 목록에 있는 대상만 통과시키고 나머지는 막는 방식. → [Part 2 §2.6](02-firewall.qmd#2-6-egress-allowlist) |
 | 환경변수 (`export`) | 프로세스가 자식에게 물려주는 이름=값 목록. 셸 변수는 `export`해야 자식 프로그램에 넘어간다. → [Part 4 §4.0](04-container.qmd) |
 | 훅 (hook) | 커널 안에서 패킷이 방화벽 규칙의 검사를 받는 지점(prerouting, input, forward 등). → [Part 2 §2.2](02-firewall.qmd#2-2-hooks) |
 | ACME | 인증서를 자동 발급·갱신하는 프로토콜(RFC 8555). Let's Encrypt가 사용. |
@@ -107,7 +130,7 @@
 | SR-IOV | Single Root I/O Virtualization. 물리 NIC 하나(PF)를 여러 가상 기능(VF)으로 나눠 VM에 직접 넘기는 기능. → [부록 H.7.1](H-pve.qmd#h-7-1-sriov) |
 | SSPL | MongoDB 등이 쓴 Server Side Public License. 서비스 제공 시 소스 공개 의무, OSI 비승인. |
 | Stateful Firewall | 연결 상태를 추적해, 허용한 연결의 응답 패킷을 자동으로 통과시키는 방화벽. |
-| sysprep | 이미지 복제 전 머신 정체성(machine-id·호스트키·로그)을 지우는 작업. |
+| sysprep | Windows의 일반화 도구(System Preparation). 리눅스 이미지에서는 `virt-sysprep`이 같은 일을 한다. → 일반화 |
 | tap 인터페이스 | VM의 가상 NIC를 호스트 쪽에서 다루는 가상 인터페이스. 하이퍼바이저 방화벽이 여기에 걸린다. → [부록 I.3](I-access-control.qmd#i-3-hypervisor) |
 | TLS 핸드셰이크 | 암호화 통신을 시작하기 전에 양쪽이 인증서와 키 정보를 주고받는 절차. |
 | unix socket (유닉스 도메인 소켓) | `IP:포트` 대신 파일 경로(`/var/run/docker.sock` 등)로 여는 소켓. 같은 컴퓨터 안 프로그램끼리의 대화(IPC·RPC)는 대부분 이것이며, 파일 권한이 곧 접근 통제다. → [Part 4 §4.0](04-container.qmd) |

@@ -18,7 +18,7 @@ sudo firewall-cmd --zone=trusted --list-all
 👀 **보이는 것:** trusted에 소스 대역이, public에 https만. 내부망에서는 모두 접속되고 외부에서는 https만 된다.
 
 💡 **느낄 것:** 규칙을 포트 하나하나가 아니라 **"이 대역은 믿는다/안 믿는다"** 로 생각하게 된다. ufw(데비안계)와 firewalld(레드햇계)는 사고방식이 다르다.
-  단, Docker publish 포트에는 zone 규칙이 적용되지 않는다. 그 트래픽은 FORWARD로 가므로 **egress=docker인 policy**로 막고, 기준도 호스트 포트가 아닌 **컨테이너 포트**로 잡는다(③의 ufw 함정과 원인이 같다).
+  단, Docker publish 포트(`-p`로 호스트에 공개한 포트)에는 zone 규칙이 적용되지 않는다. 그 트래픽은 FORWARD로 가므로 **egress=docker인 policy**(정책, 한 영역에서 다른 영역으로 지나가는 트래픽에 거는 규칙. 여기서는 나가는 쪽이 docker 영역)로 막고, 기준도 호스트 포트가 아닌 **컨테이너 포트**로 잡는다(③의 ufw 함정과 원인이 같다).
 
 ---
 

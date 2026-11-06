@@ -10,10 +10,10 @@
 
 ### 컴퓨터 공유의 역사 — 시분할에서 컨테이너까지 {#4-0-history}
 
-초기의 컴퓨터는 개인용 기기가 아닌 중앙의 메인프레임이었습니다. 값비싼 기계 한 대에 여러 사람이 단말기로 접속해 시간을 나누어 썼습니다(시분할). 그래서 운영체제는 처음부터 다음과 같은 일을 맡았습니다.
+초기의 컴퓨터는 개인용 기기가 아닌 중앙의 메인프레임이었습니다. 값비싼 기계 한 대에 여러 사람이 단말기로 접속해 시간을 나누어 썼습니다(시분할, time-sharing). 그래서 운영체제는 처음부터 다음과 같은 일을 맡았습니다.
 
-- **사용자별 격리:** 내 프로세스와 파일을 다른 사람이 건드리지 못하게 한다 (UID, 파일 권한)
-- **자원 쿼터:** 한 사람이 디스크·CPU·메모리를 다 차지하지 못하게 한다 (디스크 쿼터, `ulimit`)
+- **사용자별 격리(isolation):** 내 프로세스와 파일을 다른 사람이 건드리지 못하게 한다 (사용자 식별 번호인 UID와 파일 권한)
+- **자원 쿼터(quota, 사용량 상한):** 한 사람이 디스크·CPU·메모리를 다 차지하지 못하게 한다 (디스크 쿼터, `ulimit`)
 - **보이는 범위 제한:** 1979년 유닉스 V7의 `chroot`는 "이 프로세스에게는 이 디렉터리가 `/`다"라고 믿게 했다
 
 리눅스는 이를 두 갈래로 더 세밀하게 발전시켰습니다.
@@ -21,9 +21,9 @@
 | 기능 | 하는 일 | 나누는 것 | 들어온 때 |
 | --- | --- | --- | --- |
 | **namespace** | 무엇이 보이나 (격리) | 프로세스 번호(pid), 네트워크(net), 마운트(mnt), 호스트명(uts), 사용자(user) 등 | 2002년 mnt부터 하나씩, user는 2013년 |
-| **cgroup** | 얼마나 쓰나 (쿼터·회계) | CPU, 메모리, 디스크 I/O, 프로세스 수 | 2008년 (2.6.24) |
+| **cgroup** | 얼마나 쓰나 (쿼터·회계(accounting, 자원 사용량 집계)) | CPU, 메모리, 디스크 I/O, 프로세스 수 | 2008년 (2.6.24) |
 
-cgroup은 구글 엔지니어들이 "process containers"라는 이름으로 제안한 데서 시작했으며, 앞에서 본 쿼터 기능을 프로세스 묶음 단위로 적용하는 장치입니다. **컨테이너 = namespace(격리) + cgroup(쿼터) + 이미지(파일시스템 꾸러미)** 를 한 번에 쓰기 좋게 포장한 것입니다. LXC(2008)가 먼저 구현했고, Docker(2013)가 이를 "이미지 한 줄로 배포"하는 방식으로 다듬었습니다.
+cgroup은 구글 엔지니어들이 "process containers"라는 이름으로 제안한 데서 시작했으며, 앞에서 본 쿼터 기능을 프로세스 묶음 단위로 적용하는 장치입니다. **컨테이너 = namespace(격리) + cgroup(쿼터) + 이미지(파일시스템 꾸러미)** 를 한 번에 쓰기 좋게 포장한 것입니다. LXC(Linux Containers, 2008)가 먼저 구현했고, Docker(2013)가 이를 "이미지 한 줄로 배포"하는 방식으로 다듬었습니다.
 
 ```bash
 # 지금 내 셸이 속한 namespace들 — 이 번호가 같으면 같은 세상을 본다
@@ -79,7 +79,7 @@ docker run --rm alpine ip addr
 
 **이 비율은 15년째 거의 그대로입니다.** 위스콘신대의 드라이버 연구([Kadav & Swift, 「Understanding Modern Device Drivers」, ASPLOS 2012](https://pages.cs.wisc.edu/~kadav/app/papers/driverstudy.pdf))는 Linux 2.6.37.6(2011년 4월)을 분석해 "장치 드라이버가 리눅스 코드의 70%"이고, 드라이버 코드 중 네트워크 드라이버가 25%라고 보고했습니다. 위 표(2026년)도 드라이버 69%, 자동 생성 헤더를 뺀 드라이버 중 네트워크 카드 드라이버 25%(537만 / 2,153만 줄)로 거의 같습니다. 커널 전체 크기로는 문서·장치 트리 등 모든 파일을 합쳐 2025년 초에 처음으로 4천만 줄을 넘었고, 그 절반 이상이 드라이버라는 보도도 있습니다([heise, 「Linux breaks through the 40 million line mark」, 2025-01-25](https://www.heise.de/en/news/Linux-breaks-through-the-40-million-line-mark-10256571.html)). 기준(어떤 파일을 세나)에 따라 숫자는 조금씩 달라지므로, 위 표의 수치는 아래 명령으로 누구나 다시 셀 수 있게 해 두었습니다.
 
-그만큼 기능과 규칙, 함정도 많습니다. 컨테이너마다 이 스택을 한 벌씩 따로 갖고, 그 사이를 브리지·NAT·방화벽 규칙으로 연결하기 때문에 [실습③](labs/lab-03.qmd)의 "ufw가 왜 뚫리지", [⑨′](labs/lab-09p.qmd)의 egress(밖으로 나가는 트래픽), [4.5](#4-5-image-build)의 대역 겹침 같은 문제가 생깁니다.
+그만큼 기능과 규칙, 함정도 많습니다. 컨테이너마다 이 스택을 한 벌씩 따로 갖고, 그 사이를 브리지·NAT(network address translation, 주소 변환)·방화벽 규칙으로 연결하기 때문에 [실습③](labs/lab-03.qmd)의 "ufw가 왜 뚫리지", [⑨′](labs/lab-09p.qmd)의 egress(밖으로 나가는 트래픽), [4.5](#4-5-image-build)의 대역 겹침 같은 문제가 생깁니다.
 
 ```bash
 # 직접 세어 보기 — 최신 소스를 얕게 받아서 (약 40초, 디스크 2 GB)
@@ -108,7 +108,7 @@ sudo ss -xlp | head -20
 | --- | --- |
 | `/run/systemd/…`, `/run/systemd/journal/…` | `systemctl`이 systemd에게, 프로그램이 journald에게 로그를 보낼 때 |
 | `/dev/log` | 전통적인 syslog 입구 (요즘은 journald로 이어지는 링크) |
-| `/run/dbus/system_bus_socket` | D-Bus — 데스크톱·시스템 서비스끼리의 메시지 버스(RPC) |
+| `/run/dbus/system_bus_socket` | D-Bus — 데스크톱·시스템 서비스끼리의 메시지 버스(RPC, 원격 프로시저 호출) |
 | `/var/run/docker.sock` | `docker` 명령이 Docker 데몬에게 |
 | `/run/containerd/containerd.sock` | Docker 데몬이 containerd에게 |
 | `/var/run/postgresql/.s.PGSQL.5432` | `psql`이 같은 서버의 PostgreSQL에게 (포트 번호가 이름에 남아 있다) |
@@ -151,7 +151,7 @@ sequenceDiagram
   Note over S: 프롬프트를 다시 띄운다
 ```
 
-POSIX의 `fork`는 지금 프로세스를 **메모리까지 모두 복제**합니다(실제로는 바로 복사하지 않고, 둘 중 하나가 쓰려고 할 때 그 부분만 복사하는 copy-on-write라서 빠릅니다). 그다음 `exec`가 그 복제본의 내용을 **새 프로그램으로 갈아 끼웁니다.** 프로그램을 실행하는 과정이 언제나 "복제 → 갈아 끼우기"이므로 모든 프로세스에는 부모가 있고, 그래서 프로세스는 트리 구조를 이룹니다.
+POSIX(유닉스 계열 운영체제의 표준 인터페이스 규격)의 `fork`는 지금 프로세스를 **메모리까지 모두 복제**합니다(실제로는 바로 복사하지 않고, 둘 중 하나가 쓰려고 할 때 그 부분만 복사하는 copy-on-write라서 빠릅니다). 그다음 `exec`가 그 복제본의 내용을 **새 프로그램으로 갈아 끼웁니다.** 프로그램을 실행하는 과정이 언제나 "복제 → 갈아 끼우기"이므로 모든 프로세스에는 부모가 있고, 그래서 프로세스는 트리 구조를 이룹니다.
 
 ```bash
 # 지금 셸의 PID와 그 부모
@@ -163,7 +163,7 @@ sleep 30 &
 ps -o pid,ppid,cmd --forest
 ```
 
-여기서 한 가지 결론을 얻을 수 있습니다. **`cd`는 프로그램이 아닙니다.** 자식 프로세스는 자기 작업 디렉터리만 바꿀 수 있고 부모의 것은 바꿀 수 없습니다. `cd`가 `/usr/bin/cd`라는 프로그램이었다면 fork된 자식이 디렉터리를 바꾸고 종료될 뿐, 셸은 그대로였을 것입니다. 그래서 `cd`·`export`는 셸 안에 들어 있는 내장 명령입니다.
+여기서 한 가지 결론을 얻을 수 있습니다. **`cd`는 프로그램이 아닙니다.** 자식 프로세스는 자기 작업 디렉터리만 바꿀 수 있고 부모의 것은 바꿀 수 없습니다. `cd`가 `/usr/bin/cd`라는 프로그램이었다면 fork된 자식이 디렉터리를 바꾸고 종료될 뿐, 셸은 그대로였을 것입니다. 그래서 `cd`·`export`는 셸 안에 들어 있는 내장 명령(builtin)입니다.
 
 ```bash
 # builtin — 셸 내장
@@ -266,7 +266,7 @@ root   4  ...   \_ [kworker/R-rcu_gp]
 
 `ps auxf`에는 나무가 **두 그루** 있습니다.
 
-- **PID 1 (`systemd`)** — 사용자 공간의 뿌리. 로그인 셸, 서비스, 컨테이너 런타임이 모두 이 아래로 이어진다.
+- **PID 1 (`systemd`)** — 사용자 공간(user space, 커널 밖에서 일반 프로그램이 실행되는 영역)의 뿌리. 로그인 셸, 서비스, 컨테이너 런타임(container runtime, 컨테이너를 실제로 만들고 실행하는 프로그램)이 모두 이 아래로 이어진다.
 - **PID 2 (`kthreadd`)** — **커널 스레드**의 뿌리. `[대괄호]`로 보이는 것들이 그 자식이다.
 
 대괄호는 "명령줄이 없다"는 표시입니다. 커널 스레드는 디스크의 프로그램 파일을 `exec`해서 실행된 것이 아니라 커널이 내부에서 직접 만든 작업자이므로 `/proc/⟨PID⟩/cmdline`이 비어 있고, `ps`는 그럴 때 이름을 대괄호로 감쌉니다. 이름으로 하는 일을 대략 짐작할 수 있습니다.
@@ -276,7 +276,7 @@ root   4  ...   \_ [kworker/R-rcu_gp]
 | `[kworker/…]` | 커널의 잡일 대기열(workqueue) 처리 |
 | `[ksoftirqd/0]` | 인터럽트 뒤처리 — 네트워크 패킷이 몰리면 이 스레드의 CPU 사용량이 늘어난다 |
 | `[kswapd0]` | 메모리가 모자랄 때 회수 |
-| `[jbd2/vda1-8]` | ext4 파일시스템의 저널 기록 (`vda1`의 것) |
+| `[jbd2/vda1-8]` | ext4 파일시스템의 저널(journal, 변경 내용을 먼저 적어 두는 기록 영역) 기록 (`vda1`의 것) |
 
 `PID 1`과 `PID 2`의 부모는 둘 다 **0**입니다. 0번은 부팅할 때의 커널 자신이라 목록에 나오지 않습니다. 예전 커널에서는 커널 스레드도 init(PID 1) 아래에 붙어 한 그루로 보였지만, 지금은 `kthreadd`가 모든 커널 스레드의 부모를 맡아서 두 그루로 나뉩니다(리눅스 2.6.22, 2007년부터. [커밋 73c279927f89](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=73c279927f89561ecb45b2dfdf9314bafcfd9f67)).
 
@@ -296,9 +296,9 @@ docker rm -f pgenv
 ["POSTGRES_HOST_AUTH_METHOD=trust","PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/16/bin","GOSU_VERSION=1.19","LANG=en_US.utf8","PG_MAJOR=16","PG_VERSION=16.15-1.pgdg13+2","PGDATA=/var/lib/postgresql/data"]
 ```
 
-내가 `-e`로 준 것 하나에, **이미지의 Dockerfile `ENV`** 로 정해진 것들(`PATH`·`PG_VERSION` 등)이 더해져 있습니다. `PATH`에 `/usr/lib/postgresql/16/bin`이 들어 있어서 컨테이너 안에서 `psql`을 경로 없이 실행할 수 있습니다.
+내가 `-e`로 준 것 하나에, **이미지의 Dockerfile(이미지를 만드는 절차를 적은 파일) `ENV`** 로 정해진 것들(`PATH`·`PG_VERSION` 등)이 더해져 있습니다. `PATH`에 `/usr/lib/postgresql/16/bin`이 들어 있어서 컨테이너 안에서 `psql`을 경로 없이 실행할 수 있습니다.
 
-compose에서 컨테이너로 들어가는 길은 `environment:`와 `env_file:`입니다. ⚠️ **프로젝트 디렉터리의 `.env` 파일은 자동으로 컨테이너에 들어가지 않습니다.** `.env`는 `compose.yaml` 안의 `${TAG}` 같은 자리를 채우는 데 쓰입니다. 직접 확인해 보면 다음과 같습니다.
+compose(Docker Compose, 여러 컨테이너를 한 파일에 선언해 함께 실행하는 도구)에서 컨테이너로 들어가는 길은 `environment:`와 `env_file:`입니다. ⚠️ **프로젝트 디렉터리의 `.env` 파일은 자동으로 컨테이너에 들어가지 않습니다.** `.env`는 `compose.yaml` 안의 `${TAG}` 같은 자리를 채우는 데 쓰입니다. 직접 확인해 보면 다음과 같습니다.
 
 ```bash
 mkdir envtest && cd envtest
@@ -323,7 +323,7 @@ docker compose down -t 0
 
 `TAG`는 이미지 태그(`alpine:3.20`)를 채우는 데 쓰였지만 `FOO`는 컨테이너에 없습니다. `.env`의 값을 컨테이너에 넣으려면 `env_file: .env`를 쓰거나 `environment:`에 `FOO: ${FOO}`처럼 명시합니다.
 
-⚠️ 환경변수는 **비밀을 두기에 좋은 곳이 아닙니다.** `docker` 권한이 있는 사람은 누구나 `docker inspect`로 평문을 보고, 컨테이너 안에서는 `/proc/1/environ`으로 보입니다. 비밀번호·토큰은 읽기 전용으로 마운트한 파일로 넘기는 편이 낫습니다(많은 공식 이미지가 `POSTGRES_PASSWORD_FILE`처럼 `_FILE` 변수를 지원합니다).
+⚠️ 환경변수는 **비밀을 두기에 좋은 곳이 아닙니다.** `docker` 권한이 있는 사람은 누구나 `docker inspect`로 평문(plaintext, 암호화하지 않은 원래 값)을 보고, 컨테이너 안에서는 `/proc/1/environ`으로 보입니다. 비밀번호·토큰은 읽기 전용으로 마운트한 파일로 넘기는 편이 낫습니다(많은 공식 이미지가 `POSTGRES_PASSWORD_FILE`처럼 `_FILE` 변수를 지원합니다).
 
 더 깊이: [Kadav & Swift, 「Understanding Modern Device Drivers」, ASPLOS 2012](https://pages.cs.wisc.edu/~kadav/app/papers/driverstudy.pdf), [namespaces(7)](https://man7.org/linux/man-pages/man7/namespaces.7.html), [cgroups(7)](https://man7.org/linux/man-pages/man7/cgroups.7.html), [fork(2)](https://man7.org/linux/man-pages/man2/fork.2.html), [execve(2)](https://man7.org/linux/man-pages/man2/execve.2.html), [environ(7)](https://man7.org/linux/man-pages/man7/environ.7.html), [Docker Compose: 환경변수 우선순위와 .env](https://docs.docker.com/compose/how-tos/environment-variables/).
 
@@ -335,13 +335,13 @@ docker compose down -t 0
 |---|---|---|
 | 격리 단위 | 커널 포함 한 대 | 프로세스(호스트 커널 공유) |
 | 기동 | 분 단위 | 초 단위 |
-| 격리 강도 | 강함(하이퍼바이저 경계) | 상대적으로 약함(커널 공유) |
-| 산출물 | 디스크 이미지(수 GB) | 레이어 이미지(수십~수백 MB) |
-| 잘 맞는 일 | 다른 OS, 강한 멀티테넌트 | 서비스 하나, 재현 가능한 배포 |
+| 격리 강도 | 강함(하이퍼바이저(hypervisor, VM을 실행·관리하는 소프트웨어) 경계) | 상대적으로 약함(커널 공유) |
+| 산출물 | 디스크 이미지(수 GB) | 레이어(layer, 파일 변경분을 겹겹이 쌓은 단위) 이미지(수십~수백 MB) |
+| 잘 맞는 일 | 다른 OS, 강한 멀티테넌트(multi-tenant, 여러 사용자·조직이 한 시스템을 나눠 쓰는 구조) | 서비스 하나, 재현 가능한 배포 |
 
-**왜 이게 중요한가.** 커널을 공유한다는 것은 *컨테이너 탈출 = 호스트 장악*이라는 뜻이다. 그래서 신뢰할 수 없는 코드를 실행할 때는 VM 경계가 여전히 낫고, 컨테이너에는 비루트(non-root: root가 아닌 일반 사용자로 실행)·egress 차단 같은 보강이 붙는다(4.4, 4.5).
+**왜 이게 중요한가.** 커널을 공유한다는 것은 *컨테이너 탈출(container escape) = 호스트 장악*이라는 뜻이다. 그래서 신뢰할 수 없는 코드를 실행할 때는 VM 경계가 여전히 낫고, 컨테이너에는 비루트(non-root: root가 아닌 일반 사용자로 실행)·egress 차단 같은 보강이 붙는다(4.4, 4.5).
 
-**과잉설계 경계.** 컨테이너가 쉬워지면 반대 방향의 실수가 생긴다. "서비스 상태를 보고 싶다"는 요구에 Prometheus + Grafana + Alertmanager + exporter를 모두 구축하는 것이 그 예다.
+**과잉설계(over-engineering) 경계.** 컨테이너가 쉬워지면 반대 방향의 실수가 생긴다. "서비스 상태를 보고 싶다"는 요구에 Prometheus + Grafana + Alertmanager + exporter를 모두 구축하는 것이 그 예다.
 
 - 필요가 *"죽었는지 알림"* 이면 → 단일 컨테이너(예: Uptime Kuma)로 충분하다.
 - 필요가 *"수백 개 지표의 시계열 분석"* 일 때 비로소 풀스택.
@@ -364,7 +364,7 @@ uname -r; docker exec <ctr> uname -r
 
 ## 4.2 선언형 운영 — compose 파일에 남는 설치 내역 {#4-2-compose}
 
-**멘탈모델.** 명령형은 *"무엇을 했는가"* 의 기록(셸 히스토리, 기억), 선언형은 *"무엇이어야 하는가"* 의 기록(파일)이다. 서버 상태 = `compose.yaml` + 데이터 볼륨. 그 밖의 것은 모두 버려도 된다.
+**멘탈모델.** 명령형(imperative)은 *"무엇을 했는가"* 의 기록(셸 히스토리, 기억), 선언형(declarative)은 *"무엇이어야 하는가"* 의 기록(파일)이다. 서버 상태 = `compose.yaml` + 데이터 볼륨(volume, 컨테이너를 지워도 남는 데이터 저장 공간). 그 밖의 것은 모두 버려도 된다.
 
 ```yaml
 # compose.yaml — 이 한 파일이 "설치 문서"를 대신한다
@@ -384,8 +384,8 @@ volumes:
 
 **왜.**
 
-- **재현성:** 서버가 망가져도 지우고 `up`하면 복구된다. "복구 절차"가 곧 "설치 절차"라 따로 문서화할 것이 없다.
-- **감사 가능:** 파일이 git에 있으면 *누가 언제 왜* 바꿨는지가 남는다. 섀도우 IT(조직이 파악하지 못한 채 개인이 임의로 운영하는 시스템)가 드러나는 지점이다.
+- **재현성(reproducibility, 같은 선언에서 언제나 같은 결과를 다시 만들 수 있는 성질):** 서버가 망가져도 지우고 `up`하면 복구된다. "복구 절차"가 곧 "설치 절차"라 따로 문서화할 것이 없다.
+- **감사 가능(auditability, 누가 언제 무엇을 바꿨는지 추적·검토할 수 있는 성질):** 파일이 git에 있으면 *누가 언제 왜* 바꿨는지가 남는다. 섀도우 IT(조직이 파악하지 못한 채 개인이 임의로 운영하는 시스템)가 드러나는 지점이다.
 - **데이터와 분리:** 컨테이너는 소모품, 볼륨만 자산이다. 백업 대상이 명확해진다([Part 1](01-image.qmd)·백업 장 참고).
 
 **확인.** 복구 리허설을 한 번은 해 본다.
@@ -433,7 +433,7 @@ psql -c 'select now();'
 ```
 
 - 호스트에 DB 클라이언트를 *설치하지 않는다.* 클라이언트가 서버와 같은 이미지에서 오므로 클라이언트와 서버의 버전 불일치가 없다.
-- 파이프·리다이렉트를 쓸 땐 `-T`(또는 `-i`만), 대화형이면 `-it`. TTY 유무가 가장 흔한 실패 원인이다.
+- 파이프·리다이렉트를 쓸 땐 `-T`(또는 `-i`만), 대화형이면 `-it`. TTY(터미널 장치) 유무가 가장 흔한 실패 원인이다.
 - `~/.zshrc`에 넣어 두면 장비마다 따라온다.
 
 ### (3) 설정 — 추출, 수정, 볼륨 마운트 {#4-3-config-mount}
@@ -454,7 +454,7 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
 ```
 
-- 이미지는 **불변**, 바뀌는 것은 **밖에서 주입**. 이미지를 업그레이드해도 내 설정은 그대로다.
+- 이미지는 **불변**(immutable), 바뀌는 것은 **밖에서 주입**. 이미지를 업그레이드해도 내 설정은 그대로다.
 - 설정을 이미지에 `COPY`로 굽는 것은 *설정이 바뀔 때마다 빌드*가 필요해 느리고, 비밀(키·비밀번호)이 레이어에 남을 위험도 있다.
 - `:ro`로 마운트하면 컨테이너가 침해되어도 설정을 바꿀 수 없다.
 
@@ -485,7 +485,7 @@ docker build -t myapp:1.0 . && docker run --rm -p 8000:8000 myapp:1.0
 
 ## 4.4 네트워크 멤버십과 egress 허용 목록 {#4-4-network-membership}
 
-**멘탈모델.** 컨테이너의 "나갈 수 있는 곳"은 방화벽 규칙이 아니라 **어느 네트워크에 붙어 있느냐**로 정해진다. compose의 `networks:` 목록이 곧 *허용 목록*이다. 이것이 SADP의 outbound 통제를 백엔드에 적용한 모습이다([실습⑨′](labs/lab-09p.qmd)).
+**멘탈모델.** 컨테이너의 "나갈 수 있는 곳"은 방화벽 규칙이 아니라 **어느 네트워크에 붙어 있느냐**로 정해진다. compose의 `networks:` 목록이 곧 *허용 목록*(allowlist)이다. 이것이 SADP(Secure Application Deployment Profile, 앱이 올라가는 자리를 입구·출구·빌드·기록의 네 지점에서 통제하자는 원칙)의 아웃바운드(outbound, 안에서 밖으로 나가는 방향) 통제를 백엔드에 적용한 모습이다([실습⑨′](labs/lab-09p.qmd)).
 
 ```{mermaid}
 flowchart LR
@@ -513,9 +513,9 @@ networks:
   data: { internal: true }
 ```
 
-**왜.** 백엔드가 침해되었을 때의 피해는 대부분 *나가는 길*에서 결정된다. C2(공격자의 명령·제어 서버) 통신, 데이터 유출, 추가 도구 다운로드가 전부 outbound다. 앱이 인터넷에 접속할 일이 없다면 경로 자체를 없앤다. 방화벽 규칙을 쓰지 않아도 되고, 선언이 곧 정책이라 *리뷰 가능*하다.
+**왜.** 백엔드가 침해되었을 때의 피해는 대부분 *나가는 길*에서 결정된다. C2(공격자의 명령·제어 서버) 통신, 데이터 유출, 추가 도구 다운로드가 전부 아웃바운드다. 앱이 인터넷에 접속할 일이 없다면 경로 자체를 없앤다. 방화벽 규칙을 쓰지 않아도 되고, 선언이 곧 정책이라 *리뷰 가능*하다.
 
-`internal: true`는 Docker가 그 네트워크에 외부 라우팅·NAT(masquerade)를 만들지 않는다는 뜻이다. 게이트웨이가 없으니 `8.8.8.8`로 갈 길이 없다.
+`internal: true`는 Docker가 그 네트워크에 외부 라우팅·NAT(masquerade, 나가는 패킷의 출발지 주소를 호스트 주소로 바꾸는 방식)를 만들지 않는다는 뜻이다. 게이트웨이가 없으니 `8.8.8.8`로 갈 길이 없다.
 
 **확인.** 가두기 전/후를 반드시 대조한다.
 
@@ -538,7 +538,7 @@ docker network inspect <project>_web --format '{{.Internal}}'
 
 - `internal`은 "인터넷 차단"이지 "그 네트워크 *안*까지 차단"이 아니다. 같은 net의 컨테이너끼리는 서로 모든 포트로 통한다. 예: app이 침해되면 같은 `data` net의 db 전 포트가 열려 있다.
 - 서비스를 `edge`에 붙이면 그 컨테이너는 *전면 egress 허용*이다. 붙이는 곳을 최소화하고, caddy 같은 문지기만 붙인다.
-- 목적지·포트 단위로 조이려면 호스트의 `DOCKER-USER` 체인으로 내려간다 → [Part 2](02-firewall.qmd). 컨테이너 트래픽이 `INPUT`이 아니라 `FORWARD`를 지나므로 일반 방화벽 규칙이 적용되지 않는 이유도 거기서 다룬다.
+- 목적지·포트 단위로 조이려면 호스트의 `DOCKER-USER` 체인(chain, 방화벽 규칙을 차례로 검사하는 묶음)으로 내려간다 → [Part 2](02-firewall.qmd). 컨테이너 트래픽이 `INPUT`이 아니라 `FORWARD`를 지나므로 일반 방화벽 규칙이 적용되지 않는 이유도 거기서 다룬다.
 
 **같은 생각, 여러 고도.** 호스트(실습⑥) → **컨테이너(여기)** → 망 경계(실습⑧) → AI 에이전트(실습⑭). 전부 "나가는 길은 기본 차단, 필요한 곳만 허용"이다.
 
@@ -568,7 +568,7 @@ docker inspect -f '{{.Config.User}}' myapp:1.0
 
 ### 멀티스테이지 빌드 {#4-5-multi-stage}
 
-**멘탈모델.** 멀티스테이지 빌드는 한 Dockerfile 안에 여러 단계(`FROM`)를 두고, 앞 단계의 결과물만 다음 단계로 옮기는 방식이다. *빌드 도구는 빌드에만, 실행에는 결과물만.* 컴파일러·패키지 매니저·소스는 공격 표면이자 용량이다. 최종 이미지에 넣지 않는다.
+**멘탈모델.** 멀티스테이지 빌드는 한 Dockerfile 안에 여러 단계(`FROM`)를 두고, 앞 단계의 결과물만 다음 단계로 옮기는 방식이다. *빌드 도구는 빌드에만, 실행에는 결과물만.* 컴파일러·패키지 매니저·소스는 공격면(attack surface, 공격받을 수 있는 지점)이자 용량이다. 최종 이미지에 넣지 않는다.
 
 ```dockerfile
 # --- 빌드 단계: 도구 잔뜩 ---
@@ -619,8 +619,8 @@ docker network ls -q | xargs docker network inspect \
 
 - `bip`: 기본 브리지 `docker0`의 대역. `default-address-pools`: compose 등이 만드는 *사용자 정의* 네트워크의 풀(`base`를 `size` 크기로 잘라 쓴다).
 - 위 예(`172.31.0.0/16`, `/24`씩)는 네트워크 약 255개분이다. 프로젝트가 많으면 `size`를 줄이거나 base를 넓힌다.
-- **적용:** `sudo systemctl restart docker`. 이미 만든 네트워크는 그대로이므로 `docker compose down && up -d`로 재생성한다. 재시작은 컨테이너를 멈추니 점검 창에서 한다.
+- **적용:** `sudo systemctl restart docker`. 이미 만든 네트워크는 그대로이므로 `docker compose down && up -d`로 재생성한다. 재시작은 컨테이너를 멈추니 점검 창(maintenance window, 미리 공지한 작업 시간대)에서 한다.
 - 대역은 **기관 IP 담당과 합의한 값**을 쓴다. 이 예시는 문서용이다.
-- firewalld를 쓰는 서버라면 브리지 인터페이스가 어느 zone에 속하는지도 함께 확인한다. Docker 트래픽이 firewalld와 *다른 길*로 흐르는 이유는 [Part 2](02-firewall.qmd)에서 다룬다.
+- firewalld를 쓰는 서버라면 브리지 인터페이스가 어느 zone(firewalld가 인터페이스를 묶어 신뢰 수준별로 규칙을 적용하는 단위)에 속하는지도 함께 확인한다. Docker 트래픽이 firewalld와 *다른 길*로 흐르는 이유는 [Part 2](02-firewall.qmd)에서 다룬다.
 
 **바깥 링크.** [Dockerfile best practices](https://docs.docker.com/build/building/best-practices/) · [Multi-stage builds](https://docs.docker.com/build/building/multi-stage/) · [Daemon configuration (`default-address-pools`)](https://docs.docker.com/engine/daemon/) · [Docker and firewalld](https://docs.docker.com/engine/network/packet-filtering-firewalls/#docker-and-firewalld)

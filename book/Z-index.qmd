@@ -6,13 +6,17 @@
 
 ## 기호·숫자
 
-- **2FA** — [§3.5](03-network.qmd#3-5-bastion)
+- **2FA** — [§3.5](03-network.qmd#3-5-bastion) · [§6.2](06-access.qmd#6-2-trust-chain)
 - **802.1X** — [§6.5](06-access.qmd#6-5-nac) · [Part 6](06-access.qmd#6-summary) · [부록 A](A-assets.qmd#a-docs)
 
 ## ㄱ
 
+- **감사 (audit)** — [§1.1](01-image.qmd#1-1-golden-image) · [§3.1](03-network.qmd#3-1-isolated-network) · [§3.4](03-network.qmd#3-4-vpn) · [§5.1](05-trust.qmd#5-1-root-programs) · [§6.2](06-access.qmd#6-2-in-image) · [§7.1](07-ai-governance.qmd#7-1-three-layers) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [실습⑧](labs/lab-08.qmd#lab-08-prep)
+- **감사 가능성 (auditability)** — [§1.1](01-image.qmd#1-1-golden-image) · [§4.2](04-container.qmd#4-2-compose)
+- **거버넌스 (governance)** — [들어가며](index.qmd#big-picture) · [§1.4](01-image.qmd#1-4-selinux) · [§2.7](02-firewall.qmd#2-7-four-levels) · [Part 7](07-ai-governance.qmd#part-7) · [§7.1](07-ai-governance.qmd#7-1-delegation-ladder) · [§7.5](07-ai-governance.qmd#7-5-governance) · [실습⑨′](labs/lab-09p.qmd#lab-09p) · [실습⑬](labs/lab-13.qmd#lab-13)
+- **격리 (isolation)** — [들어가며](index.qmd#seven-axes) · [§2.7](02-firewall.qmd#2-7-four-levels) · [§4.0](04-container.qmd#4-0-before-containers) · [§4.1](04-container.qmd#4-1-container-vs-vm) · [§6.5](06-access.qmd#6-5-two-checks) · [실습⑦](labs/lab-07.qmd#lab-07) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [실습⑨](labs/lab-09.qmd#lab-09)
 - **골든 이미지 (golden image)** — [§1.1](01-image.qmd#1-1-golden-image) · [§1.2](01-image.qmd#1-2-compressed) · [§1.3](01-image.qmd#1-3-offline-edit) · [§1.5](01-image.qmd#1-5-deploy) · [§1.7](01-image.qmd#1-7-asset-tags) · [§1.8](01-image.qmd#1-8-reproducible) · [§1.9](01-image.qmd#1-9-ventoy) · [§5.1](05-trust.qmd#5-1-root-programs)
-- **공격면 (attack surface)** — [§3.5](03-network.qmd#3-5-bastion)
+- **공격면 (attack surface)** — [§3.5](03-network.qmd#3-5-bastion) · [§4.5](04-container.qmd#4-5-multi-stage)
 - **굽다 (bake)** — [실습⑨](labs/lab-09.qmd#lab-09-more)
 
 ## ㄴ
@@ -21,45 +25,64 @@
 
 ## ㄷ
 
+- **다층 방어 (defense in depth)** — [I.2](I-access-control.qmd#i-2-why)
+- **단일 장애 지점 (single point of failure)** — [§3.5](03-network.qmd#3-5-bastion)
 - **드롭인 (drop-in)** — [들어가며](index.qmd#audience) · [§1.3](01-image.qmd#1-3-drop-in) · [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§6.3](06-access.qmd#6-3-drop-in) · [§7.1](07-ai-governance.qmd#7-1-delegation-ladder) · [실습①](labs/lab-01.qmd#lab-01) · [실습⑥](labs/lab-06.qmd#lab-06) · [K.7](K-delivery.qmd#k-7-ssh)
 
 ## ㄹ
 
 - **루트 프로그램** — [§5.1](05-trust.qmd#5-1-root-programs)
-- **리버스 프록시 (reverse proxy)** — [§2.4](02-firewall.qmd#2-4-keep-native) · [§2.7](02-firewall.qmd#2-7-container) · [§5.2](05-trust.qmd#5-2-caddy) · [§5.6](05-trust.qmd#5-6-mental-model) · [§6.4](06-access.qmd#6-4-mental-model) · [부록 A](A-assets.qmd#a-public) · [I.5](I-access-control.qmd#i-5-2-web)
+- **리버스 프록시 (reverse proxy)** — [§2.4](02-firewall.qmd#2-4-keep-native) · [§2.7](02-firewall.qmd#2-7-container) · [§5.2](05-trust.qmd#5-2-caddy) · [§5.6](05-trust.qmd#5-6-mental-model) · [§6.4](06-access.qmd#6-4-mental-model) · [실습⑨′](labs/lab-09p.qmd#lab-09p) · [부록 A](A-assets.qmd#a-public) · [I.5](I-access-control.qmd#i-5-2-web)
 - **링크드 클론 (linked clone)** — [§1.2](01-image.qmd#1-2-image-formats) · [H.6](H-pve.qmd#h-6-2-from-template)
 
 ## ㅁ
 
 - **멀티스테이지 빌드** — [§4.5](04-container.qmd#4-5-multi-stage)
 - **멀티홈드 (multi-homed)** — [들어가며](index.qmd#addresses) · [§3.2](03-network.qmd#3-2-multi-homed) · [§3.3](03-network.qmd#3-3-gateway-firewall) · [§3.5](03-network.qmd#3-5-bastion) · [§6.5](06-access.qmd#6-5-why) · [실습⑧](labs/lab-08.qmd#lab-08-main)
-- **멘탈모델 (mental model)** — [들어가며](index.qmd#how-to-use) · [§1.3](01-image.qmd#1-3-offline-edit) · [§1.4](01-image.qmd#1-4-identity-reset) · [§2.1](02-firewall.qmd#2-1-ufw-firewalld) · [§4.0](04-container.qmd#4-0-before-containers) · [§4.5](04-container.qmd#4-5-non-root) · [Part 6](06-access.qmd#part-6) · [§7.6](07-ai-governance.qmd#7-6-adr)
+- **멘탈모델 (mental model)** — [들어가며](index.qmd#how-to-use) · [§1.3](01-image.qmd#1-3-offline-edit) · [§2.1](02-firewall.qmd#2-1-ufw-firewalld) · [§3.1](03-network.qmd#3-1-isolated-network) · [§4.0](04-container.qmd#4-0-before-containers) · [§4.5](04-container.qmd#4-5-non-root) · [Part 6](06-access.qmd#part-6) · [§7.6](07-ai-governance.qmd#7-6-adr)
 - **멱등 (idempotent)** — [§1.3](01-image.qmd#1-3-drop-in) · [실습①](labs/lab-01.qmd#lab-01)
+- **명령형 (imperative)** — [§1.1](01-image.qmd#1-1-golden-image) · [§4.2](04-container.qmd#4-2-compose)
+- **무결성 (integrity)** — [K.7](K-delivery.qmd#k-7-boot)
 - **미러 (mirror)** — [§3.5](03-network.qmd#3-5-bastion) · [K.6](K-delivery.qmd#k-6-software)
+
+## ㅂ
+
+- **방탄 호스팅 (bulletproof hosting)** — [§2.5](02-firewall.qmd#2-5-sources)
+- **비대칭 경로 (asymmetric routing)** — [§3.2](03-network.qmd#3-2-multi-homed)
 
 ## ㅅ
 
+- **사전 할당 (preallocation)** — [H.5](H-pve.qmd#h-5-preallocation) · [H.6](H-pve.qmd#h-6-2-from-template)
 - **섀도우 IT** — [들어가며](index.qmd#big-picture) · [§1.8](01-image.qmd#1-8-reproducible) · [§4.2](04-container.qmd#4-2-compose) · [§6.4](06-access.qmd#6-4-why) · [§6.5](06-access.qmd#6-5-why) · [§7.2](07-ai-governance.qmd#7-2-inventory) · [실습⑨](labs/lab-09.qmd#lab-09) · [실습⑫](labs/lab-12.qmd#lab-12)
 - **선언형 운영** — [§1.1](01-image.qmd#1-1-golden-image) · [§1.3](01-image.qmd#1-3-drop-in) · [§4.2](04-container.qmd#4-2-compose) · [G.3](G-packages.qmd#g-3-homebrew)
 - **스테이징 (staging)** — [§7.1](07-ai-governance.qmd#7-1-delegation-ladder)
 - **스푸핑 (spoofing)** — [§3.2](03-network.qmd#3-2-rp-filter) · [I.2](I-access-control.qmd#i-2-established)
+- **신뢰 사슬 (chain of trust)** — [§6.2](06-access.qmd#6-2-key-distribution) · [실습⑧](labs/lab-08.qmd#lab-08-prep) · [실습⑪](labs/lab-11.qmd#lab-11)
 
 ## ㅇ
 
 - **암묵지** — [§1.3](01-image.qmd#1-3-dotfiles)
+- **연합 (federation)** — [§6.4](06-access.qmd#6-4-idp)
 - **오케스트레이터** — [§4.5](04-container.qmd#4-5-non-root)
-- **오탐** — [§2.5](02-firewall.qmd#2-5-sources)
+- **오탐 (false positive)** — [§2.5](02-firewall.qmd#2-5-sources)
 - **위임 사다리** — [§7.1](07-ai-governance.qmd#7-1-delegation-ladder) · [실습⑬](labs/lab-13.qmd#lab-13)
 - **인벤토리** — [§1.7](01-image.qmd#1-7-hardware-identity) · [§7.1](07-ai-governance.qmd#7-1-delegation-ladder) · [§7.2](07-ai-governance.qmd#7-2-inventory) · [§7.5](07-ai-governance.qmd#7-5-principles) · [K.4](K-delivery.qmd#k-4-kc) · [K.8](K-delivery.qmd#k-8-checklist)
+- **일반화 (generalization)** — [§1.2](01-image.qmd#1-2-other-formats) · [§1.4](01-image.qmd#1-4-identity-reset) · [§1.5](01-image.qmd#1-5-deploy) · [실습①](labs/lab-01.qmd#lab-01) · [H.6](H-pve.qmd#h-6-1-customize)
 
 ## ㅈ
 
+- **자격증명 (credential)** — [§5.6](05-trust.qmd#5-6-why)
 - **자산 태그** — [§1.7](01-image.qmd#1-7-asset-tags) · [부록 A](A-assets.qmd#a-public) · [J.6](J-workstation.qmd#j-6-system) · [K.3](K-delivery.qmd#k-3-tags) · [K.8](K-delivery.qmd#k-8-checklist)
+- **재현성 (reproducibility)** — [들어가며](index.qmd#big-picture) · [Part 1](01-image.qmd#part-1) · [§1.3](01-image.qmd#1-3-offline-edit) · [§1.8](01-image.qmd#1-8-reproducible) · [§4.1](04-container.qmd#4-1-container-vs-vm) · [§4.2](04-container.qmd#4-2-compose) · [§7.5](07-ai-governance.qmd#7-5-principles)
+- **접근 제어 (access control)** — [§1.4](01-image.qmd#1-4-identity-reset) · [§1.7](01-image.qmd#1-7-hardware-identity) · [§3.4](03-network.qmd#3-4-vpn) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [부록 A](A-assets.qmd#a-docs) · [부록 I](I-access-control.qmd#appendix-i) · [I.2](I-access-control.qmd#i-2-what) · [I.5](I-access-control.qmd#i-5-application)
 - **제로 트러스트** — [§5.6](05-trust.qmd#5-6-zero-trust) · [실습⑪](labs/lab-11.qmd#lab-11)
+- **증적 (evidence)** — [§7.5](07-ai-governance.qmd#7-5-sadp)
 
 ## ㅊ
 
 - **초과 약정 (over-provisioning)** — [§1.2](01-image.qmd#1-2-other-formats) · [H.5](H-pve.qmd#h-5-preallocation)
+- **최소 권한 원칙 (least privilege)** — [§1.4](01-image.qmd#1-4-selinux) · [§5.2](05-trust.qmd#5-2-least-privilege) · [Part 7](07-ai-governance.qmd#part-7) · [§7.5](07-ai-governance.qmd#7-5-principles) · [실습⑩](labs/lab-10.qmd#lab-10)
+- **출처 (provenance)** — [§2.5](02-firewall.qmd#2-5-sources) · [§5.5](05-trust.qmd#5-5-conditions) · [§6.2](06-access.qmd#6-2-server) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [I.5](I-access-control.qmd#i-5-2-web)
 
 ## ㅋ
 
@@ -69,21 +92,24 @@
 ## ㅌ
 
 - **토폴로지** — [§3.1](03-network.qmd#3-1-isolated-network)
-- **투명 브리지 (transparent bridge)** — [§2.5](02-firewall.qmd#2-5-case)
+- **투명 브리지 (transparent bridge)** — [§2.5](02-firewall.qmd#2-5-case) · [실습⑤](labs/lab-05.qmd#lab-05) · [I.1](I-access-control.qmd#i-1-terms)
 
 ## ㅍ
 
 - **패스프레이즈 (passphrase)** — [§1.6](01-image.qmd#1-6-root-recovery) · [§6.1](06-access.qmd#6-1-verify) · [실습②](labs/lab-02.qmd#lab-02) · [J.4](J-workstation.qmd#j-4-ssh-keys)
 - **패키지 관리자** — [§1.8](01-image.qmd#1-8-reproducible) · [부록 A](A-assets.qmd#a-docs) · [부록 G](G-packages.qmd#appendix-g) · [G.1](G-packages.qmd#g-1-what) · [G.2](G-packages.qmd#g-2-os) · [G.4](G-packages.qmd#g-4-winget) · [G.6](G-packages.qmd#g-6-safety) · [J.5](J-workstation.qmd#j-5-ssh-clients)
+- **평판 (reputation)** — [§2.5](02-firewall.qmd#2-5-reputation) · [실습③](labs/lab-03.qmd#lab-03) · [실습④](labs/lab-04.qmd#lab-04) · [실습⑤](labs/lab-05.qmd#lab-05) · [부록 A](A-assets.qmd#a-public) · [I.1](I-access-control.qmd#i-1-terms) · [I.2](I-access-control.qmd#i-2-limits)
+- **폐기 (revocation)** — [§3.4](03-network.qmd#3-4-vpn) · [§5.6](05-trust.qmd#5-6-zero-trust) · [§6.1](06-access.qmd#6-1-fingerprint) · [§7.4](07-ai-governance.qmd#7-4-principles)
 - **폭발 반경 (blast radius)** — [§1.4](01-image.qmd#1-4-selinux)
-- **프로비저닝 (provisioning)** — [§1.2](01-image.qmd#1-2-other-formats) · [실습 들어가기](labs/00-lab-intro.qmd#how-to-read) · [실습①](labs/lab-01.qmd#lab-01) · [H.5](H-pve.qmd#h-5-preallocation)
-- **프록시 (proxy)** — [§2.4](02-firewall.qmd#2-4-keep-native) · [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§2.7](02-firewall.qmd#2-7-four-levels) · [§6.4](06-access.qmd#6-4-oidc) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑫](labs/lab-12.qmd#lab-12) · [I.5](I-access-control.qmd#i-5-2-web)
+- **프로비저닝 (provisioning)** — [§1.2](01-image.qmd#1-2-other-formats) · [실습 들어가기](labs/00-lab-intro.qmd#how-to-read) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [H.5](H-pve.qmd#h-5-preallocation)
+- **프록시 (proxy)** — [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§2.7](02-firewall.qmd#2-7-four-levels) · [§6.4](06-access.qmd#6-4-oidc) · [§7.4](07-ai-governance.qmd#7-4-egress) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑫](labs/lab-12.qmd#lab-12) · [I.5](I-access-control.qmd#i-5-2-web)
 - **프롬프트 인젝션** — [§7.1](07-ai-governance.qmd#7-1-three-layers) · [§7.2](07-ai-governance.qmd#7-2-prompt) · [§7.3](07-ai-governance.qmd#7-3-isolated-deploy) · [§7.4](07-ai-governance.qmd#7-4-agent-isolation)
 
 ## ㅎ
 
+- **허용 목록 (allowlist)** — [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§2.7](02-firewall.qmd#2-7-four-levels) · [§3.5](03-network.qmd#3-5-bastion) · [§4.4](04-container.qmd#4-4-network-membership) · [§7.4](07-ai-governance.qmd#7-4-agent-isolation) · [§7.5](07-ai-governance.qmd#7-5-principles) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑧](labs/lab-08.qmd#lab-08-main)
 - **호스트명 규칙** — [§1.7](01-image.qmd#1-7-asset-tags)
-- **화이트리스팅 (allowlist)** — [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§2.7](02-firewall.qmd#2-7-four-levels) · [실습④](labs/lab-04.qmd#lab-04) · [실습⑤](labs/lab-05.qmd#lab-05) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑭](labs/lab-14.qmd#lab-14) · [I.1](I-access-control.qmd#i-1-terms)
+- **화이트리스팅 (allowlisting)** — [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [실습④](labs/lab-04.qmd#lab-04) · [실습⑤](labs/lab-05.qmd#lab-05) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑭](labs/lab-14.qmd#lab-14)
 - **환경변수 (export)** — [§4.0](04-container.qmd#4-0-before-containers) · [§7.3](07-ai-governance.qmd#7-3-limits)
 - **훅 (hook)** — [§2.2](02-firewall.qmd#2-2-hooks) · [§2.5](02-firewall.qmd#2-5-reputation) · [§2.7](02-firewall.qmd#2-7-host)
 
@@ -164,7 +190,7 @@
 
 ## M
 
-- **machine-id** — [§1.3](01-image.qmd#1-3-offline-edit) · [§1.4](01-image.qmd#1-4-identity-reset) · [§7.2](07-ai-governance.qmd#7-2-inventory) · [실습①](labs/lab-01.qmd#lab-01) · [실습⑨](labs/lab-09.qmd#lab-09-more) · [H.6](H-pve.qmd#h-6-1-customize)
+- **machine-id** — [§1.3](01-image.qmd#1-3-offline-edit) · [§1.4](01-image.qmd#1-4-identity-reset) · [§7.2](07-ai-governance.qmd#7-2-inventory) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [실습⑨](labs/lab-09.qmd#lab-09-more) · [H.6](H-pve.qmd#h-6-1-customize)
 - **MADR** — [§7.6](07-ai-governance.qmd#7-6-adr) · [부록 A](A-assets.qmd#a-public) · [부록 C](C-adr.qmd#appendix-c)
 - **mTLS** — [Part 5](05-trust.qmd#part-5) · [§5.1](05-trust.qmd#5-1-korean-certs) · [§5.6](05-trust.qmd#5-6-mtls) · [실습⑩](labs/lab-10.qmd#lab-10) · [실습⑪](labs/lab-11.qmd#lab-11) · [I.5](I-access-control.qmd#i-5-2-web) · [부록 I](I-access-control.qmd#i-summary)
 - **MTU** — [§3.2](03-network.qmd#3-2-netplan-mtu) · [§3.6](03-network.qmd#3-6-mtu)
@@ -172,7 +198,7 @@
 ## N
 
 - **NAC** — [Part 6](06-access.qmd#part-6) · [§6.5](06-access.qmd#6-5-nac) · [부록 A](A-assets.qmd#a-docs)
-- **namespace** — [§4.0](04-container.qmd#4-0-history) · [§4.1](04-container.qmd#4-1-container-vs-vm)
+- **namespace** — [§4.0](04-container.qmd#4-0-history) · [§4.1](04-container.qmd#4-1-container-vs-vm) · [I.3](I-access-control.qmd#i-3-where)
 - **nftables** — [§2.1](02-firewall.qmd#2-1-ufw-firewalld) · [§2.2](02-firewall.qmd#2-2-docker-bypass) · [§2.5](02-firewall.qmd#2-5-reputation) · [실습③](labs/lab-03.qmd#lab-03) · [H.4](H-pve.qmd#h-4-host) · [부록 I](I-access-control.qmd#appendix-i) · [I.3](I-access-control.qmd#i-3-where) · [I.4](I-access-control.qmd#i-4-linux)
 - **nftables set** — [§2.5](02-firewall.qmd#2-5-reputation) · [I.2](I-access-control.qmd#i-2-limits)
 - **non-root (비루트)** — [§4.1](04-container.qmd#4-1-container-vs-vm) · [§4.5](04-container.qmd#4-5-image-build)
@@ -189,7 +215,7 @@
 
 - **PATH** — [§1.3](01-image.qmd#1-3-dotfiles) · [§4.0](04-container.qmd#4-0-path) · [실습⑨](labs/lab-09.qmd#lab-09)
 - **PCI pass-through** — [H.3](H-pve.qmd#h-3-3-sriov)
-- **policy (firewalld)** — [§2.1](02-firewall.qmd#2-1-ufw-firewalld) · [§2.2](02-firewall.qmd#2-2-trace) · [§2.4](02-firewall.qmd#2-4-firewalld-docker) · [§5.1](05-trust.qmd#5-1-root-programs) · [실습④](labs/lab-04.qmd#lab-04)
+- **policy (firewalld)** — [§2.1](02-firewall.qmd#2-1-ufw-firewalld) · [§2.2](02-firewall.qmd#2-2-trace) · [§2.4](02-firewall.qmd#2-4-firewalld-docker) · [§5.1](05-trust.qmd#5-1-root-programs) · [§5.4](05-trust.qmd#5-4-locations) · [실습④](labs/lab-04.qmd#lab-04)
 - **PPK** — [J.5](J-workstation.qmd#j-5-config-keys)
 - **Proxmox VE** — [§1.2](01-image.qmd#1-2-linked-clone) · [실습②](labs/lab-02.qmd#lab-02) · [부록 H](H-pve.qmd#appendix-h) · [H.2](H-pve.qmd#h-2-1-pve) · [H.3](H-pve.qmd#h-3-1-separate) · [H.4](H-pve.qmd#h-4-firewall) · [H.6](H-pve.qmd#h-6-1-cloud-image) · [I.3](I-access-control.qmd#i-3-builtin)
 - **ProxyJump** — [§3.5](03-network.qmd#3-5-bastion) · [§6.3](06-access.qmd#6-3-match) · [§7.1](07-ai-governance.qmd#7-1-example) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [I.6](I-access-control.qmd#i-6-1-jump-host) · [J.5](J-workstation.qmd#j-5-ssh-clients)
@@ -231,7 +257,7 @@
 - **Ventoy** — [§1.9](01-image.qmd#1-9-ventoy) · [실습②](labs/lab-02.qmd#lab-02) · [부록 B](B-licenses.qmd#b-compare)
 - **veth** — [§4.0](04-container.qmd#4-0-network-stack) · [I.3](I-access-control.qmd#i-3-where)
 - **virt-customize** — [§1.1](01-image.qmd#1-1-golden-image) · [§1.3](01-image.qmd#1-3-offline-edit) · [§1.6](01-image.qmd#1-6-root-recovery) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [H.2](H-pve.qmd#h-2-3-packages) · [H.6](H-pve.qmd#h-6-1-cloud-image)
-- **virt-sysprep** — [§1.4](01-image.qmd#1-4-identity-reset) · [H.2](H-pve.qmd#h-2-3-packages)
+- **virt-sysprep** — [§1.4](01-image.qmd#1-4-identity-reset) · [H.2](H-pve.qmd#h-2-3-packages) · [H.6](H-pve.qmd#h-6-1-customize)
 
 ## W
 

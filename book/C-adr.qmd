@@ -1,6 +1,6 @@
 # 부록 C. ADR 템플릿 (MADR) {#appendix-c}
 
-**ADR(Architecture Decision Record)** 은 "무엇을, 왜 그렇게 결정했나"를 짧게 남기는 기록입니다. 담당자가 바뀌어도 결정의 맥락이 남습니다. 이 부록은 MADR(Markdown Architecture Decision Records, 마크다운으로 쓰는 ADR 양식)을 따르며, 템플릿 원본은 [adr/madr](https://github.com/adr/madr)에 있습니다.
+**ADR(Architecture Decision Record)** 은 "무엇을, 왜 그렇게 결정했나"를 짧게 남기는 기록입니다. 담당자가 바뀌어도 결정의 맥락(context, 결정 당시의 상황과 제약)이 남습니다. 이 부록은 MADR(Markdown Architecture Decision Records, 마크다운으로 쓰는 ADR 양식)을 따르며, 템플릿 원본은 [adr/madr](https://github.com/adr/madr)에 있습니다.
 
 ## 템플릿 (복사해서 사용) {#c-template}
 
@@ -44,7 +44,7 @@
 
 1. 결정을 내린 **그날** 쓴다. 나중에 쓰면 이유를 잊는다.
 2. 한 ADR에 결정은 **하나**. 길어야 한 화면.
-3. 고친 결정은 지우지 말고 새 ADR을 쓰고 옛 ADR 상태를 "대체됨"으로 바꾼다.
+3. 고친 결정은 지우지 말고 새 ADR을 쓰고 옛 ADR 상태를 "대체됨"(superseded, 새 결정으로 바뀌었음)으로 바꾼다.
 4. 대안은 최소 둘. 선택하지 않은 것이 기록의 절반이다.
 
 ## 파일명 규칙 {#c-file-names}

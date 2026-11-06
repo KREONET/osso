@@ -6,23 +6,23 @@
 
 | 태그 | 저장소/도구 | 역할 |
 |---|---|---|
-| sadp | [github.com/msjang/ostday26-sadp](https://github.com/msjang/ostday26-sadp) | SADP 4통제지점 · 섀도우 IT(조직이 파악하지 못한 채 운영되는 시스템) 양지화 |
-| republock | [github.com/KREONET/republock](https://github.com/KREONET/republock) | 평판 기반 nftables 방화벽(인바운드) |
-| caddy-xproxy | [github.com/kreonet/caddy-xproxy](https://github.com/kreonet/caddy-xproxy) | 리버스 프록시(요청을 받아 뒤쪽 서버에 전달하는 서버). `conf.d` opt-in(명시적으로 켠 사이트에만 적용), ACME 인증서, 봇 차단 |
-| saml-oidc | [github.com/KREONET/saml-oidc-test-sandbox](https://github.com/KREONET/saml-oidc-test-sandbox) | OIDC/SAML 연동 샌드박스 |
+| sadp | [github.com/msjang/ostday26-sadp](https://github.com/msjang/ostday26-sadp) | SADP(Secure Application Deployment Profile, 안전한 앱 배포 프로파일) 4통제지점 · 섀도우 IT(조직이 파악하지 못한 채 운영되는 시스템) 양지화(드러내 관리 대상으로 삼음) |
+| republock | [github.com/KREONET/republock](https://github.com/KREONET/republock) | 평판(reputation) 기반 nftables 방화벽(인바운드, 밖에서 들어오는 연결) |
+| caddy-xproxy | [github.com/kreonet/caddy-xproxy](https://github.com/kreonet/caddy-xproxy) | 리버스 프록시(요청을 받아 뒤쪽 서버에 전달하는 서버). `conf.d` opt-in(명시적으로 켠 사이트에만 적용), ACME(인증서 자동 발급 규약) 인증서, 봇 차단 |
+| saml-oidc | [github.com/KREONET/saml-oidc-test-sandbox](https://github.com/KREONET/saml-oidc-test-sandbox) | OIDC/SAML(웹 통합 인증 규약) 연동 샌드박스(sandbox, 시험용 격리 환경) |
 | ufw-docker | [github.com/chaifeng/ufw-docker](https://github.com/chaifeng/ufw-docker) | Docker가 ufw를 우회하는 문제 해결 |
 | ohmyzsh | [github.com/kreonet/ohmyzsh](https://github.com/kreonet/ohmyzsh) | 서버 zsh 운영환경 · 자산 태그(TAG1/TAG2/HNUM) |
 | miniforge | [github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge) | conda-forge 기본 설치본(Anaconda 약관 회피) |
 | marimo | [github.com/marimo-team/marimo](https://github.com/marimo-team/marimo) | 반응형 파이썬 노트북 |
-| adr | [github.com/adr/madr](https://github.com/adr/madr) | MADR(결정 기록) 템플릿 → [부록 C](C-adr.qmd) |
+| adr | [github.com/adr/madr](https://github.com/adr/madr) | MADR(Markdown Architecture Decision Records, 결정 기록 양식) 템플릿 → [부록 C](C-adr.qmd) |
 
 ## 사내 서비스 (호스트명 생략) {#a-internal}
 
 | 태그 | 역할 |
 |---|---|
-| isetup | 서버 초기 세팅 부트스트랩 서비스 |
+| isetup | 서버 초기 세팅 부트스트랩(bootstrap, 초기 설정 자동 적용) 서비스 |
 | demo-zone | 실습·시연용 격리 환경 |
-| chat | 사내 LLM 백엔드(채팅 API) |
+| chat | 사내 LLM(대규모 언어 모델) 백엔드(채팅 API) |
 | ns5 | 사내 DNS 서비스 |
 
 ## 운영 문서 (이 책 안) {#a-docs}
@@ -31,7 +31,7 @@
 |---|---|---|
 | pve-guide | Proxmox VE 설치·구성·활용 | [부록 H](H-pve.qmd) |
 | pfsense-guide | pfSense 방화벽 운영 | [Part 3 §3.3](03-network.qmd), [실습⑦](labs/lab-07.qmd) |
-| access-control | 네트워크·시스템 접근제어(NAC·802.1X 등) | [부록 I](I-access-control.qmd), [Part 6 §6.5](06-access.qmd) |
+| access-control | 네트워크·시스템 접근제어(access control: NAC·802.1X 등) | [부록 I](I-access-control.qmd), [Part 6 §6.5](06-access.qmd) |
 | workstation | 내 PC 작업 환경(터미널·SSH 클라이언트·셸) | [부록 J](J-workstation.qmd) |
 | delivery | 서버 납품·인수 | [부록 K](K-delivery.qmd) |
 | packages | 패키지 관리자 | [부록 G](G-packages.qmd) |

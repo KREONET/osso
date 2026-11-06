@@ -1,6 +1,6 @@
 # 부록 H. Proxmox VE 설치·구성·활용 {#appendix-h}
 
-**멘탈모델(mental model, 머릿속에 그려 두는 동작 원리):** Proxmox VE(PVE)는 *데비안 위에 얹은 하이퍼바이저 관리 계층*이다. 웹 UI에서 누르는 모든 것은 결국 `/etc/pve` 아래의 **평문 파일 한 줄**이 되고, 그 파일이 클러스터 전체에 동기화된다.
+**멘탈모델(mental model, 머릿속에 그려 두는 동작 원리):** Proxmox VE(PVE)는 *데비안 위에 얹은 하이퍼바이저(hypervisor, 가상머신을 만들고 실행하는 소프트웨어) 관리 계층*이다. 웹 UI에서 누르는 모든 것은 결국 `/etc/pve` 아래의 **평문 파일 한 줄**이 되고, 그 파일이 클러스터(cluster, 여러 서버를 묶어 하나처럼 관리하는 구성) 전체에 동기화된다.
 
 이 책의 실습은 대부분 PVE 위에서 진행합니다. 이 부록은 그 PVE를 직접 설치하고, 네트워크를 구성하고, 방화벽·스토리지를 설정하고, 템플릿으로 VM을 만들어 내는 과정을 한곳에 모은 것입니다. 이미지·클론·디스크 키우기처럼 본문이 이미 "왜"를 설명한 내용은 해당 절로 연결하고, 여기서는 PVE에서 **어디를 누르고 어떤 파일이 바뀌는지**에 집중합니다.
 
@@ -8,7 +8,7 @@
 
 ## H.1 개요 {#h-1-overview}
 
-Proxmox Virtual Environment는 가상화 환경을 편리하게 구축할 수 있는 오픈소스 소프트웨어입니다. KVM 가상머신과 LXC 컨테이너(호스트 커널을 공유하는 리눅스 컨테이너)를 웹 UI 하나로 다루고, 여러 대를 묶어 클러스터로 운영할 수 있습니다. 이 부록의 흐름은 다음과 같습니다.
+Proxmox Virtual Environment는 가상화 환경을 편리하게 구축할 수 있는 오픈소스 소프트웨어입니다. KVM(Kernel-based Virtual Machine, 리눅스 커널에 내장된 가상화 기능) 가상머신과 LXC 컨테이너(호스트 커널을 공유하는 리눅스 컨테이너)를 웹 UI 하나로 다루고, 여러 대를 묶어 클러스터로 운영할 수 있습니다. 이 부록의 흐름은 다음과 같습니다.
 
 ```{mermaid}
 flowchart LR
@@ -30,7 +30,7 @@ flowchart LR
 
 - <https://pve.proxmox.com/wiki/Install_Proxmox_VE_on_Debian_13_Trixie>
 
-**V2P 설치.** PVE가 설치된 가상머신 이미지를 물리 머신의 디스크에 그대로 기록합니다. 원리는 [Part 1 §1.5](01-image.qmd)의 V2P와 같고, 손으로 해 보는 과정은 [실습②](labs/lab-02.qmd)에 있습니다. PVE 이미지를 기록할 때는 기록을 마친 뒤 **부팅 전에** 호스트 이름과 네트워크를 그 장비에 맞게 고쳐야 합니다.
+**V2P 설치.** PVE가 설치된 가상머신 이미지를 물리 머신의 디스크에 그대로 기록합니다. 원리는 [Part 1 §1.5](01-image.qmd)의 V2P(Virtual to Physical, 가상머신 이미지를 물리 머신으로 옮기는 방식)와 같고, 손으로 해 보는 과정은 [실습②](labs/lab-02.qmd)에 있습니다. PVE 이미지를 기록할 때는 기록을 마친 뒤 **부팅 전에** 호스트 이름과 네트워크를 그 장비에 맞게 고쳐야 합니다.
 
 ```bash
 wget http://.../proxmox8.qcow2
@@ -97,7 +97,7 @@ apt -y install ifupdown2 openvswitch-switch libguestfs-tools
 - **cnet**(Controller Network): 호스트 제어, 클러스터링, 스토리지에 쓰는 네트워크.
 - **pnet**(Provider Network): VM에 제공하는 네트워크.
 
-⚠️ **본문 Part 3과 브리지 이름이 같지만 뜻이 다릅니다.** [Part 3 §3.1](03-network.qmd)의 `vmbr1`은 물리 NIC가 없어 외부와 연결되지 않은 *섬*(리눅스 브리지)이고, 이 절의 `vmbr1`은 물리 NIC에 연결된 **OVS 브리지**입니다. 브리지 번호는 이름일 뿐이므로, 어떤 브리지가 무엇인지는 항상 `bridge-ports`(또는 OVS 포트)를 보고 판단합니다.
+⚠️ **본문 Part 3과 브리지 이름이 같지만 뜻이 다릅니다.** 브리지(bridge)는 여러 인터페이스를 한 L2 망으로 잇는 가상 스위치입니다. [Part 3 §3.1](03-network.qmd)의 `vmbr1`은 물리 NIC(Network Interface Card, 네트워크 카드)가 없어 외부와 연결되지 않은 *섬*(리눅스 브리지)이고, 이 절의 `vmbr1`은 물리 NIC에 연결된 **OVS 브리지**입니다. 브리지 번호는 이름일 뿐이므로, 어떤 브리지가 무엇인지는 항상 `bridge-ports`(또는 OVS 포트)를 보고 판단합니다.
 
 ### H.3.1 제어·서비스 네트워크 분리 구성 {#h-3-1-separate}
 
@@ -150,14 +150,14 @@ flowchart TB
 | sw_cnet | |
 | sw_pnet | vlan 100, 200 tagged |
 
-**서버.** PVE 설치 대상입니다. NIC1은 cnet, NIC2는 pnet에 연결합니다. NIC2에는 여러 VLAN이 tagged(802.1Q VLAN 태그가 붙은 상태)로 들어옵니다. 호스트에서 `vmbr1`을 **OVS Bridge** 타입으로 선언하고 NIC2와 연결합니다.
+**서버.** PVE 설치 대상입니다. NIC1은 cnet, NIC2는 pnet에 연결합니다. NIC2에는 여러 VLAN(Virtual LAN, 스위치 하나를 논리적으로 여러 망으로 나누는 기술)이 tagged(802.1Q VLAN 태그가 붙은 상태)로 들어옵니다. 호스트에서 `vmbr1`을 **OVS Bridge** 타입으로 선언하고 NIC2와 연결합니다.
 
 | 호스트 | NIC1 | NIC2 | 비고 |
 | --- | --- | --- | --- |
 | pve01 | (ens2f0) `10.10.0.10` | (ens2f1) | PVE 설치 |
 | pve02 | (ens2f0) `10.10.0.11` | (ens2f1) | PVE 설치 |
 | pve03 | (ens2f0) `10.10.0.12` | (ens2f1) | PVE 설치 |
-| nas01 | (ens2f0) `10.10.0.13` | | NFS 설치, PVE에 shared 스토리지 제공 |
+| nas01 | (ens2f0) `10.10.0.13` | | NFS(Network File System, 네트워크로 디렉터리를 공유하는 프로토콜) 설치, PVE에 shared 스토리지 제공 |
 
 OVS Bridge는 웹 UI의 **노드 → System → Network → Create → OVS Bridge**에서 만들고, *Bridge ports*에 NIC2(`ens2f1`)를 넣습니다.
 
@@ -292,7 +292,7 @@ IP Set은 미리 만들어 둔 **IP 주소 묶음**입니다. 방화벽 규칙 �
 ...
 ```
 
-PVE가 웹 UI에서 저장할 때는 *Comment* 칸의 내용을 `192.0.2.0/24 # Office 1`처럼 **같은 줄 끝**에 씁니다. 이 파일은 PVE 자신의 파서가 그 형식을 읽도록 만들어져 있어서 문제가 없지만, 손으로 쓸 때는 이 책의 관례대로 주석을 윗줄에 두어도 됩니다. 다만 그러면 웹 UI의 *Comment* 칸에는 보이지 않습니다.
+PVE가 웹 UI에서 저장할 때는 *Comment* 칸의 내용을 `192.0.2.0/24 # Office 1`처럼 **같은 줄 끝**에 씁니다. 이 파일은 PVE 자신의 파서(parser, 설정 파일을 읽어 해석하는 프로그램)가 그 형식을 읽도록 만들어져 있어서 문제가 없지만, 손으로 쓸 때는 이 책의 관례대로 주석을 윗줄에 두어도 됩니다. 다만 그러면 웹 UI의 *Comment* 칸에는 보이지 않습니다.
 
 ### Security Group {#h-4-security-group}
 
@@ -320,7 +320,7 @@ IN Ping(ACCEPT) -source +dc/inside -log nolog
 1. **Datacenter → Firewall → Options → Firewall = Yes**
 2. **Datacenter → Firewall → IPSet → `management` 추가 → IP/CIDR 추가**
 
-`management`라는 이름의 IP Set은 특별합니다. 방화벽을 켜면 웹 UI(8006)·SSH(22)·VNC/SPICE 콘솔 같은 관리 접속은 이 묶음에서 오는 것만 허용됩니다. 이 묶음은 **호스트 방화벽에만** 쓰이고(VM 방화벽에는 쓰이지 않음), 클러스터 자신의 로컬 네트워크는 자동으로 들어갑니다([PVE Firewall](https://pve.proxmox.com/pve-docs/chapter-pve-firewall.html)).
+`management`라는 이름의 IP Set은 특별합니다. 방화벽을 켜면 웹 UI(8006)·SSH(22)·VNC/SPICE(VM 화면을 원격으로 보여 주는 프로토콜) 콘솔 같은 관리 접속은 이 묶음에서 오는 것만 허용됩니다. 이 묶음은 **호스트 방화벽에만** 쓰이고(VM 방화벽에는 쓰이지 않음), 클러스터 자신의 로컬 네트워크는 자동으로 들어갑니다([PVE Firewall](https://pve.proxmox.com/pve-docs/chapter-pve-firewall.html)).
 
 파일을 직접 고쳐도 됩니다.
 
@@ -368,7 +368,7 @@ IN ACCEPT -p tcp -dport 3300,6789,6800:7568 -log nolog
 
 1. **특정 VM 선택 → Firewall → Options**
    - Firewall = Yes
-   - IP filter = No (Yes로 두면 VM이 `ipfilter-net⟨n⟩` IP Set에 적힌 출발지 주소로만 패킷을 내보낼 수 있습니다. 그 IP Set을 만들지 않았으면 MAC 주소에서 만들어진 IPv6 링크 로컬 주소 말고는 모두 막혀, VM 통신이 끊긴 것처럼 보입니다)
+   - IP filter = No (Yes로 두면 VM이 `ipfilter-net⟨n⟩` IP Set에 적힌 출발지 주소로만 패킷을 내보낼 수 있습니다. 그 IP Set을 만들지 않았으면 MAC 주소에서 만들어진 IPv6 링크 로컬 주소(link-local address, 같은 링크 안에서만 쓰는 자동 생성 주소) 말고는 모두 막혀, VM 통신이 끊긴 것처럼 보입니다)
 2. **특정 VM 선택 → Firewall**에서 규칙 추가. *Insert: Security Group*으로 묶음을 넣습니다.
 3. **특정 VM 선택 → Hardware → Network Device → Firewall 체크**
 
@@ -407,7 +407,7 @@ VM 쪽 `.fw` 파일에는 **묶음 이름만** 남습니다. 규칙을 바꿔야
 
 ## H.5 스토리지 {#h-5-storage}
 
-PVE는 여러 종류의 스토리지(디렉터리, NFS, LVM-thin, ZFS, Ceph RBD 등)를 지원합니다. 종류별 특징은 공식 설명서에 정리되어 있습니다.
+PVE는 여러 종류의 스토리지(디렉터리, NFS, LVM-thin, ZFS(파일시스템과 볼륨 관리를 함께 하는 스토리지 시스템), Ceph RBD(RADOS Block Device, Ceph가 제공하는 블록 장치) 등)를 지원합니다. 종류별 특징은 공식 설명서에 정리되어 있습니다.
 
 - <https://pve.proxmox.com/pve-docs/chapter-pvesm.html>
 - <https://pve.proxmox.com/wiki/Storage>
@@ -463,7 +463,7 @@ rbd: vmstore1
 
 ### 로컬 스토리지 구성 예시 {#h-5-local}
 
-Directory 타입(`local`)은 **모든 PVE 호스트에서 같은 경로**(`/var/lib/vz`)를 가리킵니다. 다만 Shared가 아니므로 내용은 호스트마다 다릅니다. 로컬에 대용량 NVMe가 여러 장 있다면 소프트웨어 RAID로 묶어 이 경로에 마운트합니다.
+Directory 타입(`local`)은 **모든 PVE 호스트에서 같은 경로**(`/var/lib/vz`)를 가리킵니다. 다만 Shared가 아니므로 내용은 호스트마다 다릅니다. 로컬에 대용량 NVMe(PCIe 버스에 직접 연결하는 고속 SSD 규격)가 여러 장 있다면 소프트웨어 RAID(Redundant Array of Independent Disks, 여러 디스크를 묶어 하나처럼 쓰는 기술)로 묶어 이 경로에 마운트합니다.
 
 ```text
 # nvme list
@@ -499,13 +499,13 @@ OS는 작은 NVMe(`nvme0n1`) 한 장에 두고, 1.5 TB NVMe 네 장을 RAID5(`md
 
 ### Preallocation = off {#h-5-preallocation}
 
-QCOW2 이미지를 쓰는 경우 스토리지의 **Preallocation**을 Off로 두면, 템플릿에서 VM을 만들 때 **thin provisioning**되어 빠릅니다(디스크 공간을 미리 0으로 채우지 않고 쓴 만큼만 차지).
+QCOW2 이미지를 쓰는 경우 스토리지의 **Preallocation**(사전 할당, 디스크 공간을 미리 확보해 두는 설정)을 Off로 두면, 템플릿에서 VM을 만들 때 **thin provisioning**되어 빠릅니다(디스크 공간을 미리 0으로 채우지 않고 쓴 만큼만 차지).
 
 웹 UI: **Datacenter → Storage → 스토리지 선택 → Edit → Preallocation = Off** (*Advanced* 체크 시 보임)
 
 ![Directory 스토리지의 Preallocation을 Off로 고르는 화면](images/pve/proxmox-storage-prealloc-off.png)
 
-thin이 왜 빠르고 무엇을 조심해야 하는지(초과 약정, discard와의 짝)는 [Part 1 §1.2](01-image.qmd)에 있습니다. 이 설정은 그 내용 가운데 PVE 스토리지 쪽에 해당하는 스위치입니다.
+thin이 왜 빠르고 무엇을 조심해야 하는지(초과 약정(over-provisioning), 그리고 지운 블록을 저장소에 돌려주는 discard와의 짝)는 [Part 1 §1.2](01-image.qmd)에 있습니다. 이 설정은 그 내용 가운데 PVE 스토리지 쪽에 해당하는 스위치입니다.
 
 ## H.6 활용 {#h-6-usage}
 
@@ -535,7 +535,7 @@ flowchart LR
 | | Total Cores | `4` |
 | | Type | `x86-64-v2-AES` 혹은 `host` |
 | Memory | Memory (MiB) | `4096` |
-| | Ballooning Device | 체크 해제 |
+| | Ballooning Device(호스트가 게스트 메모리를 회수·조정하는 장치) | 체크 해제 |
 | Network | Bridge | `vmbr0` |
 | | Model | VirtIO |
 
@@ -631,9 +631,9 @@ virt-customize -a $IMG --install qemu-guest-agent,net-tools,curl,tree,vim,wget,z
 virt-copy-in -a $IMG <some_file_in_host> <directory_path_in_image>
 ```
 
-`qemu-guest-agent`를 넣어 두면 PVE가 VM 안의 IP를 읽고, 종료·TRIM 같은 명령을 게스트에 직접 전달할 수 있습니다([실습②ⓑ](labs/lab-02.qmd)의 *Run guest-trim*).
+`qemu-guest-agent`를 넣어 두면 PVE가 VM 안의 IP를 읽고, 종료·TRIM(지운 공간을 스토리지에 돌려주는 명령) 같은 명령을 게스트(guest, VM 안에서 실행되는 운영체제)에 직접 전달할 수 있습니다([실습②ⓑ](labs/lab-02.qmd)의 *Run guest-trim*).
 
-필요하면 VM을 한 번 켜서 패키지를 설치합니다. 그런 다음 **반드시** sysprep으로 시스템 고유 정보(machine-id, SSH 호스트 키, 로그)를 지웁니다. 한 번 켠 이미지는 이미 "그 한 대"의 정체성을 갖게 되었기 때문입니다. 왜 지워야 하는지는 [Part 1 §1.4](01-image.qmd)에 있습니다.
+필요하면 VM을 한 번 켜서 패키지를 설치합니다. 그런 다음 **반드시** `virt-sysprep`으로 일반화(generalization, 이미지에서 한 시스템의 고유 정보를 지워 복제용으로 만드는 작업)해 시스템 고유 정보(machine-id, SSH 호스트 키, 로그)를 지웁니다. 한 번 켠 이미지에는 이미 그 한 대의 고유 정보가 생겼기 때문입니다. 왜 지워야 하는지는 [Part 1 §1.4](01-image.qmd)에 있습니다.
 
 ```bash
 IMG=vm-100-disk-0.qcow2
@@ -727,7 +727,7 @@ Configurations:                              Next Boot
 # reboot
 ```
 
-`mstconfig`(`mstflint` 패키지)는 NIC **펌웨어**의 설정을 바꿉니다. `SRIOV_EN=1 NUM_OF_VFS=4`는 "이 카드가 VF를 최대 4개까지 만들 수 있게 하라"는 뜻이고, 펌웨어 설정이므로 재부팅해야 반영됩니다(`Next Boot` 열). 실제로 VF를 만드는 것은 다음 단계입니다.
+`mstconfig`(`mstflint` 패키지)는 NIC **펌웨어**(firmware, 장치에 내장된 제어 소프트웨어)의 설정을 바꿉니다. `SRIOV_EN=1 NUM_OF_VFS=4`는 "이 카드가 VF를 최대 4개까지 만들 수 있게 하라"는 뜻이고, 펌웨어 설정이므로 재부팅해야 반영됩니다(`Next Boot` 열). 실제로 VF를 만드는 것은 다음 단계입니다.
 
 #### VF 생성 서비스 등록 {#h-7-1-vf-service}
 
@@ -809,7 +809,7 @@ pve01
 # reboot
 ```
 
-재부팅하면 `/etc/pve` 안의 심볼릭 링크(`local`, `qemu-server` 등)가 새 이름을 따라 바뀝니다. 그런데 웹 UI에서는 **VM이 사라진 것처럼 보입니다.** VM 설정 파일은 옛 이름의 디렉터리에 남아 있기 때문입니다.
+재부팅하면 `/etc/pve` 안의 심볼릭 링크(symbolic link, 다른 경로를 가리키는 링크 파일. `local`, `qemu-server` 등)가 새 이름을 따라 바뀝니다. 그런데 웹 UI에서는 **VM이 사라진 것처럼 보입니다.** VM 설정 파일은 옛 이름의 디렉터리에 남아 있기 때문입니다.
 
 ```text
 # tree -a /etc/pve
@@ -898,7 +898,7 @@ PVE의 기본 저장소(`local`)입니다. 백업과 디스크 이미지가 여�
 
 #### `/etc/pve` {#h-7-3-etc-pve}
 
-이 디렉터리는 SQLite3 파일인 `/var/lib/pve-cluster/config.db`를 FUSE(Filesystem in Userspace, 사용자 공간에서 동작하는 파일시스템)로 마운트한 것입니다(`pmxcfs`). 클러스터 안의 모든 호스트에 동기화됩니다. 그래서 여기 있는 파일은 평범한 파일처럼 보이지만, 한 호스트에서 고치면 **모든 호스트에서 동시에 바뀝니다.**
+이 디렉터리는 SQLite3 파일인 `/var/lib/pve-cluster/config.db`를 FUSE(Filesystem in Userspace, 사용자 공간에서 동작하는 파일시스템)로 마운트한 것입니다(`pmxcfs`, Proxmox Cluster File System). 클러스터 안의 모든 호스트에 동기화됩니다. 그래서 여기 있는 파일은 평범한 파일처럼 보이지만, 한 호스트에서 고치면 **모든 호스트에서 동시에 바뀝니다.**
 
 ```text
 # mount | grep /etc/pve
@@ -1008,7 +1008,7 @@ PVE의 기본 저장소(`local`)입니다. 백업과 디스크 이미지가 여�
 
 #### `/etc/corosync` {#h-7-3-etc-corosync}
 
-클러스터 정보가 기록되어 있습니다.
+corosync(클러스터 노드 사이의 통신과 구성원 관리를 맡는 서비스)의 클러스터 정보가 기록되어 있습니다.
 
 ```text
 # tree /etc/corosync

@@ -1,6 +1,6 @@
 # 실습① 클라우드 이미지 — 내려받아 부팅 없이 열어 보고 고치기 {#lab-01}
 
-🎯 **목표:** 부팅 없이 이미지 내부를 탐색하고, 계정·정체성을 패치하고, 설정은 **sed로 고치지 않고 조각 파일로 얹는다.**
+🎯 **목표:** 부팅 없이 이미지 내부를 탐색하고, 계정과 패키지를 패치하고, 복제 전에 일반화(generalization, machine-id·호스트 키처럼 기계마다 달라야 할 값을 지우는 일)하고, 설정은 **sed로 고치지 않고 조각 파일로 얹는다.**
 
 🖥️ **랩:** 작업 VM(libguestfs·qemu-utils 설치됨). 이미지는 파일 하나로 다룬다.
 
@@ -19,7 +19,7 @@ wget ⟨https://⟨mirror.example⟩/.../jammy-server-cloudimg-amd64.img⟩ -O �
 | Rocky 10 | <https://dl.rockylinux.org/pub/rocky/10/images/x86_64/> | `Rocky-10-GenericCloud-Base.latest.x86_64.qcow2` |
 | Rocky 9 | <https://dl.rockylinux.org/pub/rocky/9/images/x86_64/> | `Rocky-9-GenericCloud-Base.latest.x86_64.qcow2` |
 
-> 우분투의 `current/`는 보안 업데이트가 반영된 **최신 빌드**다. 버전을 고정하려면 `releases/26.04/`처럼 릴리스 디렉터리를 쓴다. 받은 뒤엔 같은 디렉터리의 체크섬 파일(`SHA256SUMS` 등)로 검증한다. 우분투 `.img`도 확장자만 그렇고 실제 형식은 qcow2다(`qemu-img info`로 확인). 데비안의 `genericcloud`는 가상머신용이라 물리 하드웨어 드라이버가 빠져 있다. 물리 서버에 기록할(②의 V2P) 이미지라면 `generic`을 받는다.
+> 우분투의 `current/`는 보안 업데이트가 반영된 **최신 빌드**다. 버전을 고정하려면 `releases/26.04/`처럼 릴리스 디렉터리를 쓴다. 받은 뒤엔 같은 디렉터리의 체크섬 파일(`SHA256SUMS` 등)로 검증한다. 우분투 `.img`도 확장자만 그렇고 실제 형식은 qcow2다(`qemu-img info`로 확인). 데비안의 `genericcloud`는 가상머신용이라 물리 하드웨어 드라이버가 빠져 있다. ②의 V2P(virtual-to-physical, 가상 머신 이미지를 물리 디스크로 옮기는 일)처럼 물리 서버에 기록할 이미지라면 `generic`을 받는다.
 
 ⌨️ **탐색 — 부팅하지 않고 내부를 들여다본다(읽기)**
 ```bash
@@ -39,7 +39,7 @@ sudo mount /dev/nbd0p⟨1⟩ /mnt && ls /mnt/etc
 sudo umount /mnt; sudo qemu-nbd --disconnect /dev/nbd0
 ```
 
-> 파티션 **번호**는 디스크 안의 **위치**가 아니다. 우분투 이미지는 루트가 1번이지만 디스크 맨 뒤에 있고, 앞쪽은 14·15·16번(BIOS·EFI·`/boot`)이 차지한다. Rocky는 4번이 루트이고 FS가 XFS다. 그래서 번호를 외우지 말고 `lsblk -f`로 확인한다([Part 1 §1.2](../01-image.qmd)).
+> 파티션 **번호**는 디스크 안의 **위치**가 아니다. 우분투 이미지는 루트가 1번이지만 디스크 맨 뒤에 있고, 앞쪽은 14·15·16번(BIOS·EFI·`/boot`)이 차지한다. Rocky는 4번이 루트이고 FS(file system, 파일시스템)가 XFS다. 그래서 번호를 외우지 말고 `lsblk -f`로 확인한다([Part 1 §1.2](../01-image.qmd)).
 
 ⌨️ **키우기 — 이미지는 일부러 작게 온다**
 ```bash
@@ -51,9 +51,9 @@ qemu-img resize ⟨image.img⟩ 20G
 virt-df -h -a ⟨image.img⟩
 ```
 
-👀 `virt-df`의 루트 크기는 **그대로**다. 디스크만 커졌고 안쪽의 파티션과 파일시스템은 아직 옛 크기다. 키우는 방법은 둘이다. cloud-init이 동작하면 **첫 부팅 때** 파티션과 파일시스템을 디스크 끝까지 자동으로 늘린다. 동작하지 않으면 부팅한 뒤 직접 세 단계(`growpart` → `resize2fs`/`xfs_growfs`)를 한다. ②에서 `df -h /`로 어느 쪽이었는지 확인한다.
+👀 `virt-df`의 루트 크기는 **그대로**다. 디스크만 커졌고 안쪽의 파티션과 파일시스템은 아직 옛 크기다. 키우는 방법은 둘이다. cloud-init(클라우드 이미지가 첫 부팅 때 계정·네트워크·디스크 크기 등을 자동으로 설정하는 도구)이 동작하면 **첫 부팅 때** 파티션과 파일시스템을 디스크 끝까지 자동으로 늘린다. 동작하지 않으면 부팅한 뒤 직접 세 단계(`growpart` → `resize2fs`/`xfs_growfs`)를 한다. ②에서 `df -h /`로 어느 쪽이었는지 확인한다.
 
-⌨️ **패치 — 계정·패키지·운영환경·정체성을 심는다(쓰기)**
+⌨️ **패치 — 계정·패키지·운영환경을 심고 일반화한다(쓰기)**
 ```bash
 # 비번은 명령줄에 직접 쓰지 않는다 → 파일로 (셸 히스토리·ps 노출 방지)
 # 방법 1: 직접 정하기
@@ -82,7 +82,7 @@ virt-customize -a ⟨image.img⟩ \
     'curl -s https://raw.githubusercontent.com/KREONET/ohmyzsh/main/install.sh | sh -s -'
 # 끝나면 비번 파일 폐기(흔적 제거)
 shred -u pass.txt
-# 정체성 리셋(machine-id·hostkey·로그)
+# 일반화(machine-id·hostkey·로그 지우기)
 virt-sysprep -a ⟨image.img⟩
 # ⚠️ Rocky/RHEL 계열이면 다음 부팅 때 SELinux 재라벨:
 # virt-customize -a ⟨rocky.qcow2⟩ --touch /.autorelabel
@@ -123,7 +123,7 @@ virt-copy-in -a ⟨image.img⟩ 60-lab.conf /etc/ssh/sshd_config.d/
 
 > ⚠️ **주석은 설정 줄 끝에 붙이지 말고 별도 줄로.** `PasswordAuthentication no  # 랩용` 처럼 쓰면 방금 본 `grep -v '#'`가 **설정 줄 전체를** 걸러 낸다. 게다가 많은 파서는 인라인 `#`을 주석으로 안 보고 **값의 일부로** 읽는다. 그래서 주석은 윗줄에 쓰는 것이 관례다.
 
-> ⚠️ **RHEL 계열에서 포트를 바꾸면(예: `Port 2222`) SELinux가 막는다.** 설정은 맞는데 서비스가 시작되지 않는다. 이때 SELinux를 끄고 싶어지기 쉽지만 **끄지 말 것.** 포트에 라벨을 알려 주면 된다: `sudo semanage port -a -t ssh_port_t -p tcp 2222`. 왜 끄면 안 되는지, 로그(`ausearch`)를 읽고 규칙을 만드는 법은 [Part 1 §1.4](../01-image.qmd)에서 다룬다.
+> ⚠️ **RHEL 계열에서 포트를 바꾸면(예: `Port 2222`) SELinux(Security-Enhanced Linux, 파일·포트·프로세스에 붙인 라벨로 접근을 통제하는 커널 보안 모듈)가 막는다.** 설정은 맞는데 서비스가 시작되지 않는다. 이때 SELinux를 끄고 싶어지기 쉽지만 **끄지 말 것.** 포트에 라벨을 알려 주면 된다: `sudo semanage port -a -t ssh_port_t -p tcp 2222`. 왜 끄면 안 되는지, 로그(`ausearch`)를 읽고 규칙을 만드는 법은 [Part 1 §1.4](../01-image.qmd)에서 다룬다.
 
 ⌨️ **생각해보기:** 아래 디렉터리에도 각각 `*.d/`가 있다. 원본을 고칠지 조각을 얹을지 고르라면 답은 거의 늘 **얹기**다. 어느 것을 `virt-copy-in`으로 넣어 보겠는가?
 `/etc/sudoers.d/` · `/etc/rsyslog.d/`(로그 라우팅) · `/etc/cron.d/` · `/etc/profile.d/`(로그인 환경·프롬프트) · `/etc/sysctl.d/`(커널 파라미터) · `/etc/systemd/system/⟨서비스⟩.service.d/`(유닛 오버라이드) · `/etc/apt/apt.conf.d/`·`sources.list.d/` · `/etc/yum.repos.d/` · `/etc/NetworkManager/conf.d/` · `/etc/modprobe.d/` · `/etc/logrotate.d/`
