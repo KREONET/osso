@@ -1,0 +1,9 @@
+_site/
+_book/
+.quarto/
+public/
+book/labs/
+cards/_out/
+my/
+*_files/
+/.luarc.json

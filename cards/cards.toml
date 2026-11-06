@@ -1,0 +1,43 @@
+# 카드 원고. tools/make-cards.py 가 cards/template.html 에 채워 PNG로 찍는다.
+# size: "square" = 1080×1080(페이스북·인스타그램), "og" = 1200×630(링크 미리보기)
+# 문장은 책 원고에서 가져온다. 책에 없는 주장을 카드에만 쓰지 않는다.
+
+[[card]]
+id = "og-osso"
+size = "og"
+kicker = "KREONET · OSSO"
+title = "오픈소스 안전운영 실습"
+body = "서버와 서비스를 맡게 된 사람을 위한 손으로 익히는 보안"
+link = "kreonet.github.io/osso"
+
+[[card]]
+id = "01-course"
+size = "square"
+kicker = "OSSO 과정 소개"
+title = "나가는 길을 어느 고도에서 통제하는가"
+body = "이미지 · 방화벽 · 격리 · 컨테이너 · 신뢰 · 접근 · AI. 일곱 축을 하나로 꿰는 질문입니다. 먼저 손으로 겪어 보고, 그다음에 이유를 이해합니다."
+link = "kreonet.github.io/osso"
+
+[[card]]
+id = "02-lab06-egress"
+size = "square"
+kicker = "실습⑥ · 나가는 연결 제한"
+title = "침해되어도 밖으로 나갈 수 없게"
+body = "기본은 모두 막고, 필요한 목적지만 연다. 앱이 침해되어도 공격자가 연결할 곳을 고를 수 없다."
+link = "kreonet.github.io/osso/lab/labs/lab-06.html"
+
+[[card]]
+id = "03-mtls-zero-trust"
+size = "square"
+kicker = "Part 5 · mTLS와 제로 트러스트"
+title = "어디서 왔느냐가 아니라 무엇을 들고 왔느냐"
+body = "CA 확인, 폐기 확인, 유효기간 확인, 그리고 CN 같은 속성 조건. 연결할 때마다 확인하고 필요한 만큼만 허락합니다."
+link = "kreonet.github.io/osso/book/05-trust.html"
+
+[[card]]
+id = "04-delegation-ladder"
+size = "square"
+kicker = "Part 7 · 위임 사다리"
+title = "AI에게는 한 칸씩 맡긴다"
+body = "조언 → 조사 → 승인 후 실행 → 위임. 어느 단계에서도 운영 서버에 상시 root는 주지 않습니다."
+link = "kreonet.github.io/osso/book/07-ai-governance.html"

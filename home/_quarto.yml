@@ -1,0 +1,31 @@
+project:
+  type: website
+
+lang: ko
+
+website:
+  title: "OSSO"
+  site-url: https://kreonet.github.io/osso/
+  repo-url: https://github.com/KREONET/osso
+  open-graph:
+    image: https://kreonet.github.io/osso/cards/og-osso.png
+  navbar:
+    left:
+      - text: "책"
+        href: book/index.html
+      - text: "실습"
+        href: lab/index.html
+      - text: "슬라이드"
+        href: slide/index.html
+      - text: "카드"
+        href: cards/index.html
+    right:
+      - icon: github
+        href: https://github.com/KREONET/osso
+
+format:
+  html:
+    theme:
+      light: [cosmo, ../shared/styles/osso.scss]
+      dark: [darkly, ../shared/styles/osso.scss]
+    page-layout: article

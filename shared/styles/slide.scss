@@ -1,0 +1,9 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+$presentation-heading-font: "Pretendard", "Noto Sans KR", sans-serif;
+$presentation-font-size-root: 34px;
+
+/*-- scss:rules --*/
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+.reveal { word-break: keep-all; }
+.reveal .slide-number { font-size: .5em; }

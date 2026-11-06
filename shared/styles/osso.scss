@@ -1,0 +1,13 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: "Pretendard", "Noto Sans KR", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+$font-family-monospace: "D2Coding", "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+/*-- scss:rules --*/
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+body { word-break: keep-all; line-height: 1.75; }
+.sidebar-item-text { word-break: keep-all; }
+/* 표는 넓으면 가로로 스크롤 */
+.table-responsive, table { display: block; overflow-x: auto; }
+/* 실습 표지(🎯 👀 💡 ⚠️)가 있는 인용문은 상자로 */
+blockquote { border-left: 4px solid var(--bs-primary); background: rgba(127,127,127,.06); padding: .6rem 1rem; }

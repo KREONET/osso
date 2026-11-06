@@ -1,0 +1,18 @@
+project:
+  type: default
+  output-dir: _site
+
+lang: ko
+
+format:
+  revealjs:
+    theme: [default, ../shared/styles/slide.scss]
+    slide-number: true
+    hash-type: number
+    preview-links: auto
+    code-copy: true
+    highlight-style: github
+    chalkboard: false
+    footer: "OSSO · 오픈소스 안전운영 실습 · KREONET"
+    mermaid:
+      theme: neutral

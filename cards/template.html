@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #0b2545;
+    --bg2: #13315c;
+    --accent: #8ecae6;
+    --text: #ffffff;
+    --muted: #c9d6e8;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: {{W}}px; height: {{H}}px; }
+  body {
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    word-break: keep-all;
+    color: var(--text);
+    background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%);
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: {{PAD}}px;
+  }
+  .kicker { font-size: {{KICK}}px; font-weight: 600; color: var(--accent); letter-spacing: .02em; }
+  .title { font-size: {{TITLE}}px; font-weight: 800; line-height: 1.25; margin-top: .4em; }
+  .body { font-size: {{BODY}}px; font-weight: 400; line-height: 1.6; color: var(--muted); margin-top: 1em; }
+  .foot { display: flex; justify-content: space-between; align-items: flex-end; font-size: {{KICK}}px; color: var(--muted); }
+  .brand { font-weight: 800; color: var(--text); letter-spacing: .04em; }
+  .bar { width: 96px; height: 8px; background: var(--accent); border-radius: 4px; margin-bottom: 28px; }
+</style>
+</head>
+<body>
+  <div>
+    <div class="bar"></div>
+    <div class="kicker">{{KICKER}}</div>
+    <div class="title">{{TITLE_TEXT}}</div>
+    <div class="body">{{BODY_TEXT}}</div>
+  </div>
+  <div class="foot"><span>{{LINK}}</span><span class="brand">KREONET</span></div>
+</body>
+</html>

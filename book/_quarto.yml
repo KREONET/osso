@@ -1,0 +1,86 @@
+project:
+  type: book
+  pre-render: python3 ../tools/sync-labs.py
+
+lang: ko
+
+book:
+  title: "오픈소스 안전운영 실습"
+  subtitle: "서버와 서비스를 맡게 된 사람을 위한 손으로 익히는 보안"
+  author: "KREONET"
+  repo-url: https://github.com/KREONET/osso
+  repo-subdir: book
+  repo-actions: [edit, issue]
+  site-url: https://kreonet.github.io/osso/book/
+  search: true
+  open-graph:
+    image: https://kreonet.github.io/osso/cards/og-osso.png
+  downloads: [epub]
+  sidebar:
+    style: docked
+    collapse-level: 1
+  chapters:
+    - index.qmd
+    - part: "본문"
+      chapters:
+        - 01-image.qmd
+        - 02-firewall.qmd
+        - 03-network.qmd
+        - 04-container.qmd
+        - 05-trust.qmd
+        - 06-access.qmd
+        - 07-ai-governance.qmd
+    - part: "부록 — 실습"
+      chapters:
+        - labs/00-lab-intro.qmd
+        - labs/lab-01.qmd
+        - labs/lab-02.qmd
+        - labs/lab-03.qmd
+        - labs/lab-04.qmd
+        - labs/lab-05.qmd
+        - labs/lab-06.qmd
+        - labs/lab-07.qmd
+        - labs/lab-08.qmd
+        - labs/lab-09.qmd
+        - labs/lab-09p.qmd
+        - labs/lab-10.qmd
+        - labs/lab-11.qmd
+        - labs/lab-12.qmd
+        - labs/lab-13.qmd
+        - labs/lab-14.qmd
+    - part: "부록 — 참고"
+      chapters:
+        - A-assets.qmd
+        - B-licenses.qmd
+        - C-adr.qmd
+        - D-cheatsheet.qmd
+        - E-references.qmd
+        - F-glossary.qmd
+        - G-packages.qmd
+        - H-pve.qmd
+        - I-access-control.qmd
+        - J-workstation.qmd
+        - K-delivery.qmd
+        - Z-index.qmd
+
+number-sections: false
+
+filters:
+  - ../shared/filters/crosslink.lua
+
+format:
+  html:
+    theme:
+      light: [cosmo, ../shared/styles/osso.scss]
+      dark: [darkly, ../shared/styles/osso.scss]
+    highlight-style: github
+    code-copy: true
+    toc: true
+    toc-depth: 3
+    toc-title: "이 장의 차례"
+    mermaid:
+      theme: neutral
+  epub:
+    toc: true
+    toc-depth: 2
+    mermaid-format: png
