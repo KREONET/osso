@@ -62,6 +62,7 @@ book:
         - J-workstation.qmd
         - K-delivery.qmd
         - Z-index.qmd
+        - Z-commands.qmd
 
 number-sections: false
 

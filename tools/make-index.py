@@ -16,11 +16,12 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "book"
 OUT = SRC / "Z-index.qmd"
 MAX_LINKS = 8
+MAX_CMD_LINKS = 12
 # 괄호 속 말 가운데 검색어로 쓰지 않을 것(맥락 표시)
 ALIAS_SKIP = {"zone", "docker", "proxmox", "firewalld", "이미지", "export"}
 
 # 색인 대상 파일과 표시 이름(SUMMARY 순서)
-SKIP = {"F-glossary.qmd", "E-references.qmd", "Z-index.qmd"}
+SKIP = {"F-glossary.qmd", "E-references.qmd", "Z-index.qmd", "Z-commands.qmd"}
 
 
 def summary_files():
@@ -82,23 +83,29 @@ def label_for(fname, h2, h1):
 
 
 def sections(fname):
-    """(label, anchor, text) 목록. 코드 블록은 뺀다."""
+    """(label, anchor, text, blocks) 목록. text에는 코드 블록을 뺀 본문, blocks에는 (언어, 줄들)."""
     lines = (SRC / fname).read_text().splitlines()
     seen = {}
     out = []
     h1 = h2 = None
-    cur = {"label": None, "anchor": "", "text": []}
-    in_code = False
+    cur = {"label": None, "anchor": "", "text": [], "blocks": []}
+    fence = None
 
     def flush():
-        if cur["text"]:
-            out.append((cur["label"] or label_for(fname, h2, h1), cur["anchor"], "\n".join(cur["text"])))
+        if cur["text"] or cur["blocks"]:
+            out.append((cur["label"] or label_for(fname, h2, h1), cur["anchor"], "\n".join(cur["text"]), cur["blocks"]))
 
     for ln in lines:
-        if ln.lstrip().startswith("```"):
-            in_code = not in_code
+        fm = re.match(r"^\s*(`{3,})(.*)$", ln)
+        if fence is None and fm:
+            fence = fm.group(1)
+            cur["blocks"].append((fm.group(2).strip(), []))
             continue
-        if in_code:
+        if fence is not None:
+            if ln.strip() == fence:
+                fence = None
+            else:
+                cur["blocks"][-1][1].append(ln)
             continue
         m = re.match(r"^(#{1,6})\s+(.*?)\s*#*\s*$", ln)
         if m:
@@ -116,7 +123,7 @@ def sections(fname):
                 h1, h2 = title, None
             elif level == 2:
                 h2 = title
-            cur = {"label": label_for(fname, h2 if level >= 2 else None, h1), "anchor": hid, "text": [title]}
+            cur = {"label": label_for(fname, h2 if level >= 2 else None, h1), "anchor": hid, "text": [title], "blocks": []}
             continue
         cur["text"].append(ln)
     flush()
@@ -197,9 +204,80 @@ def sort_key(term):
     return (g, term.lstrip("./`'\"(").lower())
 
 
+# ---------- 명령 찾아보기 ----------
+CMD_OUT = SRC / "Z-commands.qmd"
+
+
+def merge_links(hits, limit=None):
+    """[(f, lab, anc, n)] → [[lab, href, n]]. 같은 라벨은 하나로(첫 앵커, 횟수 합)."""
+    merged = {}
+    for f, lab, anc, n in hits:
+        k = (f, lab)
+        if k in merged:
+            merged[k][2] += n
+        else:
+            merged[k] = [lab, f"{f}#{anc}" if anc else f, n]
+    links = list(merged.values())
+    if limit and len(links) > limit:
+        keep = {id(x) for x in sorted(links, key=lambda x: -x[2])[:limit]}
+        links = [x for x in links if id(x) in keep]
+    return links
+
+
+def make_command_index(allsecs):
+    import sys
+    sys.path.insert(0, str(ROOT / "tools"))
+    from cmdindex import scan_block, scan_inline
+
+    per = []
+    known = set()
+    for f, lab, anc, txt, blocks in allsecs:
+        found = [c for lang, body in blocks for c in scan_block(lang, body)]
+        known.update(found)
+        per.append((f, lab, anc, txt, found))
+    extra = ROOT / "tools" / "index-commands.txt"
+    if extra.exists():
+        known.update(ln.strip() for ln in extra.read_text().splitlines() if ln.strip() and not ln.startswith("#"))
+    hits = {}
+    for f, lab, anc, txt, found in per:
+        cnt = {}
+        for c in found + scan_inline(txt, known):
+            cnt[c] = cnt.get(c, 0) + 1
+        for c, n in cnt.items():
+            hits.setdefault(c, []).append((f, lab, anc, n))
+
+    out = [
+        "# 명령 찾아보기 {#command-index}",
+        "",
+        "이 책의 본문과 실습에 나오는 명령을 ABC순으로 모았습니다. "
+        "코드 블록과 본문·표에 적힌 명령을 모두 셌고, 링크는 그 명령이 나오는 절입니다. "
+        f"자주 나오는 명령은 많이 다루는 곳 {MAX_CMD_LINKS}곳까지만 적었습니다. "
+        "`sudo`·`time` 같은 앞붙이는 빼고 실제로 실행되는 명령으로 셌으며, `cd`·`echo` 같은 셸 내장 명령은 넣지 않았습니다. "
+        "명령을 자주 쓰는 순서로 모은 표는 [부록 D](D-cheatsheet.qmd)에 있습니다.",
+        "",
+        "> 이 페이지는 `tools/make-index.py`가 만듭니다. 손으로 고치지 마세요.",
+        "",
+    ]
+    cur = None
+    for c in sorted(hits, key=lambda x: x.lower()):
+        g = c[0].upper()
+        if g != cur:
+            if cur is not None:
+                out.append("")
+            cur = g
+            out += [f"## {g} {{#cmd-{g.lower()}}}", ""]
+        links = " · ".join(f"[{lab}]({href})" for lab, href, _ in merge_links(hits[c], MAX_CMD_LINKS))
+        out.append(f"- `{c}` — {links}")
+    out.append("")
+    CMD_OUT.write_text("\n".join(out))
+    print(f"{CMD_OUT.relative_to(ROOT)}: {len(hits)} commands")
+
+
 def main():
     files = summary_files()
-    secs = [(f, lab, anc, txt) for f in files for (lab, anc, txt) in sections(f)]
+    allsecs = [(f, lab, anc, txt, blk) for f in files for (lab, anc, txt, blk) in sections(f)]
+    secs = [(f, lab, anc, txt) for f, lab, anc, txt, _ in allsecs]
+    make_command_index(allsecs)
     terms = load_terms()
     entries = {}
     for head, keys in terms.items():

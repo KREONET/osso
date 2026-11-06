@@ -7,3 +7,4 @@ cards/_out/
 my/
 *_files/
 /.luarc.json
+__pycache__/

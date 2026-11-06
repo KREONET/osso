@@ -456,7 +456,7 @@ sequenceDiagram
 
 OpenSSH는 `Match` 지시어로 조건(주소, 사용자, 그룹 등)에 따라 설정을 다르게 적용합니다. 적용 전에 반드시 동작을 확인합니다. 원 가이드는 Ubuntu 22, Rocky 8 이상에서 동작을 확인했으며, 설정 문법 오류나 파일 로딩 순서에 따라 의도와 다르게 동작할 수 있다고 경고합니다.
 
-```bash
+```text
 # /etc/ssh/sshd_config.d/01-custom-acl.conf
 # 기본: 비밀번호 인증 끔
 PasswordAuthentication no
@@ -639,7 +639,7 @@ ssh -D 1080 jump@bastion.example.org
 
 〔보충〕 **SSH 포워딩은 접근제어의 층들을 가로지르는 통로**라는 점을 기억합니다. 22번 하나만 열어 둔 서버라도 포워딩이 허용되면, 그 서버가 닿는 모든 곳으로 가는 길이 SSH 안에 생깁니다. 그러므로 서버 쪽에서 허용 범위를 제한합니다.
 
-```bash
+```text
 # /etc/ssh/sshd_config.d/03-forwarding.conf
 # 기본: 포워딩 금지
 AllowTcpForwarding no

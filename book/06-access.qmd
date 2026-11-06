@@ -94,7 +94,7 @@ chmod 600 ~/.ssh/authorized_keys
 ssh -i ~/.ssh/id_ed25519 ⟨user⟩@⟨server⟩
 ```
 
-```bash
+```text
 # ~/.ssh/config — 매번 쓰려면
 Host ⟨server⟩
   User ⟨user⟩
@@ -198,7 +198,7 @@ ssh-keygen -lf ~/.ssh/authorized_keys
 
 ### 설정 — 본 파일 대신 조각 파일 추가 {#6-3-drop-in}
 
-```bash
+```text
 # /etc/ssh/sshd_config.d/01-hardening.conf
 PasswordAuthentication no
 KbdInteractiveAuthentication no
@@ -214,7 +214,7 @@ PermitRootLogin no
 
 ### 사용자·주소별 세밀 제어 {#6-3-match}
 
-```bash
+```text
 # /etc/ssh/sshd_config.d/02-match.conf
 Match Address 192.0.2.0/24
     PasswordAuthentication no

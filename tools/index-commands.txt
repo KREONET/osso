@@ -1,0 +1,18 @@
+# 명령 찾아보기에 더할 명령. 코드 블록에는 없고 본문·표의 인라인 코드(`growpart /dev/sda 1`)에만 나오는 명령을 적는다.
+# 코드 블록에 나오는 명령은 tools/cmdindex.py가 자동으로 찾으므로 여기 적지 않아도 된다.
+apt-mark
+chkconfig
+cloud-init
+getent
+growpart
+iptables-restore-translate
+ln
+lvextend
+pip
+qm
+resize2fs
+service
+setenforce
+update-ca-certificates
+virt-sparsify
+xfs_growfs

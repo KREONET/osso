@@ -11,7 +11,7 @@
 
 ## ㄱ
 
-- **골든 이미지 (golden image)** — [§1.1](01-image.qmd#1-1-golden-image) · [§1.2](01-image.qmd#1-2-image-formats) · [§1.3](01-image.qmd#1-3-offline-edit) · [§1.5](01-image.qmd#1-5-deploy) · [§1.7](01-image.qmd#1-7-asset-tags) · [§1.8](01-image.qmd#1-8-reproducible) · [§1.9](01-image.qmd#1-9-ventoy) · [§5.1](05-trust.qmd#5-1-root-programs)
+- **골든 이미지 (golden image)** — [§1.1](01-image.qmd#1-1-golden-image) · [§1.2](01-image.qmd#1-2-compressed) · [§1.3](01-image.qmd#1-3-offline-edit) · [§1.5](01-image.qmd#1-5-deploy) · [§1.7](01-image.qmd#1-7-asset-tags) · [§1.8](01-image.qmd#1-8-reproducible) · [§1.9](01-image.qmd#1-9-ventoy) · [§5.1](05-trust.qmd#5-1-root-programs)
 - **공격면 (attack surface)** — [§3.5](03-network.qmd#3-5-bastion)
 - **굽다 (bake)** — [실습⑨](labs/lab-09.qmd#lab-09-more)
 
@@ -59,7 +59,7 @@
 
 ## ㅊ
 
-- **초과 약정 (over-provisioning)** — [§1.2](01-image.qmd#1-2-image-formats) · [H.5](H-pve.qmd#h-5-preallocation)
+- **초과 약정 (over-provisioning)** — [§1.2](01-image.qmd#1-2-other-formats) · [H.5](H-pve.qmd#h-5-preallocation)
 
 ## ㅋ
 
@@ -76,7 +76,7 @@
 - **패스프레이즈 (passphrase)** — [§1.6](01-image.qmd#1-6-root-recovery) · [§6.1](06-access.qmd#6-1-verify) · [실습②](labs/lab-02.qmd#lab-02) · [J.4](J-workstation.qmd#j-4-ssh-keys)
 - **패키지 관리자** — [§1.8](01-image.qmd#1-8-reproducible) · [부록 A](A-assets.qmd#a-docs) · [부록 G](G-packages.qmd#appendix-g) · [G.1](G-packages.qmd#g-1-what) · [G.2](G-packages.qmd#g-2-os) · [G.4](G-packages.qmd#g-4-winget) · [G.6](G-packages.qmd#g-6-safety) · [J.5](J-workstation.qmd#j-5-ssh-clients)
 - **폭발 반경 (blast radius)** — [§1.4](01-image.qmd#1-4-selinux)
-- **프로비저닝 (provisioning)** — [§1.2](01-image.qmd#1-2-image-formats) · [실습 들어가기](labs/00-lab-intro.qmd#how-to-read) · [실습①](labs/lab-01.qmd#lab-01) · [H.5](H-pve.qmd#h-5-preallocation)
+- **프로비저닝 (provisioning)** — [§1.2](01-image.qmd#1-2-other-formats) · [실습 들어가기](labs/00-lab-intro.qmd#how-to-read) · [실습①](labs/lab-01.qmd#lab-01) · [H.5](H-pve.qmd#h-5-preallocation)
 - **프록시 (proxy)** — [§2.4](02-firewall.qmd#2-4-keep-native) · [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§2.7](02-firewall.qmd#2-7-four-levels) · [§6.4](06-access.qmd#6-4-oidc) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑫](labs/lab-12.qmd#lab-12) · [I.5](I-access-control.qmd#i-5-2-web)
 - **프롬프트 인젝션** — [§7.1](07-ai-governance.qmd#7-1-three-layers) · [§7.2](07-ai-governance.qmd#7-2-prompt) · [§7.3](07-ai-governance.qmd#7-3-isolated-deploy) · [§7.4](07-ai-governance.qmd#7-4-agent-isolation)
 
@@ -191,14 +191,14 @@
 - **PCI pass-through** — [H.3](H-pve.qmd#h-3-3-sriov)
 - **policy (firewalld)** — [§2.1](02-firewall.qmd#2-1-ufw-firewalld) · [§2.2](02-firewall.qmd#2-2-trace) · [§2.4](02-firewall.qmd#2-4-firewalld-docker) · [§5.1](05-trust.qmd#5-1-root-programs) · [실습④](labs/lab-04.qmd#lab-04)
 - **PPK** — [J.5](J-workstation.qmd#j-5-config-keys)
-- **Proxmox VE** — [§1.2](01-image.qmd#1-2-image-formats) · [실습②](labs/lab-02.qmd#lab-02) · [부록 H](H-pve.qmd#appendix-h) · [H.2](H-pve.qmd#h-2-1-pve) · [H.3](H-pve.qmd#h-3-1-separate) · [H.4](H-pve.qmd#h-4-firewall) · [H.6](H-pve.qmd#h-6-1-cloud-image) · [I.3](I-access-control.qmd#i-3-builtin)
+- **Proxmox VE** — [§1.2](01-image.qmd#1-2-linked-clone) · [실습②](labs/lab-02.qmd#lab-02) · [부록 H](H-pve.qmd#appendix-h) · [H.2](H-pve.qmd#h-2-1-pve) · [H.3](H-pve.qmd#h-3-1-separate) · [H.4](H-pve.qmd#h-4-firewall) · [H.6](H-pve.qmd#h-6-1-cloud-image) · [I.3](I-access-control.qmd#i-3-builtin)
 - **ProxyJump** — [§3.5](03-network.qmd#3-5-bastion) · [§6.3](06-access.qmd#6-3-match) · [§7.1](07-ai-governance.qmd#7-1-example) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [I.6](I-access-control.qmd#i-6-1-jump-host) · [J.5](J-workstation.qmd#j-5-ssh-clients)
 - **publish (Docker)** — [§2.2](02-firewall.qmd#2-2-hooks) · [§2.4](02-firewall.qmd#2-4-firewalld-docker) · [§2.5](02-firewall.qmd#2-5-reputation) · [§2.7](02-firewall.qmd#2-7-container) · [실습③](labs/lab-03.qmd#lab-03) · [실습④](labs/lab-04.qmd#lab-04) · [I.4](I-access-control.qmd#i-4-distro) · [I.6](I-access-control.qmd#i-6-3-docker-ufw)
 - **PUEL** — [§7.6](07-ai-governance.qmd#7-6-pitfalls) · [부록 B](B-licenses.qmd#b-compare)
 
 ## Q
 
-- **qcow2** — [§1.2](01-image.qmd#1-2-image-formats) · [§1.5](01-image.qmd#1-5-deploy) · [§1.9](01-image.qmd#1-9-ventoy) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [H.5](H-pve.qmd#h-5-preallocation) · [H.6](H-pve.qmd#h-6-1-create-vm)
+- **qcow2** — [§1.2](01-image.qmd#1-2-inspect) · [§1.5](01-image.qmd#1-5-deploy) · [§1.9](01-image.qmd#1-9-ventoy) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [H.5](H-pve.qmd#h-5-preallocation) · [H.6](H-pve.qmd#h-6-1-create-vm)
 
 ## R
 
@@ -227,7 +227,7 @@
 
 ## V
 
-- **V2P** — [§1.2](01-image.qmd#1-2-disk-resize) · [§1.5](01-image.qmd#1-5-deploy) · [§1.9](01-image.qmd#1-9-ventoy) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [H.2](H-pve.qmd#h-2-1-pve)
+- **V2P** — [§1.2](01-image.qmd#1-2-raw) · [§1.5](01-image.qmd#1-5-deploy) · [§1.9](01-image.qmd#1-9-ventoy) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [H.2](H-pve.qmd#h-2-1-pve)
 - **Ventoy** — [§1.9](01-image.qmd#1-9-ventoy) · [실습②](labs/lab-02.qmd#lab-02) · [부록 B](B-licenses.qmd#b-compare)
 - **veth** — [§4.0](04-container.qmd#4-0-network-stack) · [I.3](I-access-control.qmd#i-3-where)
 - **virt-customize** — [§1.1](01-image.qmd#1-1-golden-image) · [§1.3](01-image.qmd#1-3-offline-edit) · [§1.6](01-image.qmd#1-6-root-recovery) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [H.2](H-pve.qmd#h-2-3-packages) · [H.6](H-pve.qmd#h-6-1-cloud-image)

@@ -1,0 +1,217 @@
+# 명령 찾아보기 {#command-index}
+
+이 책의 본문과 실습에 나오는 명령을 ABC순으로 모았습니다. 코드 블록과 본문·표에 적힌 명령을 모두 셌고, 링크는 그 명령이 나오는 절입니다. 자주 나오는 명령은 많이 다루는 곳 12곳까지만 적었습니다. `sudo`·`time` 같은 앞붙이는 빼고 실제로 실행되는 명령으로 셌으며, `cd`·`echo` 같은 셸 내장 명령은 넣지 않았습니다. 명령을 자주 쓰는 순서로 모은 표는 [부록 D](D-cheatsheet.qmd)에 있습니다.
+
+> 이 페이지는 `tools/make-index.py`가 만듭니다. 손으로 고치지 마세요.
+
+## A {#cmd-a}
+
+- `apt` — [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§7.2](07-ai-governance.qmd#7-2-inventory) · [실습⑥](labs/lab-06.qmd#lab-06) · [G.1](G-packages.qmd#g-1-what) · [H.2](H-pve.qmd#h-2-3-packages) · [J.1](J-workstation.qmd#j-1-shell) · [J.6](J-workstation.qmd#j-6-system)
+- `apt-mark` — [G.2](G-packages.qmd#g-2-os)
+- `audit2allow` — [§1.4](01-image.qmd#1-4-selinux)
+- `ausearch` — [§1.4](01-image.qmd#1-4-selinux)
+
+## B {#cmd-b}
+
+- `bash` — [§4.0](04-container.qmd#4-0-fork-exec)
+- `brew` — [G.1](G-packages.qmd#g-1-what) · [G.2](G-packages.qmd#g-2-os) · [G.3](G-packages.qmd#g-3-homebrew) · [J.5](J-workstation.qmd#j-5-ssh-clients)
+- `bridge` — [§3.1](03-network.qmd#3-1-isolated-network)
+
+## C {#cmd-c}
+
+- `caddy` — [실습⑩](labs/lab-10.qmd#lab-10)
+- `cat` — [§1.4](01-image.qmd#1-4-identity-reset) · [§3.1](03-network.qmd#3-1-isolated-network) · [§4.0](04-container.qmd#4-0-history) · [§6.2](06-access.qmd#6-2-server) · [§7.2](07-ai-governance.qmd#7-2-what) · [§7.3](07-ai-governance.qmd#7-3-limits) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [실습⑨](labs/lab-09.qmd#lab-09) · [실습⑫](labs/lab-12.qmd#lab-12) · [실습⑭](labs/lab-14.qmd#lab-14)
+- `certutil` — [§5.4](05-trust.qmd#5-4-verify)
+- `chkconfig` — [부록 D](D-cheatsheet.qmd#d-7-systemd)
+- `chmod` — [§1.3](01-image.qmd#1-3-offline-edit) · [§3.2](03-network.qmd#3-2-networkmanager) · [§6.1](06-access.qmd#6-1-key-files) · [§7.1](07-ai-governance.qmd#7-1-delegation-ladder) · [§7.3](07-ai-governance.qmd#7-3-example) · [실습①](labs/lab-01.qmd#lab-01) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [실습⑭](labs/lab-14.qmd#lab-14) · [J.4](J-workstation.qmd#j-4-ssh-keys)
+- `claude` — [실습⑬](labs/lab-13.qmd#lab-13)
+- `cloud-init` — [§1.2](01-image.qmd#1-2-disk-resize) · [실습②](labs/lab-02.qmd#lab-02)
+- `conda` — [G.2](G-packages.qmd#g-2-languages)
+- `cp` — [§1.2](01-image.qmd#1-2-raw) · [실습②](labs/lab-02.qmd#lab-02) · [H.2](H-pve.qmd#h-2-2-subscription) · [H.7](H-pve.qmd#h-7-4-cluster-reset) · [J.6](J-workstation.qmd#j-6-system)
+- `curl` — [§2.5](02-firewall.qmd#2-5-geo-block) · [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§3.3](03-network.qmd#3-3-gateway-firewall) · [§4.0](04-container.qmd#4-0-unix-socket) · [§5.3](05-trust.qmd#5-3-verify) · [§5.6](05-trust.qmd#5-6-verify) · [§6.4](06-access.qmd#6-4-verify) · [실습③](labs/lab-03.qmd#lab-03) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑧](labs/lab-08.qmd#lab-08-prep) · [실습⑪](labs/lab-11.qmd#lab-11) · [J.6](J-workstation.qmd#j-6-user)
+
+## D {#cmd-d}
+
+- `date` — [G.3](G-packages.qmd#g-3-homebrew)
+- `df` — [§1.2](01-image.qmd#1-2-disk-resize) · [§7.2](07-ai-governance.qmd#7-2-what) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [실습⑬](labs/lab-13.qmd#lab-13)
+- `diff` — [§2.2](02-firewall.qmd#2-2-verify)
+- `dig` — [§5.2](05-trust.qmd#5-2-verify)
+- `dmidecode` — [K.4](K-delivery.qmd#k-4-serial)
+- `dnf` — [G.2](G-packages.qmd#g-2-os) · [J.1](J-workstation.qmd#j-1-shell) · [J.6](J-workstation.qmd#j-6-system) · [K.6](K-delivery.qmd#k-6-software)
+- `docker` — [§2.2](02-firewall.qmd#2-2-docker-bypass) · [§4.0](04-container.qmd#4-0-history) · [§4.1](04-container.qmd#4-1-container-vs-vm) · [§4.2](04-container.qmd#4-2-compose) · [§4.3](04-container.qmd#4-3-exec) · [§4.4](04-container.qmd#4-4-network-membership) · [§4.5](04-container.qmd#4-5-non-root) · [§7.3](07-ai-governance.qmd#7-3-flow) · [실습⑨](labs/lab-09.qmd#lab-09) · [실습⑨′](labs/lab-09p.qmd#lab-09p) · [실습⑭](labs/lab-14.qmd#lab-14) · [부록 D](D-cheatsheet.qmd#d-3-docker)
+- `du` — [§1.2](01-image.qmd#1-2-raw)
+
+## E {#cmd-e}
+
+- `egress-close` — [실습⑥](labs/lab-06.qmd#lab-06)
+- `egress-open` — [실습⑥](labs/lab-06.qmd#lab-06)
+- `egress-state` — [실습⑥](labs/lab-06.qmd#lab-06)
+
+## F {#cmd-f}
+
+- `find` — [§4.0](04-container.qmd#4-0-network-stack)
+- `firewall-cmd` — [§2.1](02-firewall.qmd#2-1-nftables) · [§2.4](02-firewall.qmd#2-4-template) · [실습④](labs/lab-04.qmd#lab-04) · [부록 D](D-cheatsheet.qmd#d-5-firewall) · [K.7](K-delivery.qmd#k-7-ssh)
+- `fstrim` — [실습②](labs/lab-02.qmd#lab-02)
+
+## G {#cmd-g}
+
+- `Get-ChildItem` — [§5.4](05-trust.qmd#5-4-verify)
+- `Get-Service` — [J.4](J-workstation.qmd#j-4-ssh-keys)
+- `getent` — [§4.4](04-container.qmd#4-4-network-membership) · [실습⑨′](labs/lab-09p.qmd#lab-09p)
+- `git` — [§1.3](01-image.qmd#1-3-dotfiles) · [§4.0](04-container.qmd#4-0-network-stack) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [실습⑨](labs/lab-09.qmd#lab-09) · [G.5](G-packages.qmd#g-5-dotfiles) · [J.6](J-workstation.qmd#j-6-user)
+- `grep` — [§1.3](01-image.qmd#1-3-drop-in) · [§2.2](02-firewall.qmd#2-2-verify) · [§2.3](02-firewall.qmd#2-3-verify) · [§2.5](02-firewall.qmd#2-5-geo-block) · [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§5.1](05-trust.qmd#5-1-root-programs) · [§5.3](05-trust.qmd#5-3-verify) · [실습①](labs/lab-01.qmd#lab-01) · [실습⑤](labs/lab-05.qmd#lab-05) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [I.5](I-access-control.qmd#i-5-1-ssh)
+- `growpart` — [§1.2](01-image.qmd#1-2-disk-resize)
+
+## H {#cmd-h}
+
+- `head` — [§1.3](01-image.qmd#1-3-offline-edit) · [§2.5](02-firewall.qmd#2-5-geo-block) · [§4.0](04-container.qmd#4-0-history) · [§5.1](05-trust.qmd#5-1-verify) · [§6.4](06-access.qmd#6-4-verify) · [실습①](labs/lab-01.qmd#lab-01) · [실습⑤](labs/lab-05.qmd#lab-05) · [부록 D](D-cheatsheet.qmd#d-1-image)
+- `hostname` — [실습③](labs/lab-03.qmd#lab-03)
+- `hostnamectl` — [§1.7](01-image.qmd#1-7-asset-tags) · [실습②](labs/lab-02.qmd#lab-02)
+- `htop` — [실습②](labs/lab-02.qmd#lab-02)
+
+## I {#cmd-i}
+
+- `inxi` — [§1.7](01-image.qmd#1-7-hardware-identity) · [K.2](K-delivery.qmd#k-2-inxi) · [K.4](K-delivery.qmd#k-4-serial) · [K.6](K-delivery.qmd#k-6-nic-driver) · [K.8](K-delivery.qmd#k-8-checklist)
+- `ip` — [§1.7](01-image.qmd#1-7-asset-tags) · [§2.2](02-firewall.qmd#2-2-trace) · [§3.1](03-network.qmd#3-1-isolated-network) · [§3.2](03-network.qmd#3-2-multi-homed) · [§3.3](03-network.qmd#3-3-gateway-firewall) · [§3.4](03-network.qmd#3-4-vpn) · [§3.6](03-network.qmd#3-6-mtu) · [§4.0](04-container.qmd#4-0-fork-exec) · [§4.5](04-container.qmd#4-5-address-pools) · [§6.5](06-access.qmd#6-5-verify) · [부록 D](D-cheatsheet.qmd#d-6-network) · [I.1](I-access-control.qmd#i-1-terms)
+- `ipmitool` — [§1.7](01-image.qmd#1-7-hardware-identity) · [K.5](K-delivery.qmd#k-5-ipmi) · [K.8](K-delivery.qmd#k-8-checklist)
+- `iptables` — [§2.1](02-firewall.qmd#2-1-nftables) · [I.6](I-access-control.qmd#i-6-3-docker-ufw)
+- `iptables-nft` — [§2.2](02-firewall.qmd#2-2-verify) · [§2.3](02-firewall.qmd#2-3-verify) · [실습③](labs/lab-03.qmd#lab-03) · [부록 D](D-cheatsheet.qmd#d-5-firewall)
+- `iptables-restore-translate` — [§2.1](02-firewall.qmd#2-1-nftables)
+- `iptables-translate` — [§2.1](02-firewall.qmd#2-1-nftables)
+
+## J {#cmd-j}
+
+- `journalctl` — [§2.2](02-firewall.qmd#2-2-verify) · [§2.3](02-firewall.qmd#2-3-verify) · [§2.4](02-firewall.qmd#2-4-verify) · [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [실습③](labs/lab-03.qmd#lab-03) · [실습⑥](labs/lab-06.qmd#lab-06) · [부록 D](D-cheatsheet.qmd#d-7-systemd)
+
+## L {#cmd-l}
+
+- `less` — [§2.1](02-firewall.qmd#2-1-nftables) · [§2.4](02-firewall.qmd#2-4-verify) · [§5.1](05-trust.qmd#5-1-verify)
+- `ln` — [§1.3](01-image.qmd#1-3-drop-in) · [실습①](labs/lab-01.qmd#lab-01)
+- `ls` — [§1.2](01-image.qmd#1-2-inspect) · [§1.3](01-image.qmd#1-3-dotfiles) · [§3.2](03-network.qmd#3-2-which-tool) · [§4.0](04-container.qmd#4-0-history) · [§5.1](05-trust.qmd#5-1-root-programs) · [실습①](labs/lab-01.qmd#lab-01) · [J.6](J-workstation.qmd#j-6-system)
+- `lsblk` — [§1.2](01-image.qmd#1-2-disk-resize) · [§1.5](01-image.qmd#1-5-deploy) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02)
+- `lvextend` — [§1.2](01-image.qmd#1-2-disk-resize)
+- `lvs` — [실습②](labs/lab-02.qmd#lab-02)
+
+## M {#cmd-m}
+
+- `mkdir` — [§4.0](04-container.qmd#4-0-container-env) · [§6.1](06-access.qmd#6-1-key-files) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [H.7](H-pve.qmd#h-7-4-cluster-reset)
+- `modprobe` — [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)
+- `mount` — [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [부록 D](D-cheatsheet.qmd#d-1-image) · [H.2](H-pve.qmd#h-2-1-pve)
+- `mv` — [실습⑧](labs/lab-08.qmd#lab-08-main) · [H.7](H-pve.qmd#h-7-2-hostname)
+
+## N {#cmd-n}
+
+- `nano` — [실습③](labs/lab-03.qmd#lab-03)
+- `netplan` — [§3.2](03-network.qmd#3-2-which-tool)
+- `nft` — [§2.1](02-firewall.qmd#2-1-nftables) · [§2.2](02-firewall.qmd#2-2-trace) · [§2.3](02-firewall.qmd#2-3-verify) · [§2.4](02-firewall.qmd#2-4-verify) · [실습⑤](labs/lab-05.qmd#lab-05) · [부록 D](D-cheatsheet.qmd#d-5-firewall)
+- `nmcli` — [§3.2](03-network.qmd#3-2-multi-homed) · [§3.6](03-network.qmd#3-6-mtu) · [부록 D](D-cheatsheet.qmd#d-6-network)
+
+## O {#cmd-o}
+
+- `omz` — [J.6](J-workstation.qmd#j-6-user)
+- `openssl` — [§5.1](05-trust.qmd#5-1-verify) · [§5.2](05-trust.qmd#5-2-verify) · [§5.3](05-trust.qmd#5-3-how-to) · [§5.4](05-trust.qmd#5-4-verify) · [§5.5](05-trust.qmd#5-5-verify) · [§5.6](05-trust.qmd#5-6-how-to) · [실습①](labs/lab-01.qmd#lab-01) · [실습⑪](labs/lab-11.qmd#lab-11) · [부록 D](D-cheatsheet.qmd#d-4-ssh)
+- `openstack` — [I.3](I-access-control.qmd#i-3-openstack)
+- `openvpn` — [§3.4](03-network.qmd#3-4-vpn) · [실습⑦](labs/lab-07.qmd#lab-07)
+
+## P {#cmd-p}
+
+- `passwd` — [§7.1](07-ai-governance.qmd#7-1-example) · [부록 D](D-cheatsheet.qmd#d-2-disk)
+- `ping` — [§3.1](03-network.qmd#3-1-isolated-network) · [§3.2](03-network.qmd#3-2-multi-homed) · [§3.4](03-network.qmd#3-4-vpn) · [§3.6](03-network.qmd#3-6-mtu) · [실습⑤](labs/lab-05.qmd#lab-05) · [실습⑦](labs/lab-07.qmd#lab-07) · [부록 D](D-cheatsheet.qmd#d-6-network)
+- `pip` — [§1.8](01-image.qmd#1-8-reproducible)
+- `pmxcfs` — [H.7](H-pve.qmd#h-7-4-cluster-reset)
+- `ps` — [§4.0](04-container.qmd#4-0-fork-exec) · [실습⑨](labs/lab-09.qmd#lab-09)
+- `psql` — [§4.3](04-container.qmd#4-3-alias) · [실습⑨](labs/lab-09.qmd#lab-09-more)
+- `puttygen` — [J.5](J-workstation.qmd#j-5-config-keys)
+
+## Q {#cmd-q}
+
+- `qemu-img` — [§1.2](01-image.qmd#1-2-inspect) · [§1.5](01-image.qmd#1-5-deploy) · [§1.9](01-image.qmd#1-9-ventoy) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [부록 D](D-cheatsheet.qmd#d-1-image) · [H.2](H-pve.qmd#h-2-1-pve) · [H.6](H-pve.qmd#h-6-1-cloud-image)
+- `qemu-nbd` — [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)
+- `qm` — [§1.2](01-image.qmd#1-2-disk-resize) · [실습②](labs/lab-02.qmd#lab-02) · [H.7](H-pve.qmd#h-7-6-fix)
+
+## R {#cmd-r}
+
+- `republock` — [§2.5](02-firewall.qmd#2-5-geo-block) · [실습⑤](labs/lab-05.qmd#lab-05)
+- `resize2fs` — [§1.2](01-image.qmd#1-2-disk-resize)
+- `restorecon` — [§1.4](01-image.qmd#1-4-selinux)
+- `rm` — [§7.1](07-ai-governance.qmd#7-1-ai-access) · [H.7](H-pve.qmd#h-7-4-cluster-reset)
+- `rpm` — [§5.1](05-trust.qmd#5-1-root-programs)
+
+## S {#cmd-s}
+
+- `scp` — [I.5](I-access-control.qmd#i-5-1-ssh)
+- `sed` — [§3.1](03-network.qmd#3-1-isolated-network) · [H.2](H-pve.qmd#h-2-2-subscription) · [J.6](J-workstation.qmd#j-6-system) · [K.6](K-delivery.qmd#k-6-software)
+- `semanage` — [§1.4](01-image.qmd#1-4-selinux) · [실습①](labs/lab-01.qmd#lab-01) · [K.7](K-delivery.qmd#k-7-ssh)
+- `semodule` — [§1.4](01-image.qmd#1-4-selinux)
+- `service` — [부록 D](D-cheatsheet.qmd#d-7-systemd)
+- `Set-Service` — [J.4](J-workstation.qmd#j-4-ssh-keys)
+- `setenforce` — [§1.4](01-image.qmd#1-4-selinux)
+- `sftp` — [I.5](I-access-control.qmd#i-5-1-ssh)
+- `sh` — [부록 D](D-cheatsheet.qmd#d-2-disk) · [J.6](J-workstation.qmd#j-6-user)
+- `shred` — [§1.3](01-image.qmd#1-3-offline-edit) · [실습①](labs/lab-01.qmd#lab-01) · [K.1](K-delivery.qmd#k-1-overview)
+- `sleep` — [§4.0](04-container.qmd#4-0-fork-exec)
+- `snap` — [J.5](J-workstation.qmd#j-5-ssh-clients)
+- `sqlite3` — [H.7](H-pve.qmd#h-7-4-cluster-reset)
+- `ss` — [§4.0](04-container.qmd#4-0-unix-socket) · [§7.2](07-ai-governance.qmd#7-2-what) · [실습⑬](labs/lab-13.qmd#lab-13)
+- `ssh` — [§1.3](01-image.qmd#1-3-dotfiles) · [§1.7](01-image.qmd#1-7-asset-tags) · [§3.5](03-network.qmd#3-5-bastion) · [§6.1](06-access.qmd#6-1-key-files) · [§6.3](06-access.qmd#6-3-verify) · [실습⑦](labs/lab-07.qmd#lab-07) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [부록 D](D-cheatsheet.qmd#d-4-ssh) · [I.5](I-access-control.qmd#i-5-1-ssh) · [I.6](I-access-control.qmd#i-6-1-jump-host) · [J.5](J-workstation.qmd#j-5-config-keys) · [K.7](K-delivery.qmd#k-7-ssh)
+- `ssh-add` — [J.4](J-workstation.qmd#j-4-ssh-keys)
+- `ssh-copy-id` — [§6.1](06-access.qmd#6-1-key-files) · [I.5](I-access-control.qmd#i-5-1-ssh)
+- `ssh-import-id` — [§6.2](06-access.qmd#6-2-server) · [실습⑧](labs/lab-08.qmd#lab-08-prep) · [부록 D](D-cheatsheet.qmd#d-4-ssh)
+- `ssh-keygen` — [§6.1](06-access.qmd#6-1-verify) · [§6.2](06-access.qmd#6-2-verify) · [§7.2](07-ai-governance.qmd#7-2-identity) · [실습⑧](labs/lab-08.qmd#lab-08-prep) · [부록 D](D-cheatsheet.qmd#d-4-ssh) · [I.5](I-access-control.qmd#i-5-1-ssh) · [J.4](J-workstation.qmd#j-4-ssh-keys) · [J.5](J-workstation.qmd#j-5-config-keys) · [J.7](J-workstation.qmd#j-7-summary)
+- `sshd` — [§6.3](06-access.qmd#6-3-match) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [부록 D](D-cheatsheet.qmd#d-7-systemd) · [I.5](I-access-control.qmd#i-5-1-ssh) · [K.7](K-delivery.qmd#k-7-ssh)
+- `Start-Service` — [J.4](J-workstation.qmd#j-4-ssh-keys)
+- `sync` — [실습②](labs/lab-02.qmd#lab-02)
+- `sysctl` — [§3.2](03-network.qmd#3-2-rp-filter)
+- `systemctl` — [§1.2](01-image.qmd#1-2-discard) · [§1.3](01-image.qmd#1-3-drop-in) · [§3.2](03-network.qmd#3-2-which-tool) · [§4.5](04-container.qmd#4-5-address-pools) · [§6.3](06-access.qmd#6-3-verify) · [§6.5](06-access.qmd#6-5-verify) · [§7.2](07-ai-governance.qmd#7-2-inventory) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [실습⑥](labs/lab-06.qmd#lab-06) · [부록 D](D-cheatsheet.qmd#d-7-systemd) · [H.7](H-pve.qmd#h-7-1-vf-service)
+- `systemd-cgls` — [§4.0](04-container.qmd#4-0-history)
+
+## T {#cmd-t}
+
+- `tail` — [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§4.0](04-container.qmd#4-0-unix-socket)
+- `tcpdump` — [§3.2](03-network.qmd#3-2-netplan-mtu)
+- `tee` — [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§7.1](07-ai-governance.qmd#7-1-delegation-ladder) · [실습⑤](labs/lab-05.qmd#lab-05) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑧](labs/lab-08.qmd#lab-08-main)
+- `tr` — [§4.0](04-container.qmd#4-0-path)
+- `traceroute` — [들어가며](index.qmd#addresses) · [§3.2](03-network.qmd#3-2-rp-filter) · [§3.3](03-network.qmd#3-3-gateway-firewall)
+
+## U {#cmd-u}
+
+- `ufw` — [§2.1](02-firewall.qmd#2-1-nftables) · [§2.2](02-firewall.qmd#2-2-docker-bypass) · [§2.3](02-firewall.qmd#2-3-ufw-docker) · [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§2.7](02-firewall.qmd#2-7-four-levels) · [실습③](labs/lab-03.qmd#lab-03) · [실습⑥](labs/lab-06.qmd#lab-06) · [부록 D](D-cheatsheet.qmd#d-5-firewall) · [I.4](I-access-control.qmd#i-4-distro) · [I.6](I-access-control.qmd#i-6-3-docker-ufw)
+- `ufw-docker` — [§2.2](02-firewall.qmd#2-2-trace) · [§2.3](02-firewall.qmd#2-3-ufw-docker) · [실습③](labs/lab-03.qmd#lab-03)
+- `umount` — [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)
+- `uname` — [§4.1](04-container.qmd#4-1-container-vs-vm) · [§7.2](07-ai-governance.qmd#7-2-what)
+- `uniq` — [§1.3](01-image.qmd#1-3-drop-in) · [실습①](labs/lab-01.qmd#lab-01)
+- `update-alternatives` — [§2.1](02-firewall.qmd#2-1-nftables)
+- `update-ca-certificates` — [§5.4](05-trust.qmd#5-4-locations)
+- `useradd` — [§7.1](07-ai-governance.qmd#7-1-example)
+- `usermod` — [§7.1](07-ai-governance.qmd#7-1-example)
+
+## V {#cmd-v}
+
+- `vagrant` — [§1.8](01-image.qmd#1-8-reproducible)
+- `ventoy` — [실습②](labs/lab-02.qmd#lab-02)
+- `vi` — [§4.3](04-container.qmd#4-3-config-mount) · [실습⑨](labs/lab-09.qmd#lab-09-more) · [H.2](H-pve.qmd#h-2-1-pve)
+- `virt-cat` — [§1.3](01-image.qmd#1-3-offline-edit) · [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)
+- `virt-copy-in` — [§1.3](01-image.qmd#1-3-drop-in) · [실습①](labs/lab-01.qmd#lab-01) · [H.6](H-pve.qmd#h-6-1-customize)
+- `virt-customize` — [§1.3](01-image.qmd#1-3-drop-in) · [§1.6](01-image.qmd#1-6-root-recovery) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [부록 D](D-cheatsheet.qmd#d-1-image) · [H.6](H-pve.qmd#h-6-1-customize)
+- `virt-df` — [실습①](labs/lab-01.qmd#lab-01)
+- `virt-inspector` — [§1.3](01-image.qmd#1-3-offline-edit) · [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)
+- `virt-ls` — [§1.3](01-image.qmd#1-3-offline-edit) · [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)
+- `virt-sparsify` — [§1.2](01-image.qmd#1-2-discard)
+- `virt-sysprep` — [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image) · [H.6](H-pve.qmd#h-6-1-customize)
+- `visudo` — [§7.1](07-ai-governance.qmd#7-1-delegation-ladder)
+
+## W {#cmd-w}
+
+- `wc` — [§4.0](04-container.qmd#4-0-network-stack) · [§5.1](05-trust.qmd#5-1-root-programs)
+- `wg` — [§3.4](03-network.qmd#3-4-vpn) · [부록 D](D-cheatsheet.qmd#d-6-network)
+- `wg-quick` — [§3.4](03-network.qmd#3-4-vpn)
+- `wget` — [§1.2](01-image.qmd#1-2-inspect) · [실습①](labs/lab-01.qmd#lab-01) · [H.2](H-pve.qmd#h-2-1-pve)
+- `Where-Object` — [§5.4](05-trust.qmd#5-4-verify)
+- `which` — [실습⑨](labs/lab-09.qmd#lab-09-more)
+- `winget` — [§1.3](01-image.qmd#1-3-dotfiles) · [G.1](G-packages.qmd#g-1-what) · [G.2](G-packages.qmd#g-2-os) · [G.4](G-packages.qmd#g-4-winget) · [J.5](J-workstation.qmd#j-5-ssh-clients)
+- `wpa_cli` — [§6.5](06-access.qmd#6-5-verify)
+- `wsl` — [J.1](J-workstation.qmd#j-1-shell)
+
+## X {#cmd-x}
+
+- `xfs_growfs` — [§1.2](01-image.qmd#1-2-disk-resize)
