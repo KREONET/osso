@@ -98,7 +98,7 @@
 
 - `mkdir` — [§4.0](04-container.qmd#4-0-container-env) · [§6.1](06-access.qmd#6-1-key-files) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [H.7](H-pve.qmd#h-7-4-cluster-reset)
 - `modprobe` — [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)
-- `mount` — [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [부록 D](D-cheatsheet.qmd#d-1-image) · [H.2](H-pve.qmd#h-2-1-pve)
+- `mount` — [§1.5](01-image.qmd#1-5-p2v-dump) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [부록 D](D-cheatsheet.qmd#d-1-image) · [H.2](H-pve.qmd#h-2-1-pve)
 - `mv` — [실습⑧](labs/lab-08.qmd#lab-08-main) · [H.7](H-pve.qmd#h-7-2-hostname)
 
 ## N {#cmd-n}
@@ -137,7 +137,7 @@
 - `resize2fs` — [§1.2](01-image.qmd#1-2-disk-resize)
 - `restore` — [§1.5](01-image.qmd#1-5-p2v-dump)
 - `restorecon` — [§1.4](01-image.qmd#1-4-selinux)
-- `rm` — [§7.1](07-ai-governance.qmd#7-1-ai-access) · [H.7](H-pve.qmd#h-7-4-cluster-reset)
+- `rm` — [§1.5](01-image.qmd#1-5-p2v-dump) · [§7.1](07-ai-governance.qmd#7-1-ai-access) · [H.7](H-pve.qmd#h-7-4-cluster-reset)
 - `rpm` — [§5.1](05-trust.qmd#5-1-root-programs)
 
 ## S {#cmd-s}
@@ -180,7 +180,7 @@
 
 - `ufw` — [§2.1](02-firewall.qmd#2-1-nftables) · [§2.2](02-firewall.qmd#2-2-docker-bypass) · [§2.3](02-firewall.qmd#2-3-ufw-docker) · [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§2.7](02-firewall.qmd#2-7-four-levels) · [실습③](labs/lab-03.qmd#lab-03) · [실습⑥](labs/lab-06.qmd#lab-06) · [부록 D](D-cheatsheet.qmd#d-5-firewall) · [I.4](I-access-control.qmd#i-4-distro) · [I.6](I-access-control.qmd#i-6-3-docker-ufw)
 - `ufw-docker` — [§2.2](02-firewall.qmd#2-2-trace) · [§2.3](02-firewall.qmd#2-3-ufw-docker) · [실습③](labs/lab-03.qmd#lab-03)
-- `umount` — [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)
+- `umount` — [§1.5](01-image.qmd#1-5-p2v-dump) · [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)
 - `uname` — [§4.1](04-container.qmd#4-1-container-vs-vm) · [§7.2](07-ai-governance.qmd#7-2-what)
 - `uniq` — [§1.3](01-image.qmd#1-3-drop-in) · [실습①](labs/lab-01.qmd#lab-01)
 - `update-alternatives` — [§2.1](02-firewall.qmd#2-1-nftables)

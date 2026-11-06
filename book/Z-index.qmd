@@ -102,7 +102,7 @@
 - **패스프레이즈 (passphrase)** — [§1.6](01-image.qmd#1-6-root-recovery) · [§6.1](06-access.qmd#6-1-verify) · [실습②](labs/lab-02.qmd#lab-02) · [J.4](J-workstation.qmd#j-4-ssh-keys)
 - **패키지 관리자** — [§1.8](01-image.qmd#1-8-reproducible) · [부록 A](A-assets.qmd#a-docs) · [부록 G](G-packages.qmd#appendix-g) · [G.1](G-packages.qmd#g-1-what) · [G.2](G-packages.qmd#g-2-os) · [G.4](G-packages.qmd#g-4-winget) · [G.6](G-packages.qmd#g-6-safety) · [J.5](J-workstation.qmd#j-5-ssh-clients)
 - **평판 (reputation)** — [§2.5](02-firewall.qmd#2-5-reputation) · [실습③](labs/lab-03.qmd#lab-03) · [실습④](labs/lab-04.qmd#lab-04) · [실습⑤](labs/lab-05.qmd#lab-05) · [부록 A](A-assets.qmd#a-public) · [I.1](I-access-control.qmd#i-1-terms) · [I.2](I-access-control.qmd#i-2-limits)
-- **폐기 (revocation)** — [§3.4](03-network.qmd#3-4-vpn) · [§5.6](05-trust.qmd#5-6-zero-trust) · [§6.1](06-access.qmd#6-1-fingerprint) · [§7.4](07-ai-governance.qmd#7-4-principles)
+- **폐기 (revocation)** — [§1.5](01-image.qmd#1-5-p2v-dump) · [§3.4](03-network.qmd#3-4-vpn) · [§5.6](05-trust.qmd#5-6-zero-trust) · [§6.1](06-access.qmd#6-1-fingerprint) · [§7.4](07-ai-governance.qmd#7-4-principles)
 - **폭발 반경 (blast radius)** — [§1.4](01-image.qmd#1-4-selinux)
 - **프로비저닝 (provisioning)** — [§1.2](01-image.qmd#1-2-other-formats) · [실습 들어가기](labs/00-lab-intro.qmd#how-to-read) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [H.5](H-pve.qmd#h-5-preallocation)
 - **프록시 (proxy)** — [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§2.7](02-firewall.qmd#2-7-four-levels) · [§6.4](06-access.qmd#6-4-oidc) · [§7.4](07-ai-governance.qmd#7-4-egress) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑫](labs/lab-12.qmd#lab-12) · [I.5](I-access-control.qmd#i-5-2-web)
