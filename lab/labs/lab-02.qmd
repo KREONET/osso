@@ -121,8 +121,8 @@ df -h /
 
 ⚠️ Clonezilla 저장소 FS는 ext4/ntfs/fat 권장(exFAT 호환 이슈). 데이터 파티션을 저장소로 쓰려면 `DATA_FS=ext4`로 만든 USB 사용.
 
-⌨️ **ⓕ 열쇠를 잃었을 때 — 루트 비밀번호 복구** (같은 USB로, 이번에는 시스템이 아니라 *열쇠*를 되찾는다)
-*방법 A — VM/콘솔이 있을 때 (GRUB 편집. GRUB은 리눅스 부트로더):*
+⌨️ **ⓕ 열쇠를 잃었을 때 — 루트 비밀번호 복구** (같은 USB로, 이번에는 시스템이 아니라 ‘열쇠’를 되찾는다)
+방법 A — VM/콘솔이 있을 때 (GRUB 편집. GRUB은 리눅스 부트로더):
 ```
 1. 부팅 중 GRUB 메뉴에서 e
 2. linux 줄 끝에  init=/bin/bash   (Rocky/RHEL은  rd.break )
@@ -135,7 +135,7 @@ df -h /
 6. touch /.autorelabel
 7. exec /sbin/init  (또는 재부팅)
 ```
-*방법 B — 콘솔이 막혔거나 부팅이 안 될 때 (라이브 USB chroot. chroot는 루트 디렉터리를 디스크 안의 시스템으로 바꿔 그 안에서 명령을 실행하는 일):*
+방법 B — 콘솔이 막혔거나 부팅이 안 될 때 (라이브 USB chroot. chroot는 루트 디렉터리를 디스크 안의 시스템으로 바꿔 그 안에서 명령을 실행하는 일):
 ```
 1. Ventoy 메뉴 > GParted-q(또는 아무 라이브) 부팅
 # 루트 파티션

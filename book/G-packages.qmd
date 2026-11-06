@@ -93,7 +93,7 @@ vscode "editorconfig.editorconfig"
 
 ## G.4 WinGet — 윈도우의 패키지 관리자 {#g-4-winget}
 
-**WinGet**(Windows Package Manager)은 맥·리눅스가 패키지 관리자 덕분에 편리해진 것을 보고 마이크로소프트가 공식으로 만든 명령줄 패키지 관리자입니다. Windows 10 이상에서 쓸 수 있고, 최신 Windows에는 *앱 설치 관리자*(App Installer)와 함께 이미 들어 있습니다. 없으면 Microsoft Store에서 [앱 설치 관리자](https://apps.microsoft.com/detail/9nblggh4nns1)를 설치합니다. PowerShell이나 명령 프롬프트에서 씁니다.
+**WinGet**(Windows Package Manager)은 맥·리눅스가 패키지 관리자 덕분에 편리해진 것을 보고 마이크로소프트가 공식으로 만든 명령줄 패키지 관리자입니다. Windows 10 이상에서 쓸 수 있고, 최신 Windows에는 ‘앱 설치 관리자’(App Installer)와 함께 이미 들어 있습니다. 없으면 Microsoft Store에서 [앱 설치 관리자](https://apps.microsoft.com/detail/9nblggh4nns1)를 설치합니다. PowerShell이나 명령 프롬프트에서 씁니다.
 
 ```powershell
 # 찾기 — 패키지 ID를 확인한다
@@ -112,7 +112,7 @@ winget import -i apps.json
 
 설치 명령을 직접 찾기 번거로우면 [winstall.app](https://winstall.app/)에서 앱을 고르면 `winget install` 명령을 만들어 줍니다. 패키지는 기본으로 마이크로소프트의 공개 저장소(`winget source list`로 확인)에서 오고, 기관 내부 저장소를 `winget source add`로 더할 수도 있습니다.
 
-`export`는 *프로그램 추가/제거*에 있는 앱 중 WinGet 저장소에서 찾을 수 있는 것만 목록에 넣고, 못 찾은 것은 경고로 알려 줍니다. 만들어진 JSON은 직접 고쳐서 필요 없는 앱을 지워도 됩니다. 팀원에게 나눠 주면 **모두 같은 도구 세트**로 시작합니다.
+`export`는 ‘프로그램 추가/제거’에 있는 앱 중 WinGet 저장소에서 찾을 수 있는 것만 목록에 넣고, 못 찾은 것은 경고로 알려 줍니다. 만들어진 JSON은 직접 고쳐서 필요 없는 앱을 지워도 됩니다. 팀원에게 나눠 주면 **모두 같은 도구 세트**로 시작합니다.
 
 ⚠️ `--accept-package-agreements`는 각 프로그램의 **라이선스 동의를 대신 눌러 주는** 옵션입니다. 편하지만, 무엇에 동의하는지 모르고 누르게 됩니다. 기관 PC에 일괄 설치할 때는 목록의 라이선스를 한 번 확인하세요([부록 B](B-licenses.qmd)).
 

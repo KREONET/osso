@@ -104,7 +104,7 @@ grep -v '#' /etc/ssh/sshd_config | uniq
 Include /etc/ssh/sshd_config.d/*.conf
 ```
 
-> ⚠️ 이 구조는 **배포판·버전마다 다르다.** 어떤 이미지엔 이 `Include`가 없을 수도, 경로가 다를 수도 있다. "직접 열어 확인"이 먼저다(이 랩이 외우기보다 *확인하는 습관*을 들이는 이유).
+> ⚠️ 이 구조는 **배포판·버전마다 다르다.** 어떤 이미지엔 이 `Include`가 없을 수도, 경로가 다를 수도 있다. "직접 열어 확인"이 먼저다(이 랩이 외우기보다 ‘확인하는 습관’을 들이는 이유).
 
 그렇다면 원본(`sshd_config`)을 `sed`로 고치지 말고, `*.d/`에 **조각 파일 하나를 얹는다.** `sed`는 "그 줄이 있나? 주석 처리됐나? 또 추가되진 않나?"를 매번 걱정해야 하지만, **복사는 파일을 놓기만 하는 일**이라 멱등(여러 번 해도 같은 결과)하다.
 ```bash
@@ -128,7 +128,7 @@ virt-copy-in -a ⟨image.img⟩ 60-lab.conf /etc/ssh/sshd_config.d/
 ⌨️ **생각해보기:** 아래 디렉터리에도 각각 `*.d/`가 있다. 원본을 고칠지 조각을 얹을지 고르라면 답은 거의 늘 **얹기**다. 어느 것을 `virt-copy-in`으로 넣어 보겠는가?
 `/etc/sudoers.d/` · `/etc/rsyslog.d/`(로그 라우팅) · `/etc/cron.d/` · `/etc/profile.d/`(로그인 환경·프롬프트) · `/etc/sysctl.d/`(커널 파라미터) · `/etc/systemd/system/⟨서비스⟩.service.d/`(유닛 오버라이드) · `/etc/apt/apt.conf.d/`·`sources.list.d/` · `/etc/yum.repos.d/` · `/etc/NetworkManager/conf.d/` · `/etc/modprobe.d/` · `/etc/logrotate.d/`
 
-> **"있는 것"과 "켜진 것"을 링크로 나누기도 한다.** 아파치는 `sites-available/`에 설정을 모아 두고 `sites-enabled/`로 `ln -s` 해서 활성화한다(`a2ensite`가 그 심볼릭 링크를 만들고, `a2dissite`는 링크를 지운다). nginx도 같은 관습을 따르고, `systemctl enable`도 실제로는 `*.wants/`에 유닛을 링크하는 일이다. 그래서 설정을 *지우지 않고* 링크만 끊어 끌 수 있다.
+> **"있는 것"과 "켜진 것"을 링크로 나누기도 한다.** 아파치는 `sites-available/`에 설정을 모아 두고 `sites-enabled/`로 `ln -s` 해서 활성화한다(`a2ensite`가 그 심볼릭 링크를 만들고, `a2dissite`는 링크를 지운다). nginx도 같은 관습을 따르고, `systemctl enable`도 실제로는 `*.wants/`에 유닛을 링크하는 일이다. 그래서 설정을 ‘지우지 않고’ 링크만 끊어 끌 수 있다.
 
 👀 **보이는 것:** inspector가 OS·앱 목록을 출력하고, `virt-ls`/`qemu-nbd`로 안의 파일이 그대로 보인다. `grep` 한 줄로 `Include .../sshd_config.d/*.conf`가 나타난다. 조각을 넣은 뒤 `virt-ls -a ⟨image.img⟩ /etc/ssh/sshd_config.d`를 실행하면 방금 얹은 `60-lab.conf`가 목록에 있다. customize는 `Installing packages…`, sysprep은 `Performing "machine-id"…`를 수십 줄 출력한다.
 
