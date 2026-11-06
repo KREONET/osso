@@ -497,6 +497,19 @@ nvme4n1     259:14   0   1.5T  0 disk
 
 OS는 작은 NVMe(`nvme0n1`) 한 장에 두고, 1.5 TB NVMe 네 장을 RAID5(`md126`, 4.4 TB)로 묶어 VM 디스크가 놓이는 `/var/lib/vz`에 마운트한 구성입니다.
 
+### 파일시스템은 reflink를 켠 XFS로 {#h-5-reflink}
+
+`/var/lib/vz`를 따로 나눈 파티션(위 예에서는 `md126`)에 둔다면, 그 파티션을 reflink를 켠 XFS로 포맷해 두기를 권합니다. reflink(파일을 복사할 때 데이터 블록을 공유만 하고, 어느 한쪽이 쓸 때 그 블록만 따로 복사하는 기능)가 있으면 큰 디스크 파일을 복사해도 메타데이터만 만들고 끝납니다. 이 책은 템플릿에서 VM을 만들 때 Full Clone을 기본으로 쓰는데([Part 1 §1.2](01-image.qmd#1-2-linked-clone)), 이렇게 두면 Full Clone의 복사 시간과 공간 부담이 거의 사라집니다.
+
+```bash
+# 최근 xfsprogs는 reflink=1이 기본값이지만, 명시해 둔다
+mkfs.xfs -m reflink=1 /dev/md126
+# 이미 쓰고 있는 파티션이라면 켜져 있는지 확인한다
+xfs_info /var/lib/vz | grep reflink
+```
+
+reflink는 포맷할 때 정하는 값입니다. `reflink=0`으로 만든 파일시스템은 다시 포맷하기 전에는 바꿀 수 없으므로, PVE를 설치하면서 이 파티션을 만들 때 정해 둡니다. 자세한 옵션은 [mkfs.xfs(8)](https://man7.org/linux/man-pages/man8/mkfs.xfs.8.html)에 있습니다.
+
 ### Preallocation = off {#h-5-preallocation}
 
 QCOW2 이미지를 쓰는 경우 스토리지의 **Preallocation**(사전 할당, 디스크 공간을 미리 확보해 두는 설정)을 Off로 두면, 템플릿에서 VM을 만들 때 **thin provisioning**되어 빠릅니다(디스크 공간을 미리 0으로 채우지 않고 쓴 만큼만 차지).
@@ -652,6 +665,22 @@ base-100-disk-0.qcow2
 ```
 
 파일 이름이 `vm-`에서 `base-`로 바뀝니다. 템플릿은 켤 수 없고, 복제의 **원본**으로만 쓰입니다. PVE는 이렇게 sysprep 뒤에 켜지 말라는 [§1.4](01-image.qmd)의 규칙을 구조적으로 강제합니다.
+
+#### 템플릿을 최신으로 갈아 끼우기 {#h-6-1-refresh}
+
+템플릿은 한 번 만들고 끝나는 것이 아닙니다. 보안 업데이트가 쌓이면 템플릿으로 만든 새 VM도 첫 부팅부터 패치가 밀린 상태가 됩니다. 그래서 골든 이미지를 주기적으로(예를 들어 일주일에 한 번) CI/CD(지속적 통합·배포, 코드를 고칠 때마다 빌드와 배포를 자동으로 돌리는 방식)로 다시 빌드하고, 같은 VMID의 템플릿 디스크를 새 이미지로 갈아 끼웁니다. 템플릿의 VMID가 바뀌지 않으므로 VM을 만드는 사람이나 스크립트는 고칠 것이 없고, 앞으로 만드는 VM은 모두 최신 이미지에서 나옵니다.
+
+```bash
+cd /var/lib/vz/images/100
+# 새 이미지를 같은 디렉터리에 다른 이름으로 먼저 복사한 뒤
+cp /srv/build/golden.qcow2 base-100-disk-0.qcow2.new
+# 이름을 바꿔 한 번에 교체한다
+mv base-100-disk-0.qcow2.new base-100-disk-0.qcow2
+```
+
+같은 디렉터리 안에서 `mv`로 이름을 바꾸는 것은 원자적(atomic, 중간 상태 없이 한 번에 일어나는) 교체입니다. 교체하는 순간 진행 중이던 복제는 이미 열어 둔 옛 파일을 끝까지 읽으므로, 반쯤 쓰인 이미지를 복제할 일이 없습니다.
+
+이 방식은 템플릿에서 만든 VM이 모두 Full Clone일 때만 안전합니다. Linked Clone은 템플릿 디스크를 계속 읽으므로, 그 위에 Linked Clone이 하나라도 있으면 디스크를 갈아 끼우는 순간 그 VM의 디스크가 망가집니다. Linked Clone을 쓰면 옛 템플릿을 클론 수만큼 보존해야 하고, 결국 새로 만드는 VM이 어느 템플릿을 쓰는지도 흐려집니다. 템플릿은 최신 하나만 두고 Full Clone으로 복제하는 것이 이 책의 운영 방식입니다.
 
 ### H.6.2 VM 생성 {#h-6-2-create}
 

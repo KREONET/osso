@@ -27,7 +27,7 @@
 - `claude` — [실습⑬](labs/lab-13.qmd#lab-13)
 - `cloud-init` — [§1.2](01-image.qmd#1-2-disk-resize) · [실습②](labs/lab-02.qmd#lab-02)
 - `conda` — [G.2](G-packages.qmd#g-2-languages)
-- `cp` — [§1.2](01-image.qmd#1-2-raw) · [실습②](labs/lab-02.qmd#lab-02) · [H.2](H-pve.qmd#h-2-2-subscription) · [H.7](H-pve.qmd#h-7-4-cluster-reset) · [J.6](J-workstation.qmd#j-6-system)
+- `cp` — [§1.2](01-image.qmd#1-2-raw) · [실습②](labs/lab-02.qmd#lab-02) · [H.2](H-pve.qmd#h-2-2-subscription) · [H.6](H-pve.qmd#h-6-1-refresh) · [H.7](H-pve.qmd#h-7-4-cluster-reset) · [J.6](J-workstation.qmd#j-6-system)
 - `curl` — [§2.5](02-firewall.qmd#2-5-geo-block) · [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§3.3](03-network.qmd#3-3-gateway-firewall) · [§4.0](04-container.qmd#4-0-unix-socket) · [§5.3](05-trust.qmd#5-3-verify) · [§5.6](05-trust.qmd#5-6-verify) · [§6.4](06-access.qmd#6-4-verify) · [실습③](labs/lab-03.qmd#lab-03) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑧](labs/lab-08.qmd#lab-08-prep) · [실습⑪](labs/lab-11.qmd#lab-11) · [J.6](J-workstation.qmd#j-6-user)
 
 ## D {#cmd-d}
@@ -97,9 +97,10 @@
 ## M {#cmd-m}
 
 - `mkdir` — [§4.0](04-container.qmd#4-0-container-env) · [§6.1](06-access.qmd#6-1-key-files) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [H.7](H-pve.qmd#h-7-4-cluster-reset)
+- `mkfs.xfs` — [H.5](H-pve.qmd#h-5-reflink)
 - `modprobe` — [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)
 - `mount` — [§1.5](01-image.qmd#1-5-p2v-dump) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [부록 D](D-cheatsheet.qmd#d-1-image) · [H.2](H-pve.qmd#h-2-1-pve)
-- `mv` — [실습⑧](labs/lab-08.qmd#lab-08-main) · [H.7](H-pve.qmd#h-7-2-hostname)
+- `mv` — [실습⑧](labs/lab-08.qmd#lab-08-main) · [H.6](H-pve.qmd#h-6-1-refresh) · [H.7](H-pve.qmd#h-7-2-hostname)
 
 ## N {#cmd-n}
 
@@ -218,5 +219,6 @@
 ## X {#cmd-x}
 
 - `xfs_growfs` — [§1.2](01-image.qmd#1-2-disk-resize)
+- `xfs_info` — [H.5](H-pve.qmd#h-5-reflink)
 - `xfsdump` — [§1.5](01-image.qmd#1-5-p2v-dump)
 - `xfsrestore` — [§1.5](01-image.qmd#1-5-p2v-dump)

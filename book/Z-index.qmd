@@ -33,7 +33,7 @@
 
 - **루트 프로그램** — [§5.1](05-trust.qmd#5-1-root-programs)
 - **리버스 프록시 (reverse proxy)** — [§2.4](02-firewall.qmd#2-4-keep-native) · [§2.7](02-firewall.qmd#2-7-container) · [§5.2](05-trust.qmd#5-2-caddy) · [§5.6](05-trust.qmd#5-6-mental-model) · [§6.4](06-access.qmd#6-4-mental-model) · [실습⑨′](labs/lab-09p.qmd#lab-09p) · [부록 A](A-assets.qmd#a-public) · [I.5](I-access-control.qmd#i-5-2-web)
-- **링크드 클론 (linked clone)** — [§1.2](01-image.qmd#1-2-image-formats) · [H.6](H-pve.qmd#h-6-2-from-template)
+- **링크드 클론 (linked clone)** — [§1.2](01-image.qmd#1-2-linked-clone) · [H.6](H-pve.qmd#h-6-1-refresh)
 
 ## ㅁ
 
@@ -104,6 +104,7 @@
 - **평판 (reputation)** — [§2.5](02-firewall.qmd#2-5-reputation) · [실습③](labs/lab-03.qmd#lab-03) · [실습④](labs/lab-04.qmd#lab-04) · [실습⑤](labs/lab-05.qmd#lab-05) · [부록 A](A-assets.qmd#a-public) · [I.1](I-access-control.qmd#i-1-terms) · [I.2](I-access-control.qmd#i-2-limits)
 - **폐기 (revocation)** — [§1.5](01-image.qmd#1-5-p2v-dump) · [§3.4](03-network.qmd#3-4-vpn) · [§5.6](05-trust.qmd#5-6-zero-trust) · [§6.1](06-access.qmd#6-1-fingerprint) · [§7.4](07-ai-governance.qmd#7-4-principles)
 - **폭발 반경 (blast radius)** — [§1.4](01-image.qmd#1-4-selinux)
+- **풀 클론 (full clone)** — [§1.2](01-image.qmd#1-2-linked-clone) · [H.5](H-pve.qmd#h-5-reflink) · [H.6](H-pve.qmd#h-6-1-refresh)
 - **프로비저닝 (provisioning)** — [§1.2](01-image.qmd#1-2-other-formats) · [실습 들어가기](labs/00-lab-intro.qmd#how-to-read) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [H.5](H-pve.qmd#h-5-preallocation)
 - **프록시 (proxy)** — [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§2.7](02-firewall.qmd#2-7-four-levels) · [§6.4](06-access.qmd#6-4-oidc) · [§7.4](07-ai-governance.qmd#7-4-egress) · [§7.5](07-ai-governance.qmd#7-5-sadp) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑫](labs/lab-12.qmd#lab-12) · [I.5](I-access-control.qmd#i-5-2-web)
 - **프롬프트 인젝션** — [§7.1](07-ai-governance.qmd#7-1-three-layers) · [§7.2](07-ai-governance.qmd#7-2-prompt) · [§7.3](07-ai-governance.qmd#7-3-isolated-deploy) · [§7.4](07-ai-governance.qmd#7-4-agent-isolation)
@@ -234,6 +235,7 @@
 ## R
 
 - **RADIUS** — [§6.5](06-access.qmd#6-5-two-checks)
+- **reflink** — [§1.2](01-image.qmd#1-2-linked-clone) · [H.5](H-pve.qmd#h-5-reflink)
 - **RFC 5737** — [들어가며](index.qmd#addresses) · [실습③](labs/lab-03.qmd#lab-03)
 - **RRD (Round Robin Database)** — [H.7](H-pve.qmd#h-7-3-rrdcached)
 
