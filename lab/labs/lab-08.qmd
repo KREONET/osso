@@ -117,7 +117,7 @@ ssh lanvm hostname
 
 🔀 **갈림길** — 다음엔 어디로?
 
-- egress를 AI 고도에서 → [⑭ AI 배포 캡스톤](lab-14.qmd)
+- egress를 AI 레이어에서 → [⑭ AI 배포 캡스톤](lab-14.qmd)
 - 서비스를 실행해 보는 2일차로 → [⑨ compose](lab-09.qmd)
 - ssh 키·bastion·접근 통제 → [Part 6](../06-access.qmd)
 - 듀얼홈·격리망의 원리 → [Part 3](../03-network.qmd)

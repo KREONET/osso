@@ -336,7 +336,7 @@ docker compose down -t 0
 | 격리 단위 | 커널 포함 한 대 | 프로세스(호스트 커널 공유) |
 | 기동 | 분 단위 | 초 단위 |
 | 격리 강도 | 강함(하이퍼바이저(hypervisor, VM을 실행·관리하는 소프트웨어) 경계) | 상대적으로 약함(커널 공유) |
-| 산출물 | 디스크 이미지(수 GB) | 레이어(layer, 파일 변경분을 겹겹이 쌓은 단위) 이미지(수십~수백 MB) |
+| 산출물 | 디스크 이미지(수 GB) | 레이어(layer, 파일 변경분을 차례로 쌓은 단위) 이미지(수십~수백 MB) |
 | 잘 맞는 일 | 다른 OS, 강한 멀티테넌트(multi-tenant, 여러 사용자·조직이 한 시스템을 나눠 쓰는 구조) | 서비스 하나, 재현 가능한 배포 |
 
 **왜 이게 중요한가.** 커널을 공유한다는 것은 ‘컨테이너 탈출(container escape) = 호스트 장악’이라는 뜻이다. 그래서 신뢰할 수 없는 코드를 실행할 때는 VM 경계가 여전히 낫고, 컨테이너에는 비루트(non-root: root가 아닌 일반 사용자로 실행)·egress 차단 같은 보강이 붙는다(4.4, 4.5).
@@ -540,7 +540,7 @@ docker network inspect <project>_web --format '{{.Internal}}'
 - 서비스를 `edge`에 붙이면 그 컨테이너는 ‘전면 egress 허용’이다. 붙이는 곳을 최소화하고, caddy 같은 문지기만 붙인다.
 - 목적지·포트 단위로 조이려면 호스트의 `DOCKER-USER` 체인(chain, 방화벽 규칙을 차례로 검사하는 묶음)으로 내려간다 → [Part 2](02-firewall.qmd). 컨테이너 트래픽이 `INPUT`이 아니라 `FORWARD`를 지나므로 일반 방화벽 규칙이 적용되지 않는 이유도 거기서 다룬다.
 
-**같은 생각, 여러 고도.** 호스트(실습⑥) → **컨테이너(여기)** → 망 경계(실습⑧) → AI 에이전트(실습⑭). 전부 "나가는 길은 기본 차단, 필요한 곳만 허용"이다.
+**같은 생각, 여러 레이어.** 호스트(실습⑥) → **컨테이너(여기)** → 망 경계(실습⑧) → AI 에이전트(실습⑭). 전부 "나가는 길은 기본 차단, 필요한 곳만 허용"이다.
 
 **바깥 링크.** [Docker: Networking](https://docs.docker.com/engine/network/) · [Compose: networks (`internal`)](https://docs.docker.com/reference/compose-file/networks/#internal) · [Packet filtering and firewalls](https://docs.docker.com/engine/network/packet-filtering-firewalls/)
 

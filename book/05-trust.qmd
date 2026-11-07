@@ -8,7 +8,7 @@
 
 ## 5.1 TLS의 신뢰 구조 — CA·체인·키체인 {#5-1-tls-trust}
 
-### 멘탈모델 {#5-1-mental-model}
+### 개념 {#5-1-mental-model}
 
 브라우저가 `https://srv.lab.local`에 접속하면 서버는 인증서를 제시합니다. 브라우저는 세 가지만 확인합니다.
 
@@ -92,7 +92,7 @@ ls /etc/ssl/certs | head
 
 - 눈여겨볼 점은 `issuer`(누가 서명했나)와 `subject`(누구 것인가)가 체인(certificate chain, 서버 인증서에서 루트까지 서명으로 이어진 인증서들)을 따라 이어진다는 점입니다.
 
-### 바깥 링크 {#5-1-links}
+### 참고 링크 {#5-1-links}
 
 - [RFC 5280 — X.509 PKI 인증서 프로파일](https://www.rfc-editor.org/rfc/rfc5280)
 - [Let's Encrypt 인증서 호환성](https://letsencrypt.org/docs/certificate-compatibility/) — 플랫폼별로 언제부터 그 루트를 믿는지
@@ -102,7 +102,7 @@ ls /etc/ssl/certs | head
 
 ## 5.2 ACME의 두 챌린지 — HTTP-01과 DNS-01 {#5-2-acme}
 
-### 멘탈모델 {#5-2-mental-model}
+### 개념 {#5-2-mental-model}
 
 공인 CA(예: Let's Encrypt)는 사람을 만나 신분을 확인하지 않습니다. 대신 **"이 도메인을 실제로 통제하는 자만 할 수 있는 일"** 을 시킵니다. 이 자동화 프로토콜이 **ACME**([RFC 8555](https://www.rfc-editor.org/rfc/rfc8555))이고, 그 "시키는 일"이 챌린지입니다.
 
@@ -170,7 +170,7 @@ echo | openssl s_client -connect svc.demo.example:443 -servername svc.demo.examp
 
 - 와일드카드 인증서는 SAN에 `DNS:*.lab.example` 로 나타납니다.
 
-### 바깥 링크 {#5-2-links}
+### 참고 링크 {#5-2-links}
 
 - [RFC 8555 — ACME](https://www.rfc-editor.org/rfc/rfc8555)
 - [Let's Encrypt — Challenge Types](https://letsencrypt.org/docs/challenge-types/)
@@ -182,7 +182,7 @@ echo | openssl s_client -connect svc.demo.example:443 -servername svc.demo.examp
 
 ## 5.3 프라이빗 CA — 직접 운영하는 신뢰의 뿌리 {#5-3-private-ca}
 
-### 멘탈모델 {#5-3-mental-model}
+### 개념 {#5-3-mental-model}
 
 공인 CA는 **공인 도메인**과 **인터넷에서 닿는 경로**를 전제로 합니다. 다음 경우에는 그 전제가 깨집니다.
 
@@ -192,7 +192,7 @@ echo | openssl s_client -connect svc.demo.example:443 -servername svc.demo.examp
 
 이럴 때 쓰는 것이 **프라이빗 CA**(private CA, 사설 CA)입니다. 내가 루트 키 한 쌍을 만들고, 그 키로 서버 인증서에 서명합니다. 공인 CA가 하는 일을 똑같이 하되, 신뢰의 뿌리가 내가 된다는 점이 다릅니다.
 
-### 만드는 법 {#5-3-how-to}
+### 만드는 방법 {#5-3-how-to}
 
 [실습⑪](labs/lab-11.qmd)에서 직접 한다. `openssl genrsa`/`req -x509`로 루트를 만들고, CSR(Certificate Signing Request, 인증서 서명 요청)을 `openssl x509 -req -CA`로 서명하며, **SAN을 반드시 넣는다**(현대 브라우저는 CN(Common Name, 인증서 주체의 이름 필드)만 보지 않는다). 자동화는 [mkcert](https://github.com/FiloSottile/mkcert)(개발용), [step-ca](https://smallstep.com/docs/step-ca/)(ACME 지원 사내 CA)가 있다.
 
@@ -216,7 +216,7 @@ openssl x509 -in ca.crt -noout -text | grep -A1 -E "Basic Constraints|Not After"
 
 `curl --cacert`는 "이 프로세스 하나만 이 뿌리를 믿으라"는 뜻입니다. 시스템 전체에 심기 전에 안전하게 시험해 볼 수 있습니다.
 
-### 바깥 링크 {#5-3-links}
+### 참고 링크 {#5-3-links}
 
 - [mkcert](https://github.com/FiloSottile/mkcert)
 - [Smallstep — step-ca 문서](https://smallstep.com/docs/step-ca/)
@@ -226,7 +226,7 @@ openssl x509 -in ca.crt -noout -text | grep -A1 -E "Basic Constraints|Not After"
 
 ## 5.4 키스토어에 루트 인증서 등록 — Windows·iOS·Android {#5-4-keystore}
 
-### 멘탈모델 {#5-4-mental-model}
+### 개념 {#5-4-mental-model}
 
 사설 CA의 `ca.crt`는 **공개 인증서**입니다(개인키가 아님). 이를 각 기기의 신뢰 목록에 올리면, 그 기기는 이 CA가 서명한 모든 것을 믿습니다.
 
@@ -263,7 +263,7 @@ curl https://srv.lab.local/
 - 브라우저 자물쇠 → 인증서 → 발급자가 "MyLab Root CA"인지 확인합니다.
 - 심기 전에 꼭 한 번 경고 화면을 눈으로 확인하세요. 전후를 대조해 보아야 키스토어가 원인임을 직접 확인할 수 있습니다.
 
-### 바깥 링크 {#5-4-links}
+### 참고 링크 {#5-4-links}
 
 - [Apple — 신뢰할 수 있는 인증서 설정](https://support.apple.com/en-us/102390)
 - [Android — 사용자 CA 인증서](https://developer.android.com/privacy-and-security/security-config)
@@ -273,7 +273,7 @@ curl https://srv.lab.local/
 
 ## 5.5 같은 기술, 다른 용도 — DPI {#5-5-dpi}
 
-### 멘탈모델 {#5-5-mental-model}
+### 개념 {#5-5-mental-model}
 
 5.4에서 한 일을 다시 떠올려 보세요. "누군가의 CA 인증서를 내 키스토어에 심으면, 그 누군가가 서명한 **어떤 도메인의 인증서든** 내 기기는 믿는다." 이것은 편리한 기능이면서 **열쇠를 넘기는 행위**이기도 합니다.
 
@@ -342,7 +342,7 @@ echo | openssl s_client -connect example.com:443 -servername example.com 2>/dev/
 - 브라우저 자물쇠 → 인증서 → 발급자만 보아도 됩니다.
 - 내 키스토어에 어떤 CA가 심겨 있는지는 주기적으로 점검해 두는 것이 좋습니다.
 
-### 바깥 링크 {#5-5-links}
+### 참고 링크 {#5-5-links}
 
 - [NIST SP 800-52r2 — TLS 구현 가이드](https://csrc.nist.gov/pubs/sp/800/52/r2/final)
 - [CISA — HTTPS Interception Weakens TLS Security](https://www.cisa.gov/news-events/alerts/2017/03/16/https-interception-weakens-tls-security)
@@ -354,7 +354,7 @@ echo | openssl s_client -connect example.com:443 -servername example.com 2>/dev/
 
 ## 5.6 mTLS — 양방향 인증서 인증 {#5-6-mtls}
 
-### 멘탈모델 {#5-6-mental-model}
+### 개념 {#5-6-mental-model}
 
 일반적인 HTTPS에서는 서버만 신분증을 보입니다. 보통 "HTTPS 인증서"라고 하면 이 **서버 인증서**를 말하고, 브라우저 주소창의 🔒 자물쇠가 그것을 확인했다는 표시입니다. 자물쇠가 보증하는 것은 두 가지입니다.
 
@@ -441,7 +441,7 @@ bob.dev   -> 403 forbidden: CN=bob.dev,OU=lab,O=Example
 > ⚠️ Caddyfile의 따옴표 안에서 정규식의 점(`.` 문자 그대로)은 `\.`처럼 백슬래시 **하나**로 씁니다. 다른 언어 습관대로 두 개(`\\.`)를 쓰면 아무 인증서도 조건에 맞지 않아 모두 403이 됩니다. 시험 중에 실제로 겪은 실수입니다.
 
 
-### 만드는 법 (요약) {#5-6-how-to}
+### 만드는 방법 (요약) {#5-6-how-to}
 
 ```bash
 # 클라이언트 인증서를 같은 CA로 발급
@@ -485,7 +485,7 @@ openssl s_client -connect srv.lab.local:443 -servername srv.lab.local </dev/null
 
 [실습⑪](labs/lab-11.qmd)의 (3)에서 두 `curl`의 결과를 나란히 확인합니다. mTLS를 관리망 접근에 쓰는 구도는 [Part 6](06-access.qmd)의 접근 설계와 이어집니다.
 
-### 바깥 링크 {#5-6-links}
+### 참고 링크 {#5-6-links}
 
 - [RFC 8446 §4.3.2 — CertificateRequest (클라이언트 인증)](https://www.rfc-editor.org/rfc/rfc8446#section-4.3.2)
 - [Caddy — tls 지시자 client_auth](https://caddyserver.com/docs/caddyfile/directives/tls#client_auth)

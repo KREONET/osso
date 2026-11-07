@@ -10,7 +10,7 @@
 
 ## 6.1 SSH 키 — ed25519와 rsa, 키 타입과 지문 해시(SHA256) {#6-1-ssh-keys}
 
-### 멘탈모델 {#6-1-mental-model}
+### 개념 {#6-1-mental-model}
 
 SSH 키는 **자물쇠(공개키, public key)와 열쇠(개인키, private key)** 한 쌍입니다. 자물쇠는 누구에게 나눠 주어도 되고, 열쇠는 내 장비 밖으로 나가지 않습니다. 서버는 "이 자물쇠로 잠근 수수께끼를 풀 수 있는가"만 확인하므로 **비밀번호가 네트워크를 지나가지 않습니다.**
 
@@ -117,7 +117,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhgGG0e3NdlEjxGqLAJps71j0QO8e4AeUvbgronRDRb
 
 반대 방향은 불가능합니다. 이 방식의 안전성은 공개키에서 개인키를 계산할 수 없다는 데서 나옵니다. 그래서 **지켜야 할 것은 개인키 하나**이고, 백업할 것도 개인키 하나입니다. 개인키를 잃으면 새로 만들고 공개키를 다시 등록하는 수밖에 없습니다.
 
-### 바깥 링크 {#6-1-links}
+### 참고 링크 {#6-1-links}
 
 - [ssh-keygen(1)](https://man.openbsd.org/ssh-keygen) — 옵션 전체 (`-y`: 개인키에서 공개키 출력)
 - [sshd(8) AUTHORIZED_KEYS FILE FORMAT](https://man.openbsd.org/sshd#AUTHORIZED_KEYS_FILE_FORMAT) — `authorized_keys` 한 줄의 형식과 옵션
@@ -127,7 +127,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhgGG0e3NdlEjxGqLAJps71j0QO8e4AeUvbgronRDRb
 
 ## 6.2 공개키 배포 — 공개 URL과 ssh-import-id, 신뢰 사슬 {#6-2-key-distribution}
 
-### 멘탈모델 {#6-2-mental-model}
+### 개념 {#6-2-mental-model}
 
 공개키는 공개해도 되는 정보이므로, 서버마다 복사해 넣는 대신 **한 곳에 게시해 두고 필요한 곳에서 가져옵니다.** GitHub·Launchpad가 이미 그 게시판 역할을 합니다.
 
@@ -182,7 +182,7 @@ grep -n 'ssh-import-id' ~/.ssh/authorized_keys
 ssh-keygen -lf ~/.ssh/authorized_keys
 ```
 
-### 바깥 링크 {#6-2-links}
+### 참고 링크 {#6-2-links}
 
 - [ssh-import-id (Ubuntu manpage)](https://manpages.ubuntu.com/manpages/noble/man1/ssh-import-id.1.html)
 - [GitHub Docs — SSH 키 추가](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
@@ -192,7 +192,7 @@ ssh-keygen -lf ~/.ssh/authorized_keys
 
 ## 6.3 sshd 강화 — 공개키 인증만 허용, conf.d 세밀 제어 {#6-3-sshd-hardening}
 
-### 멘탈모델 {#6-3-mental-model}
+### 개념 {#6-3-mental-model}
 
 키 로그인을 만들어도 **비밀번호 로그인이 열려 있으면 가장 약한 문이 기준**입니다. 인터넷에 열린 22번 포트는 하루 종일 비밀번호 대입 시도를 받습니다. 설정 강화의 첫 단계는 접속을 "키가 있는 사람만"으로 좁히는 것입니다.
 
@@ -245,7 +245,7 @@ ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no host
 
 > **원칙:** 원격에서 sshd를 고칠 때는 **기존 세션을 끊지 말고** 새 세션으로 먼저 검증합니다. 기존 세션을 먼저 닫는 것이 스스로 접속을 잃는 가장 흔한 원인입니다.
 
-### 바깥 링크 {#6-3-links}
+### 참고 링크 {#6-3-links}
 
 - [sshd_config(5)](https://man.openbsd.org/sshd_config) — 지시어 전체, `Match` 규칙
 - [sshd(8)](https://man.openbsd.org/sshd) — `-t`, `-T` 옵션
@@ -254,7 +254,7 @@ ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no host
 
 ## 6.4 OIDC 게이트 — oauth2-proxy forward_auth {#6-4-oidc}
 
-### 멘탈모델 {#6-4-mental-model}
+### 개념 {#6-4-mental-model}
 
 **로그인은 앱이 받지 않고, 문지기가 받습니다.** 건물마다 경비실을 짓는 대신 출입문에 경비 하나를 세우는 구조입니다. 앱은 "누가 들어왔는지"만 헤더로 전달받습니다.
 
@@ -323,7 +323,7 @@ curl -s https://idp.example.org/.well-known/openid-configuration | head
 
 OIDC 흐름(authorization code, 토큰 종류) 자체는 교과서 영역이므로 표준 문서에 맡깁니다.
 
-### 바깥 링크 {#6-4-links}
+### 참고 링크 {#6-4-links}
 
 - [OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html)
 - [oauth2-proxy 문서](https://oauth2-proxy.github.io/oauth2-proxy/)
@@ -334,7 +334,7 @@ OIDC 흐름(authorization code, 토큰 종류) 자체는 교과서 영역이므�
 
 ## 6.5 NAC와 포스처 — 802.1X {#6-5-nac}
 
-### 멘탈모델 {#6-5-mental-model}
+### 개념 {#6-5-mental-model}
 
 6.1~6.4는 **서버가 사람을 가려내는** 방법이었습니다. NAC는 한 층 앞, **네트워크가 장비를 가려내는** 방법입니다. 사무실 건물 로비의 출입 게이트처럼, 계정 로그인 이전에 "이 장비가 네트워크에 들어올 자격이 있는가"를 묻습니다.
 
@@ -380,7 +380,7 @@ wpa_cli status
 
 "연결은 되는데 내부망이 안 열린다"면 인증은 됐으나 **포스처 미달로 격리 대역**에 있을 가능성을 먼저 의심합니다. 이때 가장 먼저 점검할 항목은 호스트 보안 프로그램의 설치 여부입니다.
 
-### 바깥 링크 {#6-5-links}
+### 참고 링크 {#6-5-links}
 
 - [IEEE 802.1X 개요](https://1.ieee802.org/security/802-1x/)
 - [RFC 3748 — EAP](https://datatracker.ietf.org/doc/html/rfc3748) · [RFC 2865 — RADIUS](https://datatracker.ietf.org/doc/html/rfc2865)
