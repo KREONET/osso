@@ -33,7 +33,7 @@
 ## D {#cmd-d}
 
 - `date` — [G.3](G-packages.qmd#g-3-homebrew)
-- `dd` — [§1.5](01-image.qmd#1-5-p2v-online)
+- `dd` — [§1.5](01-image.qmd#1-5-deploy)
 - `df` — [§1.2](01-image.qmd#1-2-disk-resize) · [§7.2](07-ai-governance.qmd#7-2-what) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [실습⑬](labs/lab-13.qmd#lab-13)
 - `diff` — [§2.2](02-firewall.qmd#2-2-verify)
 - `dig` — [§5.2](05-trust.qmd#5-2-verify)
