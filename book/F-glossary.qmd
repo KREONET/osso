@@ -119,7 +119,7 @@
 | namespace | 프로세스가 보는 세상(PID·네트워크·마운트·호스트명·사용자)을 따로 떼어 주는 리눅스 기능. 컨테이너의 "격리" 쪽. → [Part 4 §4.0](04-container.qmd) |
 | nftables set | 여러 주소·대역을 하나로 묶어 한 번에 조회하는 nftables의 자료 구조. 규칙 수천 개 대신 쓴다. → [Part 2 §2.5](02-firewall.qmd#2-5-why-set) |
 | non-root (비루트) | 프로세스를 root가 아닌 일반 사용자로 실행하는 것. 뚫려도 피해가 그 사용자 권한에 머문다. Dockerfile의 `USER`. → [Part 4 §4.5](04-container.qmd) |
-| ohmyzsh 태그 (TAG1/TAG2) | 물리 서버의 `/etc/tag1`(모델)·`/etc/tag2`(자산 ID)를 프롬프트에 표시하는 강사 개인 컨벤션. 소개만 하고 실습하지 않는다. |
+| ohmyzsh 태그 (TAG1/TAG2) | 물리 서버의 `/etc/tag1`(모델)·`/etc/tag2`(자산 ID)를 프롬프트에 표시하는 저자의 개인 관례. 소개만 하고 실습하지 않는다. |
 | OIDC | OpenID Connect. OAuth 2.0 위의 로그인(인증) 표준. |
 | OVS (Open vSwitch) | 소프트웨어 가상 스위치. → [부록 H.3](H-pve.qmd#h-3-layout) |
 | PATH | 명령 이름을 찾을 디렉터리 목록인 환경변수. 왼쪽부터 찾으며 리눅스는 현재 디렉터리를 뒤지지 않는다. → [Part 4 §4.0](04-container.qmd) |
