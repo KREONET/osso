@@ -19,7 +19,7 @@ wget ⟨https://⟨mirror.example⟩/.../jammy-server-cloudimg-amd64.img⟩ -O �
 | Rocky 10 | <https://dl.rockylinux.org/pub/rocky/10/images/x86_64/> | `Rocky-10-GenericCloud-Base.latest.x86_64.qcow2` |
 | Rocky 9 | <https://dl.rockylinux.org/pub/rocky/9/images/x86_64/> | `Rocky-9-GenericCloud-Base.latest.x86_64.qcow2` |
 
-> 우분투의 `current/`는 보안 업데이트가 반영된 **최신 빌드**다. 버전을 고정하려면 `releases/26.04/`처럼 릴리스 디렉터리를 쓴다. 받은 뒤엔 같은 디렉터리의 체크섬 파일(`SHA256SUMS` 등)로 검증한다. 우분투 `.img`도 확장자만 그렇고 실제 형식은 qcow2다(`qemu-img info`로 확인). 데비안의 `genericcloud`는 가상머신용이라 물리 하드웨어 드라이버가 빠져 있다. ②의 V2P(virtual-to-physical, 가상 머신 이미지를 물리 디스크로 옮기는 일)처럼 물리 서버에 기록할 이미지라면 `generic`을 받는다.
+> 우분투의 `current/`는 보안 업데이트가 반영된 **최신 빌드**다. 버전을 고정하려면 `releases/26.04/`처럼 릴리스 디렉터리를 쓴다. 받은 뒤엔 같은 디렉터리의 체크섬 파일(`SHA256SUMS` 등)로 검증한다. 우분투 `.img`도 확장자만 그렇고 실제 형식은 qcow2다(`qemu-img info`로 확인). 데비안의 `genericcloud`는 가상머신용이라 물리 하드웨어 드라이버가 빠져 있다. ②의 V2P(Virtual to Physical, 가상 머신 이미지를 물리 디스크로 옮기는 일)처럼 물리 서버에 기록할 이미지라면 `generic`을 받는다.
 
 ⌨️ **탐색 — 부팅하지 않고 내부를 들여다본다(읽기)**
 ```bash
