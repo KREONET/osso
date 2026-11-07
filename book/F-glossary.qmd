@@ -77,6 +77,7 @@
 | authorized_keys | 서버의 `~/.ssh/authorized_keys`. 이 계정에 들어올 수 있는 **공개키**를 한 줄에 하나씩 적는 파일(디렉터리 700·파일 600). → [Part 6 §6.1](06-access.qmd) |
 | bastion | 내부망 진입 전용 관문 서버. 외부 접속을 여기 한 곳으로 모은다. |
 | BMC (Baseboard Management Controller) | 서버 본체와 별도로 동작하며 원격 관리(IPMI)를 맡는 컨트롤러. |
+| BSL (Business Source License) | 소스는 공개하지만 경쟁 서비스 등 일부 상업적 사용을 제한하고, 일정 기간 뒤 오픈소스 라이선스로 바뀌는 라이선스. OSI 비승인. HashiCorp 제품이 2023년에 이 라이선스로 바뀌었다. → [부록 B](B-licenses.qmd#b-pitfalls) |
 | C2 (Command and Control) | 공격자가 침해한 서버를 원격으로 조종하는 명령·제어 서버. 나가는 연결을 막으면 연결할 수 없다. |
 | CA | 인증기관. 서버·클라이언트 인증서에 서명해 신뢰를 보증한다. |
 | Caddy | HTTPS가 기본값인 오픈소스 웹 서버·리버스 프록시. 인증서 발급·갱신·리다이렉트를 자동으로 한다. → [Part 5 §5.2](05-trust.qmd) |

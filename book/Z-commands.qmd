@@ -191,7 +191,6 @@
 
 ## V {#cmd-v}
 
-- `vagrant` — [§1.8](01-image.qmd#1-8-reproducible)
 - `ventoy` — [실습②](labs/lab-02.qmd#lab-02)
 - `vi` — [§4.3](04-container.qmd#4-3-config-mount) · [실습⑨](labs/lab-09.qmd#lab-09-more) · [H.2](H-pve.qmd#h-2-1-pve)
 - `virt-cat` — [§1.3](01-image.qmd#1-3-offline-edit) · [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)

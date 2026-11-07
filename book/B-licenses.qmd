@@ -8,18 +8,23 @@
 
 | 구분 | 함정 없음 (권장) | 함정 (주의) |
 |---|---|---|
-| 라이선스 | GPL/LGPL, MIT, Apache-2.0, BSD | PUEL(Personal Use and Evaluation License), Anaconda 약관, SSPL(Server Side Public License), Docker Desktop 약관 |
+| 라이선스 | GPL/LGPL, MIT, Apache-2.0, BSD | PUEL(Personal Use and Evaluation License), Anaconda 약관, SSPL(Server Side Public License), BSL(Business Source License), Docker Desktop·Oracle JDK 약관 |
 | 상업·기관 사용 | 자유롭게 가능 | 조건·유료·재배포(redistribution) 제약이 숨어 있음 |
-| 이 과정의 도구 | PVE, KVM·QEMU, Ventoy, Clonezilla, GParted, caddy, Keycloak, miniforge, marimo, Docker Engine, Podman … | VirtualBox Extension Pack, Anaconda 기본 채널, MongoDB/Elasticsearch, Docker Desktop |
+| 이 과정의 도구 | PVE, KVM·QEMU, Ventoy, Clonezilla, GParted, caddy, Keycloak, miniforge, marimo, Docker Engine, Podman … | VirtualBox Extension Pack, Anaconda 기본 채널, MongoDB/Elasticsearch, Docker Desktop, HashiCorp 제품, Oracle JDK, Redis |
 
-## 함정 네 가지와 대안 {#b-pitfalls}
+## 함정과 대안 {#b-pitfalls}
+
+쓰다 보면 라이선스 조건에 걸리기 쉬운 도구를 모았습니다. 대부분 처음에는 무료로 쓰다가, 조직 규모가 커지거나 약관이 바뀌거나 점검을 받을 때 문제가 드러납니다.
 
 | 함정 | 왜 함정인가 | 대체 |
 |---|---|---|
-| VirtualBox **Extension Pack (PUEL)** | 본체는 GPL이지만 확장팩(USB 2/3, 원격 데스크톱 RDP 등)은 개인·평가용만 무료, 기관 사용은 상용 유료 | PVE/KVM·QEMU, 확장팩 없이 본체만 사용 |
+| VirtualBox **Extension Pack (PUEL)** | 본체는 GPL이지만 확장팩(USB 2/3, 원격 데스크톱 RDP 등)은 개인·평가용만 무료, 기관 사용은 상용 유료. 오라클이 기관의 확장팩 사용을 점검해 비용을 청구한 사례가 알려지면서 대학 등에서도 사용 자제 안내가 나왔다 | PVE/KVM·QEMU, 확장팩 없이 본체만 사용 |
 | **Anaconda 기본 채널** | 대형 조직(약 200명 초과)은 상용 ToS(서비스 이용 약관) 적용 대상 | miniforge(conda-forge 채널) |
 | MongoDB / Elasticsearch **SSPL** | 서비스로 제공 시 전체 소스 공개 의무. **OSI(Open Source Initiative, 오픈소스 라이선스 승인 단체) 비승인**(오픈소스 아님) | PostgreSQL, OpenSearch 등 OSI 승인 라이선스 |
 | **Docker Desktop** | 대기업(직원·매출 기준 초과)은 유료 구독 | Docker Engine 또는 Podman |
+| **HashiCorp 제품**(Vagrant, Terraform, Packer, Vault 등) | 2023년에 MPL 2.0에서 BSL 1.1(Business Source License)로 바뀌었다. OSI 비승인이며, 이 제품과 경쟁하는 서비스를 만드는 데 쓰는 것은 제한된다. 기관 내부 개발 도구로 쓰는 것은 대개 문제없다 | Terraform은 OpenTofu, Vault는 OpenBao(둘 다 MPL 2.0 포크). Vagrant는 PVE의 VM이나 컨테이너로 대신한다 |
+| **Oracle JDK** | 2023년부터 상용 사용은 직원 수 기준의 구독(Java SE Universal Subscription) 대상이다 | OpenJDK 빌드(Eclipse Temurin 등) |
+| **Redis** | 2024년 7.4부터 RSALv2·SSPLv1로 바뀌어 OSI 승인 라이선스가 아니게 되었다. 2025년 Redis 8에서 AGPLv3를 선택지로 다시 더했다 | Valkey(BSD, 리눅스 재단) |
 
 ## 한 줄 요약 {#b-summary}
 
