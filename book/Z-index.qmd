@@ -228,7 +228,7 @@
 - **Proxmox VE** — [§1.2](01-image.qmd#1-2-linked-clone) · [실습②](labs/lab-02.qmd#lab-02) · [부록 H](H-pve.qmd#appendix-h) · [H.2](H-pve.qmd#h-2-1-pve) · [H.3](H-pve.qmd#h-3-1-separate) · [H.4](H-pve.qmd#h-4-firewall) · [H.6](H-pve.qmd#h-6-1-cloud-image) · [I.3](I-access-control.qmd#i-3-builtin)
 - **ProxyJump** — [§3.5](03-network.qmd#3-5-bastion) · [§6.3](06-access.qmd#6-3-match) · [§7.1](07-ai-governance.qmd#7-1-example) · [실습⑧](labs/lab-08.qmd#lab-08-main) · [I.6](I-access-control.qmd#i-6-1-jump-host) · [J.5](J-workstation.qmd#j-5-ssh-clients)
 - **publish (Docker)** — [§2.2](02-firewall.qmd#2-2-hooks) · [§2.4](02-firewall.qmd#2-4-firewalld-docker) · [§2.5](02-firewall.qmd#2-5-reputation) · [§2.7](02-firewall.qmd#2-7-container) · [실습③](labs/lab-03.qmd#lab-03) · [실습④](labs/lab-04.qmd#lab-04) · [I.4](I-access-control.qmd#i-4-distro) · [I.6](I-access-control.qmd#i-6-3-docker-ufw)
-- **PUEL** — [§7.6](07-ai-governance.qmd#7-6-pitfalls) · [부록 B](B-licenses.qmd#b-compare)
+- **PUEL** — [§1.8](01-image.qmd#1-8-reproducible) · [§7.6](07-ai-governance.qmd#7-6-pitfalls) · [부록 B](B-licenses.qmd#b-compare)
 
 ## Q
 
