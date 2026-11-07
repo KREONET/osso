@@ -612,14 +612,28 @@ conda에는 함정이 하나 있습니다. **Anaconda 배포판의 기본 채널
 
 ## 1.9 Ventoy — 부팅 도구와 이미지를 USB 하나에 {#1-9-ventoy}
 
-**멘탈모델:** USB 하나가 ‘부팅도구(ISO)’와 ‘운반할 짐(이미지)’을 둘 다 싣는다. ISO는 복사만 하면 메뉴에 나타난다.
-
 보통의 부팅 USB는 ISO 하나를 USB 전체에 기록하므로, 도구마다 USB가 하나씩 필요합니다. **[Ventoy](https://www.ventoy.net/)** 는 USB에 부트로더를 ‘한 번만’ 설치하고, 그 위에 ISO 파일을 복사해 두기만 합니다. 부팅하면 파일 목록이 메뉴로 나옵니다. 현장 가방에는 이것 하나면 됩니다. [실습②](labs/lab-02.qmd)ⓐ가 이 구성입니다.
 
 - **부팅도구:** GParted(라이브 터미널, V2P 실행 환경), Clonezilla(백업·복원), 아무 라이브 ISO(루트 복구).
 - **짐(페이로드):** [실습①](labs/lab-01.qmd)에서 만든 패치된 골든 이미지.
 
-Ventoy USB에는 파티션이 둘 생깁니다. ISO와 이미지를 넣는 첫 파티션과, Ventoy 부트로더가 들어 있는 작은 EFI 파티션입니다. 첫 파티션의 파일시스템은 USB를 어느 운영체제에서 꽂아 파일을 넣을지에 따라 고릅니다.
+### Windows에서 Ventoy USB 만들기 {#1-9-windows}
+
+Ventoy USB는 대부분 Windows PC에서 만듭니다. Ventoy 사이트에서 Windows용 압축 파일을 받아 풀고 `Ventoy2Disk.exe`를 실행합니다. 이때 USB 뒤쪽에 빈 공간을 남겨 두면, 나중에 그 공간을 백업 이미지나 골든 이미지를 담는 데이터 파티션으로 쓸 수 있습니다.
+
+![Ventoy2Disk에서 뒤쪽 공간을 남기고 설치한 뒤, 디스크 관리에서 그 공간을 exFAT 데이터 파티션으로 만드는 과정](images/ventoy/ventoy-reserved-space.jpg)
+
+1. `Ventoy2Disk.exe`의 **Option → Partition Configuration**을 연다.
+2. **Preserve some space at the bottom of the disk**를 선택하고 남길 크기를 적는다. 그림에서는 160 GB를 남겼다.
+3. 대상 USB를 확인하고 **Install**을 누른다. USB의 내용은 모두 지워진다.
+4. 설치가 끝나면 **디스크 관리**(`diskmgmt.msc`)를 연다. USB에 `Ventoy`(exFAT, ISO를 넣는 곳)와 `VTOYEFI`(32 MB, Ventoy 부트로더), 그리고 **할당되지 않은** 160 GB가 보인다.
+5. 할당되지 않은 공간을 마우스 오른쪽 단추로 눌러 **새 단순 볼륨**을 만들고, 파일 시스템은 exFAT, 볼륨 레이블은 `Data` 같은 이름으로 정해 빠른 포맷을 한다.
+
+리눅스에서는 `Ventoy2Disk.sh`의 `-r` 옵션으로 같은 일을 합니다(`sudo ./Ventoy2Disk.sh -i -r 163840 /dev/sdX`, 남길 크기는 MB 단위). 남은 공간은 `fdisk`나 `parted`로 파티션을 만든 뒤 포맷합니다.
+
+### 파티션과 파일시스템 {#1-9-filesystems}
+
+이렇게 만든 USB에는 파티션이 셋 있습니다. ISO를 넣는 첫 파티션(`Ventoy`), Ventoy 부트로더가 들어 있는 작은 EFI 파티션(`VTOYEFI`), 그리고 직접 만든 데이터 파티션입니다. 첫 파티션과 데이터 파티션의 파일시스템은 USB를 어느 운영체제에서 꽂아 파일을 넣을지에 따라 고릅니다.
 
 | 파일시스템 | Windows | macOS | Linux | 비고 |
 | --- | --- | --- | --- | --- |
@@ -630,9 +644,11 @@ Ventoy USB에는 파티션이 둘 생깁니다. ISO와 이미지를 넣는 첫 �
 
 세 운영체제에서 모두 쓰려면 exFAT을 그대로 둡니다. exFAT은 저널링을 하지 않으므로, 파일을 넣은 뒤에는 반드시 안전하게 꺼내기(eject)를 한 다음 뽑습니다.
 
-설치 때 `-r ⟨MB⟩`로 뒤쪽에 ‘예비 데이터 파티션’을 남길 수 있습니다. 이 파티션은 Clonezilla 백업 이미지를 저장하는 곳으로 쓸 수 있고, exFAT으로 두어도 됩니다. Clonezilla는 2.7.1(2021)부터 exFAT을 커널 드라이버로 다룹니다. 저는 Ventoy 데이터 파티션을 exFAT으로 두고 Windows PC를 Clonezilla로 백업·복원하는 데 문제없이 쓰고 있습니다. 주의할 점은 두 가지입니다. 첫째, exFAT은 저널링이 없어 백업을 기록하는 도중 전원이 끊기거나 USB가 빠지면 손상될 수 있습니다. 리눅스에서만 다룰 백업이라면 ext4가 더 안전하고, 이 때문에 USB 빌드 스크립트에 `DATA_FS=ext4` 선택지를 둡니다. 둘째, exFAT을 저장소로 쓰는 것과 exFAT 파티션 자체를 백업 대상으로 삼는 것은 다릅니다. 백업할 원본 파티션이 exFAT이면 쓰인 블록만 골라 읽는 방식이 제한될 수 있습니다. 서버 디스크에는 exFAT 파티션이 거의 없으므로 보통은 신경 쓸 일이 없습니다.
+데이터 파티션은 Clonezilla 백업 이미지를 저장하는 곳으로 쓸 수 있고, exFAT으로 두어도 됩니다. Clonezilla는 2.7.1(2021)부터 exFAT을 커널 드라이버로 다룹니다. 저는 Ventoy 데이터 파티션을 exFAT으로 두고 Windows PC를 Clonezilla로 백업·복원하는 데 문제없이 쓰고 있습니다. 주의할 점은 두 가지입니다. 첫째, exFAT은 저널링이 없어 백업을 기록하는 도중 전원이 끊기거나 USB가 빠지면 손상될 수 있습니다. 리눅스에서만 다룰 백업이라면 ext4가 더 안전하고, 이 때문에 USB 빌드 스크립트에 `DATA_FS=ext4` 선택지를 둡니다. 둘째, exFAT을 저장소로 쓰는 것과 exFAT 파티션 자체를 백업 대상으로 삼는 것은 다릅니다. 백업할 원본 파티션이 exFAT이면 쓰인 블록만 골라 읽는 방식이 제한될 수 있습니다. 서버 디스크에는 exFAT 파티션이 거의 없으므로 보통은 신경 쓸 일이 없습니다.
 
-이 책의 USB 이미지는 `make-usb-ventoy.sh`로 만듭니다. 흐름만 보면 이렇습니다.
+### 실습용 USB 이미지 {#1-9-usb-image}
+
+실습에서 쓰는 USB 이미지는 `make-usb-ventoy.sh`로 만듭니다. 흐름만 보면 이렇습니다.
 
 1. 빈 **thin qcow2**를 만든다(`qemu-img create`, 쓴 만큼만 커지므로 몇 GB짜리 USB도 파일은 작다).
 2. 그것을 블록 장치(`qemu-nbd`)로 노출하고 Ventoy를 설치한다.

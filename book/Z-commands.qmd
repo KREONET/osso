@@ -128,7 +128,7 @@
 
 ## Q {#cmd-q}
 
-- `qemu-img` — [§1.2](01-image.qmd#1-2-inspect) · [§1.5](01-image.qmd#1-5-deploy) · [§1.9](01-image.qmd#1-9-ventoy) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [부록 D](D-cheatsheet.qmd#d-1-image) · [H.2](H-pve.qmd#h-2-1-pve) · [H.6](H-pve.qmd#h-6-1-cloud-image)
+- `qemu-img` — [§1.2](01-image.qmd#1-2-inspect) · [§1.5](01-image.qmd#1-5-deploy) · [§1.9](01-image.qmd#1-9-usb-image) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [부록 D](D-cheatsheet.qmd#d-1-image) · [H.2](H-pve.qmd#h-2-1-pve) · [H.6](H-pve.qmd#h-6-1-cloud-image)
 - `qemu-nbd` — [실습①](labs/lab-01.qmd#lab-01) · [부록 D](D-cheatsheet.qmd#d-1-image)
 - `qm` — [§1.2](01-image.qmd#1-2-disk-resize) · [실습②](labs/lab-02.qmd#lab-02) · [H.7](H-pve.qmd#h-7-6-fix)
 
