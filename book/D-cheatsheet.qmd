@@ -33,7 +33,7 @@ virt-customize -a ⟨image.img⟩ \
 # 일반화(machine-id·hostkey·로그 지우기)
 virt-sysprep -a ⟨image.img⟩
 # 포맷 변환 (raw/vmdk/qcow2)
-qemu-img convert -O qcow2 ⟨in.img⟩ ⟨out.qcow2⟩
+qemu-img convert -p -O qcow2 ⟨in.img⟩ ⟨out.qcow2⟩
 # 포맷·크기 확인
 qemu-img info ⟨image.qcow2⟩
 ```
