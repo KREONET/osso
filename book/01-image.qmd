@@ -572,7 +572,7 @@ flowchart LR
 ```
 
 ```bash
-# 붓고 난 뒤, 장비마다
+# 장비마다
 sudo hostnamectl set-hostname 042-u24-web
 ```
 
