@@ -88,7 +88,7 @@ virt-sysprep -a ⟨image.img⟩
 # virt-customize -a ⟨rocky.qcow2⟩ --touch /.autorelabel
 ```
 
-> 비밀번호는 `file:pass.txt` 형태로 넘긴다. `password:⟨평문⟩`은 셸 히스토리·`ps`·스크립트에 그대로 남는다. 파일로 받고 끝나면 `shred -u`로 지운다(저장소에 **커밋 금지**).
+> 비밀번호는 `file:pass.txt` 형태로 넘긴다. `password:⟨평문⟩`은 셸 히스토리·`ps`·스크립트에 그대로 남는다. 파일로 받고 끝나면 `shred -u`로 지운다(저장소에 **커밋 금지**). `rm`은 이름만 지우고 내용은 디스크에 남지만, `shred`는 내용을 무작위 데이터로 덮어쓴 뒤 지운다. SSD나 copy-on-write 파일시스템에서는 덮어쓰기가 보장되지 않으므로, 파일은 처음부터 메모리 위의 `/dev/shm`에 만드는 편이 낫다 → [Part 1 §1.3](../01-image.qmd#1-3-offline-edit)
 
 > 오프라인 편집 중에는 네트워크가 없으므로 ohmyzsh는 `--firstboot-command`로 **첫 부팅 때** 설치되도록 넣어 둔다. 이때 egress(서버에서 밖으로 나가는 통신)가 허용되어 있어야 한다(Day1 ⑥과 연결).
 

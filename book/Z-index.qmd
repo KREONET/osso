@@ -58,6 +58,7 @@
 - **스테이징 (staging)** — [§7.1](07-ai-governance.qmd#7-1-delegation-ladder)
 - **스푸핑 (spoofing)** — [§3.2](03-network.qmd#3-2-rp-filter) · [I.2](I-access-control.qmd#i-2-established)
 - **신뢰 사슬 (chain of trust)** — [§6.2](06-access.qmd#6-2-key-distribution) · [실습⑧](labs/lab-08.qmd#lab-08-prep) · [실습⑪](labs/lab-11.qmd#lab-11)
+- **쓰기 시 복사 (copy-on-write)** — [§1.2](01-image.qmd#1-2-inspect) · [§1.3](01-image.qmd#1-3-offline-edit) · [§4.0](04-container.qmd#4-0-fork-exec) · [실습①](labs/lab-01.qmd#lab-01)
 
 ## ㅇ
 
@@ -66,6 +67,7 @@
 - **오버헤드 (overhead)** — [§1.5](01-image.qmd#1-5-deploy)
 - **오케스트레이터** — [§4.5](04-container.qmd#4-5-non-root)
 - **오탐 (false positive)** — [§2.5](02-firewall.qmd#2-5-sources)
+- **웨어 레벨링 (wear leveling)** — [§1.3](01-image.qmd#1-3-offline-edit)
 - **위임 사다리** — [§7.1](07-ai-governance.qmd#7-1-delegation-ladder) · [실습⑬](labs/lab-13.qmd#lab-13)
 - **인벤토리** — [§1.7](01-image.qmd#1-7-hardware-identity) · [§7.1](07-ai-governance.qmd#7-1-delegation-ladder) · [§7.2](07-ai-governance.qmd#7-2-inventory) · [§7.5](07-ai-governance.qmd#7-5-principles) · [K.4](K-delivery.qmd#k-4-kc) · [K.8](K-delivery.qmd#k-8-checklist)
 - **일반화 (generalization)** — [§1.2](01-image.qmd#1-2-other-formats) · [§1.4](01-image.qmd#1-4-identity-reset) · [§1.5](01-image.qmd#1-5-deploy) · [실습①](labs/lab-01.qmd#lab-01) · [H.6](H-pve.qmd#h-6-1-customize)
@@ -230,7 +232,7 @@
 
 ## Q
 
-- **qcow2** — [§1.2](01-image.qmd#1-2-inspect) · [§1.5](01-image.qmd#1-5-deploy) · [§1.9](01-image.qmd#1-9-ventoy) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [H.5](H-pve.qmd#h-5-preallocation) · [H.6](H-pve.qmd#h-6-1-create-vm)
+- **qcow2** — [§1.2](01-image.qmd#1-2-inspect) · [§1.3](01-image.qmd#1-3-offline-edit) · [§1.5](01-image.qmd#1-5-deploy) · [§1.9](01-image.qmd#1-9-ventoy) · [실습①](labs/lab-01.qmd#lab-01) · [실습②](labs/lab-02.qmd#lab-02) · [H.5](H-pve.qmd#h-5-preallocation) · [H.6](H-pve.qmd#h-6-1-create-vm)
 
 ## R
 
@@ -242,6 +244,7 @@
 ## S
 
 - **SADP** — [들어가며](index.qmd#big-picture) · [§2.7](02-firewall.qmd#2-7-common) · [§4.4](04-container.qmd#4-4-network-membership) · [§7.1](07-ai-governance.qmd#7-1-delegation-ladder) · [§7.5](07-ai-governance.qmd#7-5-governance) · [실습⑨′](labs/lab-09p.qmd#lab-09p) · [실습⑭](labs/lab-14.qmd#lab-14) · [부록 A](A-assets.qmd#a-public)
+- **shred** — [§1.3](01-image.qmd#1-3-offline-edit) · [실습①](labs/lab-01.qmd#lab-01) · [K.1](K-delivery.qmd#k-1-overview)
 - **squid** — [§2.6](02-firewall.qmd#2-6-egress-allowlist) · [§2.7](02-firewall.qmd#2-7-four-levels) · [§7.4](07-ai-governance.qmd#7-4-egress) · [실습⑥](labs/lab-06.qmd#lab-06) · [실습⑭](labs/lab-14.qmd#lab-14) · [G.6](G-packages.qmd#g-6-safety)
 - **SR-IOV** — [H.3](H-pve.qmd#h-3-3-sriov) · [H.7](H-pve.qmd#h-7-1-sriov)
 - **SSPL** — [§7.6](07-ai-governance.qmd#7-6-pitfalls) · [부록 B](B-licenses.qmd#b-compare)
@@ -252,6 +255,7 @@
 
 - **Tabby** — [J.2](J-workstation.qmd#j-2-terminal) · [J.5](J-workstation.qmd#j-5-ssh-clients)
 - **TLS 핸드셰이크** — [§3.6](03-network.qmd#3-6-mtu) · [§5.6](05-trust.qmd#5-6-mental-model)
+- **tmpfs** — [§1.3](01-image.qmd#1-3-offline-edit)
 
 ## U
 

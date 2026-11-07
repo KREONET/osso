@@ -226,7 +226,26 @@ virt-cat -a ⟨image.img⟩ /etc/os-release
 
 같은 이유로 ‘켜진’ 이미지를 오프라인 도구로 건드리면 안 됩니다(게스트가 쓰는 중인 파일시스템과 충돌해 손상). [실습①](labs/lab-01.qmd)의 경고 "꺼진 상태에서만"은 그 뜻입니다.
 
-보안상 세부 사항이 하나 있습니다. 비번을 `--root-password password:평문`으로 쓰면 셸 히스토리와 `ps`에 남습니다. `--root-password file:pass.txt`로 파일에서 읽히고(`chmod 600`), 끝나면 `shred -u`로 지웁니다. 그 파일은 저장소에 커밋하지 않습니다.
+보안상 세부 사항이 하나 있습니다. 비밀번호를 `--root-password password:평문`으로 넘기면 셸 히스토리와 `ps`에 남습니다. `--root-password file:pass.txt`로 파일에서 읽게 하고(`chmod 600`), 끝나면 `shred -u`로 지웁니다. 그 파일은 저장소에 커밋하지 않습니다.
+
+`rm`으로 지우지 않고 `shred`를 쓰는 이유는 이렇습니다. `rm`은 디렉터리에서 파일 이름을 지울 뿐, 내용이 담긴 데이터 블록은 그대로 둡니다. 파일시스템은 그 블록을 빈 공간으로 표시하고, 다른 파일이 그 자리를 덮어쓸 때까지 내용은 디스크에 남아 있습니다. 디스크를 직접 읽는 복구 도구로 되살릴 수 있다는 뜻입니다. `shred`는 파일을 지우기 전에 그 내용을 무작위 데이터로 여러 번 덮어씁니다. `-u`는 덮어쓴 뒤 파일을 삭제하라는 옵션이고, `-z`는 마지막에 0으로 한 번 더 덮어 덮어쓴 흔적을 감춥니다. `-v`를 붙이면 과정이 보입니다(Ubuntu 26.04의 uutils coreutils 0.8.0).
+
+```console
+$ shred -v -z -u pass.txt
+shred: pass.txt: pass 1/4 (random)...
+shred: pass.txt: pass 2/4 (random)...
+shred: pass.txt: pass 3/4 (random)...
+shred: pass.txt: pass 4/4 (000000)...
+shred: pass.txt: removing
+shred: pass.txt: renamed to 00000000
+...
+shred: 0: renamed to 0
+shred: pass.txt: removed
+```
+
+무작위 데이터로 세 번(기본값), 0으로 한 번 덮어쓴 뒤 삭제합니다. 삭제하기 전에 이름을 `00000000`, `0000000`처럼 줄여 가며 바꾸는 것은 디렉터리 항목에 남는 원래 파일 이름까지 지우기 위해서입니다.
+
+다만 `shred`는 같은 자리에 덮어쓴다는 가정에 기대므로, 이 가정이 깨지는 곳에서는 옛 내용이 남을 수 있습니다. Btrfs·ZFS처럼 쓰기 시 복사(copy-on-write, 고칠 때 새 블록에 쓰고 옛 블록은 두는 방식)를 하는 파일시스템, 스냅숏과 백업, 그리고 웨어 레벨링(wear leveling, 같은 주소에 쓰더라도 수명을 고르게 하려고 다른 셀에 기록하는 방식)을 하는 SSD가 그렇습니다. 1.2절의 thin 디스크와 qcow2 이미지 안에서도 덮어쓴 블록이 저장소의 같은 자리에 있다는 보장은 없습니다. 자세한 한계는 [shred(1)](https://man7.org/linux/man-pages/man1/shred.1.html)에 있습니다. 그래서 더 확실한 방법은 비밀번호 파일을 처음부터 디스크에 쓰지 않는 것입니다. 메모리 위의 파일시스템(tmpfs)인 `/run/user/$(id -u)`나 `/dev/shm`에 파일을 만들면 디스크에 기록되지 않고 재부팅하면 사라집니다(스왑으로 내려갈 수는 있습니다). `shred`는 그 위에 더하는 습관으로 씁니다.
 
 ### 드롭인(.d) — 본 설정을 그대로 두고 조각 파일로 덧붙이기 {#1-3-drop-in}
 

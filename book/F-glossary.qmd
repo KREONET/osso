@@ -34,11 +34,13 @@
 | 스테이징 (staging) | 운영에 반영하기 전에 같은 구성으로 시험하는 환경. |
 | 스푸핑 (spoofing) | 출발지 주소 등을 위조하는 공격. |
 | 신뢰 사슬 (chain of trust) | 루트 CA에서 서버 인증서까지 서명으로 이어지는 믿음의 연결. → [Part 5](05-trust.qmd) |
+| 쓰기 시 복사 (copy-on-write) | 데이터를 고칠 때 제자리에 덮어쓰지 않고 새 블록에 쓴 뒤 가리키는 곳만 바꾸는 방식. Btrfs·ZFS·qcow2가 쓴다. 덮어써서 지우는 `shred`가 통하지 않는다. → [Part 1 §1.3](01-image.qmd#1-3-offline-edit) |
 | 암묵지 | 문서로 정리되지 않고 사람에게만 남아 있는 노하우. → [Part 1 §1.3](01-image.qmd#1-3-dotfiles) |
 | 연합 (federation) | 다른 기관의 계정으로 로그인하도록 신원 확인을 연동하는 방식. |
 | 오버헤드 (overhead) | 본래 작업 외에 더 드는 처리 비용. 가상화에서는 하이퍼바이저를 거치느라 생기는 비용을 말하며, CPU의 하드웨어 가상화 지원과 virtio로 크게 줄었다. → [Part 1 §1.5](01-image.qmd#1-5-deploy) |
 | 오케스트레이터 | 쿠버네티스처럼 여러 컨테이너를 여러 서버에 배치·관리하는 시스템. |
 | 오탐 (false positive) | 정상 대상을 악성으로 잘못 판정하는 것(false positive). |
+| 웨어 레벨링 (wear leveling) | SSD가 셀의 수명을 고르게 쓰려고 같은 주소에 대한 쓰기도 다른 셀에 기록하는 방식. 덮어쓰기로 지운 내용이 다른 셀에 남을 수 있다. → [Part 1 §1.3](01-image.qmd#1-3-offline-edit) |
 | 위임 사다리 | AI에게 맡기는 정도를 조언→조사→승인 후 실행→위임의 네 칸으로 나눈 것. 칸마다 계정·권한·사람의 확인 방법이 다르다. → [Part 7 §7.1](07-ai-governance.qmd) |
 | 인벤토리 | 서버·소프트웨어·계정 같은 자산과 그 식별 정보를 모은 목록. → [Part 7 §7.2](07-ai-governance.qmd#7-2-inventory) |
 | 일반화 (generalization) | 이미지를 여러 기계에 복제해도 겹치지 않도록 machine-id·SSH 호스트 키·로그 같은 기계 고유 정보를 지우는 일. Windows는 `sysprep`, 리눅스 이미지는 `virt-sysprep`으로 한다. → [Part 1 §1.4](01-image.qmd#1-4-identity-reset) |
@@ -135,10 +137,12 @@
 | SADP | Secure Application Deployment Profile. 앱을 하나하나 검사하는 대신 앱이 올라가는 자리를 입구·출구·빌드·기록의 네 지점에서 통제하자는 지침. 저자가 2026년 제안(<https://msjang.github.io/ostday26-sadp/>). → [Part 7 §7.5](07-ai-governance.qmd) |
 | SNAT | 출발지 주소 변환. 내부 대역이 외부로 나갈 때(masquerade) 쓴다. |
 | SR-IOV | Single Root I/O Virtualization. 물리 NIC 하나(PF)를 여러 가상 기능(VF)으로 나눠 VM에 직접 넘기는 기능. → [부록 H.7.1](H-pve.qmd#h-7-1-sriov) |
+| shred | 파일 내용을 무작위 데이터로 여러 번 덮어쓴 뒤 지우는 명령(`-u` 삭제, `-z` 마지막에 0으로). `rm`은 이름만 지우고 내용은 디스크에 남긴다. → [Part 1 §1.3](01-image.qmd#1-3-offline-edit) |
 | SSPL | MongoDB 등이 쓴 Server Side Public License. 서비스 제공 시 소스 공개 의무, OSI 비승인. |
 | Stateful Firewall | 연결 상태를 추적해, 허용한 연결의 응답 패킷을 자동으로 통과시키는 방화벽. |
 | sysprep | Windows의 일반화 도구(System Preparation). 리눅스 이미지에서는 `virt-sysprep`이 같은 일을 한다. → 일반화 |
 | tap 인터페이스 | VM의 가상 NIC를 호스트 쪽에서 다루는 가상 인터페이스. 하이퍼바이저 방화벽이 여기에 걸린다. → [부록 I.3](I-access-control.qmd#i-3-hypervisor) |
+| tmpfs | 메모리 위에 만드는 파일시스템. `/dev/shm`·`/run/user/⟨UID⟩`가 대표적이며, 디스크에 기록되지 않고 재부팅하면 사라진다. → [Part 1 §1.3](01-image.qmd#1-3-offline-edit) |
 | TLS 핸드셰이크 | 암호화 통신을 시작하기 전에 양쪽이 인증서와 키 정보를 주고받는 절차. |
 | unix socket (유닉스 도메인 소켓) | `IP:포트` 대신 파일 경로(`/var/run/docker.sock` 등)로 여는 소켓. 같은 컴퓨터 안 프로그램끼리의 대화(IPC·RPC)는 대부분 이것이며, 파일 권한이 곧 접근 통제다. → [Part 4 §4.0](04-container.qmd) |
 | V2P | Virtual to Physical. 가상 이미지를 물리 서버로 복원·이식하는 것. |
