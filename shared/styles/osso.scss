@@ -11,3 +11,8 @@ body { word-break: keep-all; line-height: 1.75; }
 .table-responsive, table { display: block; overflow-x: auto; }
 /* 실습 표지(🎯 👀 💡 ⚠️)가 있는 인용문은 상자로 */
 blockquote { border-left: 4px solid var(--bs-primary); background: rgba(127,127,127,.06); padding: .6rem 1rem; }
+/* keep-all 때문에 긴 URL·인라인 코드가 줄을 넘지 못해 모바일에서 가로 스크롤이 생긴다 */
+:not(pre) > code, a { overflow-wrap: anywhere; }
+:not(pre) > code { white-space: pre-wrap !important; }
+/* 그림은 화면 폭을 넘지 않게 */
+.cell-output-display svg, pre.mermaid svg, figure img { max-width: 100%; height: auto; }

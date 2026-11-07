@@ -32,7 +32,7 @@ virt-cat -a ⟨image.img⟩ /etc/os-release
 # 진짜 파일시스템으로 마운트해서 보기 (qemu-nbd)
 sudo modprobe nbd max_part=8
 sudo qemu-nbd --connect=/dev/nbd0 ⟨image.img⟩
-# 디스크 → 파티션 → 파일시스템, 세 겹을 본다. 루트는 몇 번이고 FS는 무엇인가?
+# 디스크 → 파티션 → 파일시스템, 세 레이어를 본다. 루트는 몇 번이고 FS는 무엇인가?
 lsblk -f /dev/nbd0
 # 루트 파티션을 폴더처럼 (우분투·데비안 p1, Rocky p4)
 sudo mount /dev/nbd0p⟨1⟩ /mnt && ls /mnt/etc
@@ -45,7 +45,7 @@ sudo umount /mnt; sudo qemu-nbd --disconnect /dev/nbd0
 ```bash
 # 가상 크기를 본다 (우분투 3.5 GiB)
 qemu-img info ⟨image.img⟩ | grep 'virtual size'
-# 디스크 겹만 20 GiB로
+# 디스크 레이어만 20 GiB로
 qemu-img resize ⟨image.img⟩ 20G
 # 예측: 루트 파일시스템도 20 GiB가 됐을까?
 virt-df -h -a ⟨image.img⟩
